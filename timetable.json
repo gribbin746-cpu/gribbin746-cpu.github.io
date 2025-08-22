@@ -1,0 +1,5762 @@
+[
+  {
+    "date": "2025-07-23",
+    "start": "2025-07-23T09:00",
+    "end": "2025-07-23T10:00",
+    "title": "Introduction to Semester 2",
+    "domain": "Info",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Jessica Bergmann, Dr Esther Robinson"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T09:00",
+    "end": "2025-07-24T10:00",
+    "title": "Medical Sciences - Female Pelvis & Reproduction Systems",
+    "domain": "Anatomy",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Prerecoding on Canvas Panopto",
+    "staff": "Ethan Cresswell"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T10:00",
+    "end": "2025-07-24T11:30",
+    "title": "Medical Sciences - Female Pelvis & Reproduction Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "A",
+      "B"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T11:30",
+    "end": "2025-07-24T13:00",
+    "title": "Medical Sciences - Female Pelvis & Reproduction Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "C",
+      "D"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T09:00",
+    "end": "2025-07-24T10:30",
+    "title": "Medical Sciences - Female Pelvis & Reproduction Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "E",
+      "G",
+      "I",
+      "K",
+      "M",
+      "N"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T10:30",
+    "end": "2025-07-24T12:00",
+    "title": "Medical Sciences - Female Pelvis & Reproduction Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "F",
+      "J",
+      "H",
+      "L",
+      "O",
+      "P"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T13:00",
+    "end": "2025-07-24T15:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:00",
+    "end": "2025-07-24T17:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:00",
+    "end": "2025-07-24T17:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:00",
+    "end": "2025-07-24T17:00",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "TBA"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:30",
+    "end": "2025-07-24T17:30",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "TBA"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:30",
+    "end": "2025-07-24T17:30",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:30",
+    "end": "2025-07-24T17:30",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:30",
+    "end": "2025-07-24T17:30",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-07-24",
+    "start": "2025-07-24T15:30",
+    "end": "2025-07-24T17:30",
+    "title": "Open Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-07-25",
+    "start": "2025-07-25T09:00",
+    "end": "2025-07-25T10:30",
+    "title": "Reproductive Physiology Introduction: Sex Hormones, Pubertal Development and the Menstrual Cycle",
+    "domain": "Physiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Neil Spratt"
+  },
+  {
+    "date": "2025-07-25",
+    "start": "2025-07-25T11:00",
+    "end": "2025-07-25T12:00",
+    "title": "The X and Y Chromosomes",
+    "domain": "Genetics",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Gerard Kaiko"
+  },
+  {
+    "date": "2025-07-25",
+    "start": "2025-07-25T13:00",
+    "end": "2025-07-25T14:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.58",
+    "staff": "Kate Dundas"
+  },
+  {
+    "date": "2025-07-25",
+    "start": "2025-07-25T15:00",
+    "end": "2025-07-25T16:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.58",
+    "staff": "Kate Dundas"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T09:00",
+    "end": "2025-07-28T10:30",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T09:00",
+    "end": "2025-07-28T10:30",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T08:30",
+    "end": "2025-07-28T10:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T10:30",
+    "end": "2025-07-28T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-28",
+    "start": "2025-07-28T13:30",
+    "end": "2025-07-28T15:00",
+    "title": "Clinical Decision Making:  Consent in Minors",
+    "domain": "Prof Dev",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Indu Gunarathne"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T08:30",
+    "end": "2025-07-29T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T08:30",
+    "end": "2025-07-29T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T08:30",
+    "end": "2025-07-29T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP326",
+    "staff": "Raphael Yeo"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T08:30",
+    "end": "2025-07-29T10:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T08:30",
+    "end": "2025-07-29T10:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T08:30",
+    "end": "2025-07-29T10:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T10:30",
+    "end": "2025-07-29T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T10:30",
+    "end": "2025-07-29T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T10:30",
+    "end": "2025-07-29T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 1",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP326",
+    "staff": "Raphael Yeo"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T10:30",
+    "end": "2025-07-29T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T10:30",
+    "end": "2025-07-29T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-29",
+    "start": "2025-07-29T10:30",
+    "end": "2025-07-29T12:00",
+    "title": "Middle Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T08:30",
+    "end": "2025-07-30T10:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T10:30",
+    "end": "2025-07-30T12:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T10:30",
+    "end": "2025-07-30T12:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T10:30",
+    "end": "2025-07-30T12:30",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T11:00",
+    "end": "2025-07-30T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T11:00",
+    "end": "2025-07-30T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T11:00",
+    "end": "2025-07-30T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T11:00",
+    "end": "2025-07-30T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T11:00",
+    "end": "2025-07-30T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T09:00",
+    "end": "2025-07-31T10:30",
+    "title": "Medical Sciences - Male Pelvis and Reproductive Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "A",
+      "B"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T10:30",
+    "end": "2025-07-31T12:00",
+    "title": "Medical Sciences - Male Pelvis and Reproductive Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "C",
+      "D"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T09:00",
+    "end": "2025-07-31T10:30",
+    "title": "Medical Sciences - Male Pelvis and Reproductive Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "E",
+      "G",
+      "I",
+      "K",
+      "M",
+      "N"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T10:30",
+    "end": "2025-07-31T12:00",
+    "title": "Medical Sciences - Male Pelvis and Reproductive Systems",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "F",
+      "J",
+      "H",
+      "L",
+      "O",
+      "P"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T13:00",
+    "end": "2025-07-31T15:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:00",
+    "end": "2025-07-31T17:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:00",
+    "end": "2025-07-31T17:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:00",
+    "end": "2025-07-31T17:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:00",
+    "end": "2025-07-31T17:00",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:30",
+    "end": "2025-07-31T17:30",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:30",
+    "end": "2025-07-31T17:30",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:30",
+    "end": "2025-07-31T17:30",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-07-31",
+    "start": "2025-07-31T15:30",
+    "end": "2025-07-31T17:30",
+    "title": "Open Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-01",
+    "start": "2025-08-01T08:00",
+    "end": "2025-08-01T09:00",
+    "title": "Male Reproductive Function - Physiology of Erection, Ejaculation and the Sexual Act",
+    "domain": "Physiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Neil Spratt"
+  },
+  {
+    "date": "2025-08-01",
+    "start": "2025-08-01T09:00",
+    "end": "2025-08-01T10:00",
+    "title": "Microbiology of STIs",
+    "domain": "Microbiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Nathan Bartlett"
+  },
+  {
+    "date": "2025-08-01",
+    "start": "2025-08-01T11:00",
+    "end": "2025-08-01T12:00",
+    "title": "Gonadal Pathology",
+    "domain": "Pathology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Mehr Gupta"
+  },
+  {
+    "date": "2025-08-01",
+    "start": "2025-08-01T12:00",
+    "end": "2025-08-01T13:00",
+    "title": "Pharmacology of Antimicrobials",
+    "domain": "Pharmacology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "A Prof Paul Tooney"
+  },
+  {
+    "date": "2025-08-01",
+    "start": "2025-08-01T14:00",
+    "end": "2025-08-01T15:00",
+    "title": "Public Health of STI's",
+    "domain": "HSE",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T09:00",
+    "end": "2025-08-04T10:30",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T09:00",
+    "end": "2025-08-04T10:30",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T08:30",
+    "end": "2025-08-04T10:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T10:30",
+    "end": "2025-08-04T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T12:30",
+    "end": "2025-08-04T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "SR202",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T12:30",
+    "end": "2025-08-04T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "V107",
+    "staff": "Dr Jo Taylor"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T14:00",
+    "end": "2025-08-04T15:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "SR202",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-04",
+    "start": "2025-08-04T14:00",
+    "end": "2025-08-04T15:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "V107",
+    "staff": "Dr Jo Taylor"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T08:30",
+    "end": "2025-08-05T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T08:30",
+    "end": "2025-08-05T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T08:30",
+    "end": "2025-08-05T10:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T08:30",
+    "end": "2025-08-05T10:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T08:30",
+    "end": "2025-08-05T10:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T08:30",
+    "end": "2025-08-05T10:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T10:30",
+    "end": "2025-08-05T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T10:30",
+    "end": "2025-08-05T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T10:30",
+    "end": "2025-08-05T12:00",
+    "title": "Structured Clinical Skills: Men's History Taking",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T10:30",
+    "end": "2025-08-05T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T10:30",
+    "end": "2025-08-05T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-05",
+    "start": "2025-08-05T10:30",
+    "end": "2025-08-05T12:00",
+    "title": "Middle Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T08:30",
+    "end": "2025-08-06T10:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T10:30",
+    "end": "2025-08-06T12:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T10:30",
+    "end": "2025-08-06T12:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T10:30",
+    "end": "2025-08-06T12:30",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T11:00",
+    "end": "2025-08-06T13:00",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T11:00",
+    "end": "2025-08-06T13:00",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T11:00",
+    "end": "2025-08-06T13:00",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-07-30",
+    "start": "2025-07-30T11:00",
+    "end": "2025-07-30T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T11:00",
+    "end": "2025-08-06T13:00",
+    "title": "Close Working Problem 46",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T14:00",
+    "end": "2025-08-06T15:00",
+    "title": "Folate",
+    "domain": "HSE",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "GP201",
+    "staff": "Dr Ben Ewald"
+  },
+  {
+    "date": "2025-08-06",
+    "start": "2025-08-06T16:00",
+    "end": "2025-08-06T16:30",
+    "title": "Course Coordinator Q&A - Assessment Information + AINs",
+    "domain": "Info",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Jessica Bergmann/Dr Esther Robinson/Dr Joelle Coumans"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T09:00",
+    "end": "2025-08-07T10:00",
+    "title": "Gonads, Gametes, Zygotes and Embryos",
+    "domain": "Histology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Alan Brichta"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T10:00",
+    "end": "2025-08-07T12:00",
+    "title": "Gonads, Gametes, Zygotes and Embryos",
+    "domain": "Histology",
+    "activity": "Online Lab",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Alan Brichta"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T13:00",
+    "end": "2025-08-07T15:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:00",
+    "end": "2025-08-07T17:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:00",
+    "end": "2025-08-07T17:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:00",
+    "end": "2025-08-07T17:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:00",
+    "end": "2025-08-07T17:00",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:30",
+    "end": "2025-08-07T17:30",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:30",
+    "end": "2025-08-07T17:30",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:30",
+    "end": "2025-08-07T17:30",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-07",
+    "start": "2025-08-07T15:30",
+    "end": "2025-08-07T17:30",
+    "title": "Open Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-08",
+    "start": "2025-08-08T09:00",
+    "end": "2025-08-08T10:00",
+    "title": "Pregnancy Prevention (Revision of Metabolism and Drug Interactions)",
+    "domain": "Pharmacology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Jon Hirst"
+  },
+  {
+    "date": "2025-08-08",
+    "start": "2025-08-08T11:00",
+    "end": "2025-08-08T12:00",
+    "title": "Physiology of Fertility and Pregnancy",
+    "domain": "Physiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Neil Spratt"
+  },
+  {
+    "date": "2025-08-08",
+    "start": "2025-08-08T13:00",
+    "end": "2025-08-08T14:00",
+    "title": "Genetic Concepts in Gametogenesis and Conception",
+    "domain": "Genetics",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Gerard Kaiko"
+  },
+  {
+    "date": "2025-08-08",
+    "start": "2025-08-08T14:00",
+    "end": "2025-08-08T15:00",
+    "title": "Introduction to Genetic Testing and Investigations",
+    "domain": "Genetics",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Gerard Kaiko"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T09:00",
+    "end": "2025-08-11T10:30",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T09:00",
+    "end": "2025-08-11T10:30",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T08:30",
+    "end": "2025-08-11T10:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T10:30",
+    "end": "2025-08-11T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T12:30",
+    "end": "2025-08-11T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "ICT218",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T12:30",
+    "end": "2025-08-11T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "ICT219",
+    "staff": "Dr Jo Taylor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T14:00",
+    "end": "2025-08-11T15:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "ICT218",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T14:00",
+    "end": "2025-08-11T15:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "ICT219",
+    "staff": "Dr Jo Taylor"
+  },
+  {
+    "date": "2025-08-11",
+    "start": "2025-08-11T16:00",
+    "end": "2025-08-11T17:00",
+    "title": "Termination of Pregnancy",
+    "domain": "Prof Dev",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Indu Gunarathne"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T08:30",
+    "end": "2025-08-12T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T08:30",
+    "end": "2025-08-12T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T08:30",
+    "end": "2025-08-12T10:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T08:30",
+    "end": "2025-08-12T10:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T08:30",
+    "end": "2025-08-12T10:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T08:30",
+    "end": "2025-08-12T10:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T10:30",
+    "end": "2025-08-12T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T10:30",
+    "end": "2025-08-12T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T10:30",
+    "end": "2025-08-12T12:00",
+    "title": "Structured Clinical Skills: Women's History Taking 2",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T10:30",
+    "end": "2025-08-12T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T10:30",
+    "end": "2025-08-12T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-12",
+    "start": "2025-08-12T10:30",
+    "end": "2025-08-12T12:00",
+    "title": "Middle Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T08:30",
+    "end": "2025-08-13T10:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T10:30",
+    "end": "2025-08-13T12:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T10:30",
+    "end": "2025-08-13T12:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T10:30",
+    "end": "2025-08-13T12:30",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T11:00",
+    "end": "2025-08-13T13:00",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T11:00",
+    "end": "2025-08-13T13:00",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T11:00",
+    "end": "2025-08-13T13:00",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T11:00",
+    "end": "2025-08-13T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T11:00",
+    "end": "2025-08-13T13:00",
+    "title": "Close Working Problem 47",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-13",
+    "start": "2025-08-13T14:30",
+    "end": "2025-08-13T15:30",
+    "title": "Longatudinal Integrated Clerkship Information Session",
+    "domain": "Info",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Maree Puxty"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T09:00",
+    "end": "2025-08-14T10:30",
+    "title": "Medical Sciences - Mother and Baby",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "A",
+      "B"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T10:30",
+    "end": "2025-08-14T12:00",
+    "title": "Medical Sciences - Mother and Baby",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "C",
+      "D"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T09:00",
+    "end": "2025-08-14T10:30",
+    "title": "Medical Sciences - Mother and Baby",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "E",
+      "G",
+      "I",
+      "K",
+      "M",
+      "N"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T10:30",
+    "end": "2025-08-14T12:00",
+    "title": "Medical Sciences - Mother and Baby",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "F",
+      "J",
+      "H",
+      "L",
+      "O",
+      "P"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T13:00",
+    "end": "2025-08-14T15:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:00",
+    "end": "2025-08-14T17:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:00",
+    "end": "2025-08-14T17:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:00",
+    "end": "2025-08-14T17:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:00",
+    "end": "2025-08-14T17:00",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:30",
+    "end": "2025-08-14T17:30",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:30",
+    "end": "2025-08-14T17:30",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:30",
+    "end": "2025-08-14T17:30",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-14",
+    "start": "2025-08-14T15:30",
+    "end": "2025-08-14T17:30",
+    "title": "Open Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-15",
+    "start": "2025-08-15T08:00",
+    "end": "2025-08-15T09:00",
+    "title": "Anaesthetic Agents - Local and General",
+    "domain": "Pharmacology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "A Prof Paul Tooney"
+  },
+  {
+    "date": "2025-08-15",
+    "start": "2025-08-15T09:00",
+    "end": "2025-08-15T10:00",
+    "title": "Drugs in Pregnancy",
+    "domain": "Pharmacology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "A Prof Paul Tooney"
+  },
+  {
+    "date": "2025-08-15",
+    "start": "2025-08-15T10:00",
+    "end": "2025-08-15T12:00",
+    "title": "Clinical Panel Forum:Trans Health",
+    "domain": "HBS",
+    "activity": "Forum",
+    "campus": "Callaghan",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "GP201",
+    "staff": "Prof  Katie Wynne"
+  },
+  {
+    "date": "2025-08-15",
+    "start": "2025-08-15T13:00",
+    "end": "2025-08-15T14:00",
+    "title": "Hormonal Control of Labour, Delivery and Lactation",
+    "domain": "Physiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Neil Spratt"
+  },
+  {
+    "date": "2025-08-15",
+    "start": "2025-08-15T14:00",
+    "end": "2025-08-15T15:00",
+    "title": "Infant Transition to Extra-Uterine Life",
+    "domain": "Physiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Neil Spratt"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T09:00",
+    "end": "2025-08-18T10:30",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T09:00",
+    "end": "2025-08-18T10:30",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T08:30",
+    "end": "2025-08-18T10:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T10:30",
+    "end": "2025-08-18T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T12:30",
+    "end": "2025-08-18T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "ICT218",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T12:30",
+    "end": "2025-08-18T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "ICT219",
+    "staff": "Georgia Dagger"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T14:00",
+    "end": "2025-08-18T15:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "ICT218",
+    "staff": "A Prof Marita Lynagh"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T14:00",
+    "end": "2025-08-18T15:30",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "ICT219",
+    "staff": "Georgia Dagger"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T13:00",
+    "end": "2025-08-18T14:00",
+    "title": "Research Ethics",
+    "domain": "Prof Dev",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Indu Gunarathne"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T14:00",
+    "end": "2025-08-18T15:00",
+    "title": "Clinical Decision Making: Consent in the Mature Minor",
+    "domain": "Prof Dev",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Indu Gunarathne"
+  },
+  {
+    "date": "2025-08-18",
+    "start": "2025-08-18T15:30",
+    "end": "2025-08-18T16:30",
+    "title": "Clinical Panel Forum:  Management of Labour and Delivery",
+    "domain": "Clinical",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Mrs Susan Armitage"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T08:30",
+    "end": "2025-08-19T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T08:30",
+    "end": "2025-08-19T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T08:30",
+    "end": "2025-08-19T10:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T08:30",
+    "end": "2025-08-19T10:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T08:30",
+    "end": "2025-08-19T10:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T08:30",
+    "end": "2025-08-19T10:00",
+    "title": "Middle Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T10:30",
+    "end": "2025-08-19T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T10:30",
+    "end": "2025-08-19T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T10:30",
+    "end": "2025-08-19T12:00",
+    "title": "Structured Clinical Skills: Revision Y2 - Neuro UL & LL",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T10:30",
+    "end": "2025-08-19T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "Tutorial",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T10:30",
+    "end": "2025-08-19T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "Tutorial",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-19",
+    "start": "2025-08-19T10:30",
+    "end": "2025-08-19T12:00",
+    "title": "Middle Working Problem 48",
+    "domain": "Tutorial",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T08:30",
+    "end": "2025-08-20T10:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T10:30",
+    "end": "2025-08-20T12:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T10:30",
+    "end": "2025-08-20T12:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T10:30",
+    "end": "2025-08-20T12:30",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T11:00",
+    "end": "2025-08-20T13:00",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T11:00",
+    "end": "2025-08-20T13:00",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T11:00",
+    "end": "2025-08-20T13:00",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T11:00",
+    "end": "2025-08-20T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T11:00",
+    "end": "2025-08-20T13:00",
+    "title": "Close Working Problem 48",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-20",
+    "start": "2025-08-20T14:30",
+    "end": "2025-08-20T16:30",
+    "title": "Pathways Information Session - Year 4/5 Preferencing",
+    "domain": "Info",
+    "activity": "Seminar",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Natalie Jones"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T09:00",
+    "end": "2025-08-21T10:30",
+    "title": "Medical Sciences - Revision Endocrine System",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "A",
+      "B"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T10:30",
+    "end": "2025-08-21T12:00",
+    "title": "Medical Sciences - Revision Endocrine System",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "CCS",
+    "groups": [
+      "C",
+      "D"
+    ],
+    "venue": "GO93.11.37",
+    "staff": "Dr Ethan Cresswell"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T09:00",
+    "end": "2025-08-21T10:30",
+    "title": "Medical Sciences - Revision Endocrine System",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "E",
+      "G",
+      "I",
+      "K",
+      "M",
+      "N"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T10:30",
+    "end": "2025-08-21T12:00",
+    "title": "Medical Sciences - Revision Endocrine System",
+    "domain": "Anatomy",
+    "activity": "Lab",
+    "campus": "Callaghan",
+    "groups": [
+      "F",
+      "J",
+      "H",
+      "L",
+      "O",
+      "P"
+    ],
+    "venue": "MSW320",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T13:00",
+    "end": "2025-08-21T15:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:00",
+    "end": "2025-08-21T17:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:00",
+    "end": "2025-08-21T17:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:00",
+    "end": "2025-08-21T17:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:00",
+    "end": "2025-08-21T17:00",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:30",
+    "end": "2025-08-21T17:30",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:30",
+    "end": "2025-08-21T17:30",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:30",
+    "end": "2025-08-21T17:30",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-21",
+    "start": "2025-08-21T15:30",
+    "end": "2025-08-21T17:30",
+    "title": "Open Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-22",
+    "start": "2025-08-22T09:00",
+    "end": "2025-08-22T10:00",
+    "title": "Perinatal and Early Childhood Infections",
+    "domain": "Immunology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Nathan Bartlett"
+  },
+  {
+    "date": "2025-08-22",
+    "start": "2025-08-22T10:00",
+    "end": "2025-08-22T11:00",
+    "title": "Clinical Genetics - Approach to Child Development",
+    "domain": "Genetics",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Prerecoding on Canvas Panopto",
+    "staff": "Dr Himanshu Goel"
+  },
+  {
+    "date": "2025-08-22",
+    "start": "2025-08-22T12:30",
+    "end": "2025-08-22T14:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.58",
+    "staff": "Kate Dundas"
+  },
+  {
+    "date": "2025-08-22",
+    "start": "2025-08-22T14:30",
+    "end": "2025-08-22T16:00",
+    "title": "Sexuality and Identity",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.58",
+    "staff": "Kate Dundas"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T09:00",
+    "end": "2025-08-25T10:30",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T09:00",
+    "end": "2025-08-25T10:30",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T08:30",
+    "end": "2025-08-25T10:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.56",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.60",
+    "staff": "Peter Bae"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP327",
+    "staff": "Karma Tenzin"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clinical Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP326",
+    "staff": "Htoo Myat"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T10:30",
+    "end": "2025-08-25T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T12:30",
+    "end": "2025-08-25T14:00",
+    "title": "Sexuality Across the Lifespan",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "SR192",
+    "staff": "Dr Jo Taylor"
+  },
+  {
+    "date": "2025-08-25",
+    "start": "2025-08-25T14:00",
+    "end": "2025-08-25T15:30",
+    "title": "Sexuality Across the Lifespan",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "SR192",
+    "staff": "Dr Jo Taylor"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T08:30",
+    "end": "2025-08-26T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T08:30",
+    "end": "2025-08-26T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T08:30",
+    "end": "2025-08-26T10:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T08:30",
+    "end": "2025-08-26T10:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T08:30",
+    "end": "2025-08-26T10:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T08:30",
+    "end": "2025-08-26T10:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T10:30",
+    "end": "2025-08-26T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP327",
+    "staff": "Vicki Howell"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T10:30",
+    "end": "2025-08-26T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP328",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T10:30",
+    "end": "2025-08-26T12:00",
+    "title": "Structured Clinical Skills: CSA (Clinical Skills Assessment)",
+    "domain": "Clin Skills",
+    "activity": "Practical",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP326",
+    "staff": "Khanrin Vashum"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T10:30",
+    "end": "2025-08-26T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP325",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T10:30",
+    "end": "2025-08-26T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP324",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-26",
+    "start": "2025-08-26T10:30",
+    "end": "2025-08-26T12:00",
+    "title": "Middle Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP321",
+    "staff": "Roving Tutor"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T08:30",
+    "end": "2025-08-27T10:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T10:30",
+    "end": "2025-08-27T12:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T10:30",
+    "end": "2025-08-27T12:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T10:30",
+    "end": "2025-08-27T12:30",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T11:00",
+    "end": "2025-08-27T13:00",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T11:00",
+    "end": "2025-08-27T13:00",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T11:00",
+    "end": "2025-08-27T13:00",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T11:00",
+    "end": "2025-08-27T13:00",
+    "title": "Close Working Problem 45",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T11:00",
+    "end": "2025-08-27T13:00",
+    "title": "Close Working Problem 49",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T13:30",
+    "end": "2025-08-27T15:00",
+    "title": "Sexuality Across the Lifespan",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Kate Dundas"
+  },
+  {
+    "date": "2025-08-27",
+    "start": "2025-08-27T15:30",
+    "end": "2025-08-27T17:00",
+    "title": "Sexuality Across the Lifespan",
+    "domain": "Interactional Skills",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Kate Dundas"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T09:00",
+    "end": "2025-08-28T10:00",
+    "title": "Medical Sciences - Histology of Breast and Cervix",
+    "domain": "Histology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Alan Brichta"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T10:00",
+    "end": "2025-08-28T12:00",
+    "title": "Medical Sciences - Histology of Breast and Cervix",
+    "domain": "Histology",
+    "activity": "Online Lab",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Alan Brichta"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "A"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Tegan Stettaford"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "B"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Heather Allard"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "E"
+    ],
+    "venue": "GP326",
+    "staff": "Erin Gardiner"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "G"
+    ],
+    "venue": "GP328",
+    "staff": "Tooba Azami"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "I"
+    ],
+    "venue": "GP325",
+    "staff": "Travis Swadling"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "K"
+    ],
+    "venue": "GP327",
+    "staff": "Richard Thorpe"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "M"
+    ],
+    "venue": "GP321",
+    "staff": "Juan Morales Franco"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T13:00",
+    "end": "2025-08-28T15:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "N"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:00",
+    "end": "2025-08-28T17:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "C"
+    ],
+    "venue": "GO93.08.55",
+    "staff": "Ethan Creswell"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:00",
+    "end": "2025-08-28T17:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "CCS",
+    "groups": [
+      "D"
+    ],
+    "venue": "GO93.08.51",
+    "staff": "Natalie Govind"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:00",
+    "end": "2025-08-28T17:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "J"
+    ],
+    "venue": "GP325",
+    "staff": "Abhijit Chowdhury"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:00",
+    "end": "2025-08-28T17:00",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "F"
+    ],
+    "venue": "GP328",
+    "staff": "Esther Robinson"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:30",
+    "end": "2025-08-28T17:30",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "H"
+    ],
+    "venue": "GP327",
+    "staff": "Roger Liang"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:30",
+    "end": "2025-08-28T17:30",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "L"
+    ],
+    "venue": "GP326",
+    "staff": "Jeff Regnis"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:30",
+    "end": "2025-08-28T17:30",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "O"
+    ],
+    "venue": "GP321",
+    "staff": "Neil Spratt"
+  },
+  {
+    "date": "2025-08-28",
+    "start": "2025-08-28T15:30",
+    "end": "2025-08-28T17:30",
+    "title": "Open Working Problem 50",
+    "domain": "PBL",
+    "activity": "Tutorial",
+    "campus": "Callaghan",
+    "groups": [
+      "P"
+    ],
+    "venue": "GP324",
+    "staff": "Lauren Harms"
+  },
+  {
+    "date": "2025-08-29",
+    "start": "2025-08-29T08:00",
+    "end": "2025-08-29T09:00",
+    "title": "Effects of Ageing on the Brain and Body",
+    "domain": "Pathology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "A Prof Doug Smith"
+  },
+  {
+    "date": "2025-08-29",
+    "start": "2025-08-29T09:00",
+    "end": "2025-08-29T10:00",
+    "title": "Physiology of Menopause",
+    "domain": "Physiology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Prof Neil Spratt"
+  },
+  {
+    "date": "2025-08-29",
+    "start": "2025-08-29T10:30",
+    "end": "2025-08-29T11:30",
+    "title": "Cancer Concepts",
+    "domain": "Pathology",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Ricardo Vilain"
+  },
+  {
+    "date": "2025-08-29",
+    "start": "2025-08-29T11:30",
+    "end": "2025-08-29T12:30",
+    "title": "Population Genetics",
+    "domain": "Genetics",
+    "activity": "Lecture",
+    "campus": "Both",
+    "groups": [
+      "ALL"
+    ],
+    "venue": "Zoom 2025",
+    "staff": "Dr Gerard Kaiko"
+  }
+]
