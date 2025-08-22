@@ -1,4 +1,4 @@
-# MEDI2101B Timetable (GitHub Pages)
+#  Timetable (GitHub Pages)
 
 Static site that renders your timetable with campus/PBL filters and live status.
 
