@@ -5,59 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MEDI2101B Timetable</title>
 <style>
-  :root { --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e8eb; --border:#222534;
-          --good:#2ecc71; --warn:#f1c40f; --chip:#1b1e27; --accent:#3aa0ff;}
+  :root {
+    /* Dark theme (default) */
+    --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e8eb; --border:#222534;
+    --good:#2ecc71; --warn:#f1c40f; --chip:#1b1e27; --accent:#3aa0ff; --accent2:#7c4dff;
+    --dom-Anatomy:#3a9bff; --dom-PBL:#2ecc71; --dom-Clinical:#ff9f43; --dom-Physiology:#8e44ad;
+    --dom-Biochem:#00c1a3; --dom-Info:#8899aa; --dom-Pharmacology:#e67e22; --dom-Pathology:#ff5252;
+    --shadow: 0 4px 14px rgba(0,0,0,.2);
+  }
+  .theme-light {
+    --bg:#f7f8fb; --card:#ffffff; --muted:#5e6a75; --text:#0f141b; --border:#dde2ea;
+    --good:#2e8b57; --warn:#b58900; --chip:#eff3f8; --accent:#0b84ff; --accent2:#5f3aff;
+    --dom-Anatomy:#0b84ff; --dom-PBL:#1e9e5a; --dom-Clinical:#d97706; --dom-Physiology:#7c3aed;
+    --dom-Biochem:#0ea5a4; --dom-Info:#64748b; --dom-Pharmacology:#d35400; --dom-Pathology:#dc2626;
+    --shadow: 0 6px 18px rgba(10,20,40,.08);
+  }
   html, body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; background:var(--bg); color:var(--text); }
-  .wrap { max-width:1100px; margin:0 auto; padding:16px 16px 88px; }
-  header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 6px; position:sticky; top:0; background:linear-gradient(var(--bg) 80%, transparent); z-index:5;}
-  .title { font-size:20px; font-weight:800; }
-  .tabs { display:inline-flex; background:#12141b; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-  .tab-btn { padding:10px 14px; color:var(--muted); border-right:1px solid var(--border); cursor:pointer; user-select:none;}
+  .wrap { max-width:1200px; margin:0 auto; padding:16px 16px 96px; }
+  header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 8px; position:sticky; top:0;
+           background:linear-gradient(var(--bg) 80%, transparent); z-index:5; }
+  .title { font-size:21px; font-weight:800; letter-spacing:.2px; }
+  .tabs { display:inline-flex; background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+  .tab-btn { padding:10px 14px; color:var(--muted); border-right:1px solid var(--border); cursor:pointer; user-select:none; }
   .tab-btn:last-child { border-right:none; }
   .tab-btn.active { color:var(--text); background:#1a1d27; }
+  .theme-light .tab-btn.active { background:#eef2f8; }
   .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  .btn { background:#12141b; border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; }
+  .btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; box-shadow:var(--shadow); }
+  .btn:active { transform: translateY(1px); }
   .pill { display:inline-flex; gap:8px; align-items:center; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
   .grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:12px; }
-  .card { grid-column:span 12; background:#121319; border:1px solid var(--border); border-radius:14px; padding:14px; }
-  .event { display:grid; grid-template-columns:26px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:#12141b; }
+  .card { grid-column:span 12; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow:var(--shadow); }
+  .event { display:grid; grid-template-columns:26px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:linear-gradient(#12141b, #151a24); }
+  .theme-light .event { background:linear-gradient(#ffffff, #fbfdff); }
   .event + .event { margin-top:8px; }
+  .event.compact { grid-template-columns:18px 1fr; gap:8px; padding:6px; }
   .when { font-variant-numeric: tabular-nums; font-weight:600; }
   .title2 { font-weight:700; }
   .sub { color:var(--muted); font-size:12px; }
   .chip { display:inline-block; background:#1a2130; border:1px solid var(--border); padding:4px 8px; border-radius:8px; font-size:12px; color:var(--muted); }
+  .chip.mand { background: rgba(231,76,60,.15); color:#ff9aa2; border-color:#5b2b2b; }
+  .theme-light .chip.mand { background: rgba(220,38,38,.12); color:#b91c1c; border-color:#fecaca; }
+  .theme-light .chip { background:#eef2f8; color:#4b5563; }
   .live-dot { width:12px; height:12px; border-radius:50%; background:var(--good); box-shadow:0 0 0 4px rgba(46,204,113,.15), 0 0 10px rgba(46,204,113,.6); }
   .soon-dot { width:12px; height:12px; border-radius:50%; background:var(--warn); }
   .past-dot { width:12px; height:12px; border-radius:50%; background:#434a57; }
   .hidden { display:none; }
   .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #c7cbd2; border-bottom: 1px solid var(--border); }
+  .theme-light .date-header { color:#374151; }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
   .warn { color:#f6d365; }
+
+  /* Domain color accents */
+  .dombar { width:6px; height:100%; border-radius:6px; }
+  .event-body { display:grid; grid-template-columns:1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; }
+  .event.compact .event-body { display:none; }
+  .event.compact .when { font-weight:600; }
+  .event.compact .title2 { font-weight:700; }
+  .event.compact .title-wrap { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  /* Week grid */
+  .weekbar { display:grid; grid-template-columns:repeat(7, 1fr); gap:12px; }
+  .daycol { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px; min-height:240px; box-shadow:var(--shadow); }
+  .dayhead { font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between; color:var(--muted); }
+  .daybody .event { background:transparent; box-shadow:none; }
+  .nav-week { display:flex; gap:6px; align-items:center; }
+
   /* Modal */
   .modal-backdrop { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6); z-index:999;}
-  .modal { width:min(680px,94vw); background:#121319; border:1px solid var(--border); border-radius:16px; padding:18px; position:relative;}
+  .modal { width:min(780px,94vw); background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; position:relative; box-shadow:var(--shadow);}
   .modal .x { position:absolute; right:10px; top:10px; width:28px; height:28px; border-radius:8px; border:1px solid var(--border); background:#0e1016; color:#cbd1db; cursor:pointer;}
+  .theme-light .modal .x { background:#eef2f8; color:#111827; }
+  label { display:block; margin-bottom:6px; font-size:13px; color:var(--muted); }
+  select, input[type=text], input[type=number] { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#0e1016; color:var(--text); }
+  .theme-light select, .theme-light input[type=text], .theme-light input[type=number] { background:#fff; color:#0f141b; }
+
   footer { position:fixed; bottom:0; left:0; right:0; background:linear-gradient(transparent, var(--bg) 20%, var(--bg)); padding:10px 12px; }
-  .foot-inner { max-width:1100px; margin:0 auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  .foot-inner { max-width:1200px; margin:0 auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+
+  /* Countdown banner */
+  .banner { grid-column: span 12; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(90deg, rgba(58,160,255,.12), transparent); box-shadow:var(--shadow); }
+  .theme-light .banner { background:linear-gradient(90deg, rgba(11,132,255,.12), #ffffff); }
+  .banner .primary { font-weight:700; }
+  .banner .meta { color:var(--muted); font-size:12px; }
+
+  /* Transit helper prettier */
+  .transit { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .cta { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; border:1px solid var(--border); text-decoration:none; color:var(--text); background:var(--chip); }
+  .cta:hover { filter:brightness(1.05); }
+
+  /* Toggles */
+  .switch { display:inline-flex; align-items:center; gap:6px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="root">
   <header>
     <div class="title">MEDI2101B Timetable</div>
     <div class="controls">
       <div class="tabs" role="tablist">
         <div class="tab-btn active" data-tab="today" role="tab" aria-selected="true">Today</div>
+        <div class="tab-btn" data-tab="week" role="tab" aria-selected="false">Week</div>
         <div class="tab-btn" data-tab="all" role="tab" aria-selected="false">All</div>
       </div>
       <button class="btn" id="btn-settings" title="Campus / PBL">Settings</button>
       <button class="btn" id="btn-load" title="Load JSON/CSV">Load Data</button>
       <button class="btn" id="btn-jump" title="Scroll All → Today">Jump to Today</button>
       <button class="btn" id="btn-ics" title="Export filtered events to calendar">Export ICS</button>
-      <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔 Notifications</button>
-      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;background:#0e1016;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:4px 8px;">
-        <option value="ALL">ALL</option>
-      </select></span>
+      <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔</button>
+      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;"></select></span>
+      <span class="pill switch"><input type="checkbox" id="toggle-compact"> <label for="toggle-compact">Compact</label></span>
+      <span class="pill switch"><input type="checkbox" id="toggle-mand"> <label for="toggle-mand">Only mandatory</label></span>
+      <button class="btn" id="btn-theme">Theme</button>
     </div>
   </header>
 
@@ -65,7 +124,20 @@
   <div id="notice" class="sub"></div>
   <div class="dropzone" id="dropzone">Drop <b>timetable.json</b> or <b>timetable.csv</b> here, or click "Load Data".</div>
 
+  <div id="countdown" class="banner hidden"></div>
+
   <div id="today-view" class="grid" role="region" aria-live="polite"></div>
+  <div id="week-view" class="grid hidden" role="region">
+    <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="nav-week">
+        <button class="btn" id="wk-prev">← Prev</button>
+        <button class="btn" id="wk-today">This week</button>
+        <button class="btn" id="wk-next">Next →</button>
+      </div>
+      <div class="sub" id="wk-range"></div>
+    </div>
+    <div id="weekbar" class="weekbar card" style="background:none;border:none;box-shadow:none;padding:0;"></div>
+  </div>
   <div id="all-view" class="grid hidden" role="region"></div>
 </div>
 
@@ -86,16 +158,16 @@
     <div class="sub" style="margin-bottom:10px">Choose your campus and PBL group.</div>
     <div style="display:flex;gap:12px">
       <div style="flex:1">
-        <div class="sub">Campus</div>
-        <select id="sel-campus" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">
+        <label for="sel-campus">Campus</label>
+        <select id="sel-campus">
           <option value="Both">Both</option>
           <option value="Callaghan">Callaghan</option>
           <option value="CCS">CCS</option>
         </select>
       </div>
       <div style="flex:1">
-        <div class="sub">PBL Group</div>
-        <select id="sel-group" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">
+        <label for="sel-group">PBL Group</label>
+        <select id="sel-group">
           <option value="ALL">ALL</option>
           <option>A</option><option>B</option><option>C</option><option>D</option>
           <option>E</option><option>F</option><option>G</option><option>H</option>
@@ -104,7 +176,30 @@
         </select>
       </div>
     </div>
-    <div style="margin-top:10px">      <div class="sub">Optional label</div>      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">    </div>    <div style="display:flex;gap:12px;margin-top:10px">      <div style="flex:1">        <div class="sub">Home station / address</div>        <input id="txt-home" placeholder="e.g., Hamilton Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>      <div style="flex:1">        <div class="sub">Campus station</div>        <input id="txt-campus-st" placeholder="Gosford Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>    </div>    <div style="display:flex;gap:12px;margin-top:10px">      <div style="flex:1">        <div class="sub">Arrive buffer (min)</div>        <input id="num-arrive" type="number" min="0" value="15" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>      <div style="flex:1">        <div class="sub">Leave buffer (min)</div>        <input id="num-leave" type="number" min="0" value="10" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>    </div>
+    <div style="margin-top:10px">
+      <label for="txt-name">Optional label</label>
+      <input id="txt-name" placeholder="e.g., Callaghan – Group H">
+    </div>
+    <div style="display:flex;gap:12px;margin-top:10px">
+      <div style="flex:1">
+        <label for="txt-home">Home station / address</label>
+        <input id="txt-home" placeholder="e.g., Hamilton Station">
+      </div>
+      <div style="flex:1">
+        <label for="txt-campus-st">Campus station</label>
+        <input id="txt-campus-st" placeholder="Gosford Station" value="Gosford Station">
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:10px">
+      <div style="flex:1">
+        <label for="num-arrive">Arrive buffer (min)</label>
+        <input id="num-arrive" type="number" min="0" value="15">
+      </div>
+      <div style="flex:1">
+        <label for="num-leave">Leave buffer (min)</label>
+        <input id="num-leave" type="number" min="0" value="10">
+      </div>
+    </div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
       <button class="btn" id="btn-save">Save</button>
       <button class="btn" id="btn-close">Close</button>
@@ -115,74 +210,129 @@
 <input type="file" id="file-input" accept=".json,.csv" class="hidden"/>
 
 <script>
+  // ---------- State & prefs ----------
   let EVENTS = [];
   let DOMAIN = "ALL";
   let notifiedKeys = new Set();
+  let WEEK_OFFSET = 0; // 0 = this week, -1 = prev, +1 = next
+  let COMPACT = false;
 
   function loadPrefs(){ try{ const r=localStorage.getItem('medi2101b_prefs'); return r?JSON.parse(r):null;}catch{ return null; } }
   function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10 }; }
   function savePrefs(p){ localStorage.setItem('medi2101b_prefs', JSON.stringify(p)); }
-  function campusMatch(evCampus, prefCampus){ if (prefCampus==='Both' || evCampus==='Both') return true; return evCampus===prefCampus; }
-  function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
-  function domainMatch(evDomain){ return DOMAIN==='ALL' || String(evDomain||'').toLowerCase()===DOMAIN.toLowerCase(); }
 
+  // ---------- Utils ----------
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const sanitize = s => String(s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-
   function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   function fmtDate(d){ return d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'}); }
   function byStart(a,b){ return new Date(a.start) - new Date(b.start); }
   function todayKey(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
   function statusFor(ev, now){ const s=new Date(ev.start), e=new Date(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
+  function startOfWeek(d){ const dd = new Date(d); const day = dd.getDay(); const diff = (day === 0 ? -6 : 1 - day); dd.setDate(dd.getDate() + diff); dd.setHours(0,0,0,0); return dd; } // Monday
+  function addDays(d, n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+  function colorForDomain(dom){ const key = String(dom||'').trim(); const map = { 'Anatomy':'var(--dom-Anatomy)','PBL':'var(--dom-PBL)','Clinical':'var(--dom-Clinical)','Physiology':'var(--dom-Physiology)','Biochem':'var(--dom-Biochem)','Info':'var(--dom-Info)','Pharmacology':'var(--dom-Pharmacology)','Pathology':'var(--dom-Pathology)' }; return map[key] || 'var(--accent2)'; }
 
-  function isRemote(ev){
-    const v = String(ev.venue||''); const t = String(ev.title||''); const a = String(ev.activity||'');
-    return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t) || /Lecture/i.test(a) && /zoom|panopto/i.test(v);
+  function campusMatch(evCampus, prefCampus){ if (prefCampus==='Both' || evCampus==='Both') return true; return evCampus===prefCampus; }
+  function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
+  function domainMatch(evDomain){ return DOMAIN==='ALL' || String(evDomain||'').toLowerCase()===DOMAIN.toLowerCase(); }
+  function filteredEvents(){ const prefs = Object.assign(defaultPrefs(), loadPrefs()||{}); const onlyMand = localStorage.getItem('medi2101b_onlymand')==='1'; return EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group) && domainMatch(ev.domain) && (!onlyMand || computeMandatory(ev))).sort(byStart); }
+  // --- Data normalization & mandatory tagging ---
+  function normalizeCampus(raw){
+    const s = String(raw||'').toLowerCase().replace(/\s+/g,'').replace('&','/');
+    if (!s) return 'Both';
+    if (s.includes('cal/cc') || s.includes('cc/cal') || s.includes('calcc') || s.includes('cccal') || s.includes('both')) return 'Both';
+    if (s.startsWith('cal')) return 'Callaghan';
+    if (s.startsWith('cc') || s.startsWith('ccs')) return 'CCS';
+    return raw; // fallback
   }
+  function normalizeGroups(g){
+    if (Array.isArray(g)) return g.length ? g : ['ALL'];
+    if (!g) return ['ALL'];
+    const s = String(g);
+    const parts = s.split(/[,\s;\/]+/).map(x=>x.trim()).filter(Boolean);
+    const letters = parts.map(x=>x.toUpperCase()).filter(x=>x==='ALL' || /^[A-P]$/.test(x));
+    return letters.length ? letters : ['ALL'];
+  }
+  function computeMandatory(ev){
+    if (ev.mandatory === true) return true;
+    // Heuristics: explicit keywords OR small-group (not ALL)
+    const t = (String(ev.title||'') + ' ' + String(ev.activity||'')).toLowerCase();
+    if (/(mandatory|compulsory|attendance required)/i.test(t)) return true;
+    const gs = normalizeGroups(ev.groups);
+    if (gs.some(x => x!=='ALL')) return true;
+    return false;
+  }
+  function normalizeAndEnhance(data){
+    data.forEach(e => {
+      e.campusNorm = normalizeCampus(e.campus);
+      e.groups = normalizeGroups(e.groups);
+      e.mandatory = computeMandatory(e);
+    });
+    return data;
+  }
+  // Override campus/group matchers to use normalized values
+  function campusMatch(evCampus, prefCampus){
+    const ec = normalizeCampus(evCampus);
+    if (prefCampus==='Both') return true;
+    if (ec==='Both') return true;
+    return ec === prefCampus;
+  }
+  function groupMatch(evGroups, prefGroup){
+    const gs = normalizeGroups(evGroups);
+    if (prefGroup==='ALL') return true;
+    return gs.includes(prefGroup) || gs.includes('ALL');
+  }
+
+
+  function computeNext(evts, now){ return evts.filter(e => new Date(e.end) > now).sort((a,b)=>new Date(a.start)-new Date(b.start))[0] || null; }
+  function isRemote(ev){ const v = String(ev.venue||''); const t = String(ev.title||''); const a = String(ev.activity||''); return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t); }
+
+  // ---------- Weather (Open-Meteo) ----------
+  async function fetchWeather(){
+    // Gosford default
+    const defLat = -33.424, defLon = 151.342;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${defLat}&longitude=${defLon}&current=temperature_2m,apparent_temperature,precipitation&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
+    try {
+      const r = await fetch(url, {cache:'no-cache'});
+      if (!r.ok) throw new Error('weather fetch failed');
+      const j = await r.json();
+      return j;
+    } catch(e){
+      return null;
+    }
+  }
+  function weatherIcon(code){
+    // minimal mapping
+    const m = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',61:'🌧️',71:'🌨️',80:'🌧️',95:'⛈️'};
+    return m[code] || '🌡️';
+  }
+
+  // ---------- Transit ----------
   function urlEncode(s){ return encodeURIComponent(String(s||'')); }
   function mapsTransitLink(origin, dest){
     const base = 'https://www.google.com/maps/dir/?api=1';
     return `${base}&travelmode=transit&origin=${urlEncode(origin)}&destination=${urlEncode(dest)}&transit_mode=train`;
   }
-  function addTransitHelper(container, dateKey){
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const dayEvents = filteredEvents().filter(ev => ev.date === dateKey && !isRemote(ev));
-    if (!dayEvents.length) return;
-    const first = dayEvents.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, dayEvents[0]);
-    const last = dayEvents.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, dayEvents[0]);
-    const arriveBy = new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000);
-    const leaveAfter = new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000);
-    const card = document.createElement('div'); card.className='card';
-    const inner = document.createElement('div');
-    const h = document.createElement('div'); h.className='title2'; h.textContent = 'Transit helper';
-    const p = document.createElement('div'); p.className='sub';
-    p.textContent = 'For in-person sessions only. Times are local and buffers are configurable in Settings.';
-    const row = document.createElement('div'); row.style.marginTop='8px';
-    const a1 = document.createElement('a'); a1.className='btn'; a1.href = mapsTransitLink(prefs.home, prefs.campusStation); a1.target='_blank'; a1.rel='noopener'; a1.textContent = 'Open arrival options';
-    const a2 = document.createElement('a'); a2.className='btn'; a2.href = mapsTransitLink(prefs.campusStation, prefs.home); a2.style.marginLeft='8px'; a2.target='_blank'; a2.rel='noopener'; a2.textContent='Open return options';
-    const info = document.createElement('div'); info.className='sub'; info.style.marginTop='8px';
-    info.textContent = `Arrive by ${arriveBy.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})} · Leave after ${leaveAfter.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
-    inner.append(h,p,row,info);
-    row.append(a1,a2);
-    card.appendChild(inner);
-    container.prepend(card);
+
+  // ---------- Renderers ----------
+  function renderCountdown(){
+    const now = new Date();
+    const evts = filteredEvents();
+    const next = computeNext(evts, now);
+    const el = $('#countdown');
+    if (!next){ el.classList.add('hidden'); return; }
+    const st = new Date(next.start);
+    const diff = Math.max(0, Math.floor((st-now)/60000));
+    el.classList.remove('hidden');
+    el.innerHTML = `<div class="primary">Next: ${sanitize(next.title)} in ${diff} min</div>
+                    <div class="meta">${fmtHM(st)} · ${sanitize(next.domain)} · ${sanitize(next.activity)} · ${sanitize(next.campus)}</div>`;
   }
 
-
-  function filteredEvents(){
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    return EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group) && domainMatch(ev.domain)).sort(byStart);
-  }
-
-  function computeNext(evts, now){
-    return evts.filter(e => new Date(e.end) > now).sort((a,b)=>new Date(a.start)-new Date(b.start))[0] || null;
-  }
-
-  function render(){
+  function renderToday(){
     const now = new Date();
     $('#nowstr').textContent = now.toLocaleString();
-
     const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
     const filterStr = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
     $('#filterstr').textContent = filterStr;
@@ -190,10 +340,47 @@
 
     const filtered = filteredEvents();
 
-    // Today
+    // Countdown banner
+    renderCountdown();
+
     const tv = $('#today-view'); tv.innerHTML = '';
     const today = todayKey(now);
     const todays = filtered.filter(ev => ev.date === today);
+    // Morning digest (once per day)
+    const digestKey = 'medi2101b_digest_date';
+    const lastDigest = localStorage.getItem(digestKey);
+    if (lastDigest !== today){
+      localStorage.setItem(digestKey, today);
+      // build digest card
+      const dig = document.createElement('div'); dig.className='card';
+      dig.innerHTML = `<div class="title2">Morning digest</div>
+        <div class="sub" id="digest-sub">Loading weather…</div>`;
+      tv.appendChild(dig);
+      // async fill: sessions + weather + transit windows
+      const oncampus = todays.filter(e => !isRemote(e));
+      const first = oncampus.length ? oncampus.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, oncampus[0]) : null;
+      const last = oncampus.length ? oncampus.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, oncampus[0]) : null;
+      const arriveBy = first ? new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000) : null;
+      const leaveAfter = last ? new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000) : null;
+
+      const summary = `${todays.length} session${todays.length===1?'':'s'} · ` + (oncampus.length?`${oncampus.length} on-campus`:`all remote`);
+      let lines = [summary];
+      if (arriveBy) lines.push(`Arrive by ${fmtHM(arriveBy)}`);
+      if (leaveAfter) lines.push(`Leave after ${fmtHM(leaveAfter)}`);
+
+      fetchWeather().then(w => {
+        let wx = 'Weather unavailable';
+        if (w && w.daily){
+          const wcode = w.daily.weathercode[0];
+          const tmax = w.daily.temperature_2m_max[0];
+          const tmin = w.daily.temperature_2m_min[0];
+          const p = w.daily.precipitation_probability_max[0];
+          wx = `${weatherIcon(wcode)} ${Math.round(tmin)}–${Math.round(tmax)}°C · rain ${p}%`;
+        }
+        $('#digest-sub').textContent = lines.join(' · ') + ' · ' + wx;
+      });
+    }
+
     if (!todays.length){
       const d = document.createElement('div'); d.className='card'; d.innerHTML = '<div class="sub">No events today for the current filters.</div>'; tv.appendChild(d);
     } else {
@@ -201,62 +388,127 @@
       const inner = document.createElement('div');
       todays.forEach(ev => {
         const st = statusFor(ev, now);
-        const row = document.createElement('div'); row.className='event';
-        const dot = document.createElement('div'); dot.className = st==='live'?'live-dot':(st==='soon'?'soon-dot':'past-dot');
-        const when = document.createElement('div'); when.className='when';
-        const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
-        const title = document.createElement('div'); title.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
-        const where = document.createElement('div'); where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'');
+        const row = document.createElement('div'); row.className='event' + (COMPACT?' compact':'');
+        const dom = document.createElement('div'); dom.className='dombar'; dom.style.background = colorForDomain(ev.domain);
+        const when = document.createElement('div'); when.className='when'; const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
+        const titleWrap = document.createElement('div'); titleWrap.className='title-wrap';
+        titleWrap.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
+        const where = document.createElement('div'); where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'') + (computeMandatory(ev)?' <span class="chip mand">Mandatory</span>':'');
         const who = document.createElement('div'); who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
-        row.append(dot, when, title, where, who); inner.appendChild(row);
+        const dot = document.createElement('div'); dot.className = st==='live'?'live-dot':(st==='soon'?'soon-dot':'past-dot');
+        // layout
+        if (COMPACT){
+          row.append(dom, dot, when, titleWrap);
+        } else {
+          const body = document.createElement('div'); body.className='event-body';
+          body.append(when, titleWrap, where, who);
+          row.append(dom, dot, body);
+        }
+        inner.appendChild(row);
       });
       card.appendChild(inner); tv.appendChild(card);
-      addTransitHelper(tv, today);
-    }
 
-    // All
+      // Transit helper, prettier
+      const oncampus = todays.filter(e => !isRemote(e));
+      if (oncampus.length){
+        const first = oncampus.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, oncampus[0]);
+        const last = oncampus.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, oncampus[0]);
+        const arriveBy = new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000);
+        const leaveAfter = new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000);
+        const tcard = document.createElement('div'); tcard.className='card';
+        const innerT = document.createElement('div');
+        innerT.innerHTML = `<div class="title2">Transit</div>
+          <div class="sub">Plan around buffers · arrive by <b>${fmtHM(arriveBy)}</b> · leave after <b>${fmtHM(leaveAfter)}</b></div>`;
+        const row = document.createElement('div'); row.className='transit';
+        const a1 = document.createElement('a'); a1.className='cta'; a1.href=mapsTransitLink(prefs.home, prefs.campusStation); a1.target='_blank'; a1.rel='noopener'; a1.textContent='Arrival options (train)';
+        const a2 = document.createElement('a'); a2.className='cta'; a2.href=mapsTransitLink(prefs.campusStation, prefs.home); a2.target='_blank'; a2.rel='noopener'; a2.textContent='Return options';
+        row.append(a1,a2);
+        innerT.append(row);
+        tcard.append(innerT);
+        tv.appendChild(tcard);
+      }
+    }
+  }
+
+  function renderAll(){
+    const now = new Date();
     const av = $('#all-view'); av.innerHTML = '';
+    const filtered = filteredEvents();
     const byDate = new Map();
     filtered.forEach(ev => { if(!byDate.has(ev.date)) byDate.set(ev.date, []); byDate.get(ev.date).push(ev); });
+    const today = todayKey(now);
     [...byDate.keys()].sort().forEach(k => {
       const dHead = document.createElement('div'); dHead.className='date-header'; dHead.id = 'date-'+k; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
       const card = document.createElement('div'); card.className='card';
       const inner = document.createElement('div');
       byDate.get(k).sort(byStart).forEach(ev => {
         const st = statusFor(ev, now);
-        const row = document.createElement('div'); row.className='event';
-        const dot = document.createElement('div'); dot.className = st==='live'?'live-dot':(st==='soon'?'soon-dot':'past-dot');
-        const when = document.createElement('div'); when.className='when';
-        const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
-        const title = document.createElement('div'); title.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
-        const where = document.createElement('div'); where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'');
+        const row = document.createElement('div'); row.className='event' + (COMPACT?' compact':'');
+        const dom = document.createElement('div'); dom.className='dombar'; dom.style.background = colorForDomain(ev.domain);
+        const when = document.createElement('div'); when.className='when'; const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
+        const titleWrap = document.createElement('div'); titleWrap.className='title-wrap';
+        titleWrap.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
+        const where = document.createElement('div'); where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'') + (computeMandatory(ev)?' <span class="chip mand">Mandatory</span>':'');
         const who = document.createElement('div'); who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
-        row.append(dot, when, title, where, who); inner.appendChild(row);
+        const dot = document.createElement('div'); dot.className = st==='live'?'live-dot':(st==='soon'?'soon-dot':'past-dot');
+        if (COMPACT){
+          row.append(dom, dot, when, titleWrap);
+        } else {
+          const body = document.createElement('div'); body.className='event-body';
+          body.append(when, titleWrap, where, who);
+          row.append(dom, dot, body);
+        }
+        inner.appendChild(row);
       });
       card.appendChild(inner); av.appendChild(card);
     });
-
-    // Next up
-    const next = computeNext(filtered, now);
-    if (next){
-      const mins = Math.max(0, Math.floor((new Date(next.start)-now)/60000));
-      $('#nextup').textContent = `${next.title} · ${new Date(next.start).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})} (${mins} min)`;
-    } else {
-      $('#nextup').textContent = '—';
-    }
   }
 
-  // ----- Scrolling helpers -----
-  function scrollAllToToday(){
+  // Week grid
+  function renderWeek(){
     const now = new Date();
-    const id = 'date-'+todayKey(now);
-    const el = document.getElementById(id);
-    if (el){
-      el.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    const base = startOfWeek(addDays(now, 7*WEEK_OFFSET));
+    const end = addDays(base, 6);
+    $('#wk-range').textContent = fmtDate(base) + ' — ' + fmtDate(end);
+    const area = $('#weekbar'); area.innerHTML = '';
+    const days = Array.from({length:7}, (_,i)=> addDays(base, i));
+    const data = filteredEvents();
+    days.forEach(d => {
+      const key = todayKey(d);
+      const col = document.createElement('div'); col.className='daycol';
+      const head = document.createElement('div'); head.className='dayhead';
+      head.innerHTML = `<span>${d.toLocaleDateString([], {weekday:'short'})}</span><span>${d.getDate()} ${d.toLocaleDateString([], {month:'short'})}</span>`;
+      const body = document.createElement('div'); body.className='daybody';
+      data.filter(e => e.date===key).forEach(ev => {
+        const row = document.createElement('div'); row.className='event' + (COMPACT?' compact':'');
+        row.style.background='transparent';
+        row.style.border='1px dashed var(--border)';
+        const dom = document.createElement('div'); dom.className='dombar'; dom.style.background = colorForDomain(ev.domain);
+        const when = document.createElement('div'); when.className='when'; const ds=new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
+        const tw = document.createElement('div'); tw.className='title-wrap'; tw.innerHTML = '<div class="title2">'+sanitize(ev.title)+' '+(computeMandatory(ev)?'<span class="chip mand">Mandatory</span>':'')+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
+        if (COMPACT){ row.append(dom, when, tw); } else { const body2=document.createElement('div'); body2.className='event-body'; body2.append(when, tw); row.append(dom, body2); }
+        body.appendChild(row);
+      });
+      col.append(head, body);
+      area.appendChild(col);
+    });
   }
 
-  // ----- Data loading -----
+  function scrollAllToToday(){
+    const id = 'date-'+todayKey(new Date());
+    const el = document.getElementById(id);
+    if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+
+  // Populate domain dropdown
+  function populateDomainFilter(data){
+    const doms = Array.from(new Set(data.map(e => String(e.domain||'').trim()).filter(Boolean))).sort();
+    const sel = document.getElementById('sel-domain');
+    sel.innerHTML = '<option value="ALL">ALL</option>' + doms.map(d=>`<option>${d}</option>`).join('');
+    sel.value = DOMAIN || 'ALL';
+  }
+
+  // CSV parser
   async function parseCSV(text){
     const lines = text.split(/\r?\n/).filter(l => l.length);
     if (!lines.length) return [];
@@ -276,13 +528,7 @@
     return out;
   }
 
-  function populateDomainFilter(data){
-    const doms = Array.from(new Set(data.map(e => String(e.domain||'').trim()).filter(Boolean))).sort();
-    const sel = document.getElementById('sel-domain');
-    sel.innerHTML = '<option value="ALL">ALL</option>' + doms.map(d=>`<option>${d}</option>`).join('');
-    sel.value = DOMAIN || 'ALL';
-  }
-
+  // Auto-load data (works on http/https; blocked under file:)
   async function tryAutoLoad(){
     if (location.protocol === 'file:'){
       $('#notice').innerHTML = 'Opened as <span class="warn">file://</span>. Auto-loading local files is blocked by browsers. Use <b>Load Data</b>, or run a tiny local server.';
@@ -291,10 +537,9 @@
     try {
       const r = await fetch('timetable.json', {cache:'no-cache'});
       if (r.ok){
-        EVENTS = await r.json();
-        localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+        EVENTS = await r.json(); EVENTS = normalizeAndEnhance(EVENTS); localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
-        render();
+        renderAll(); renderToday(); renderWeek();
         $('#notice').textContent = 'Loaded timetable.json from same folder.';
         return;
       }
@@ -303,10 +548,9 @@
       const r = await fetch('timetable.csv', {cache:'no-cache'});
       if (r.ok){
         const txt = await r.text();
-        EVENTS = await parseCSV(txt);
-        localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+        EVENTS = await parseCSV(txt); EVENTS = normalizeAndEnhance(EVENTS); localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
-        render();
+        renderAll(); renderToday(); renderWeek();
         $('#notice').textContent = 'Loaded timetable.csv from same folder.';
         return;
       }
@@ -314,145 +558,97 @@
     $('#notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found. On GitHub Pages, put those files in the repo root next to index.html.';
   }
 
-  // ----- Modal controls -----
-  function openModal(){ 
-    const mb = document.getElementById('modal-backdrop');
-    mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
-    const p=Object.assign(defaultPrefs(), loadPrefs()||{});
-    document.getElementById('sel-campus').value=p.campus; document.getElementById('sel-group').value=p.group; document.getElementById('txt-name').value=p.label;
-    document.getElementById('txt-home').value=p.home; document.getElementById('txt-campus-st').value=p.campusStation; document.getElementById('num-arrive').value=p.arriveBuf; document.getElementById('num-leave').value=p.leaveBuf;
-  }
-  function closeModal(){
-    const mb = document.getElementById('modal-backdrop');
-    mb.style.display='none'; mb.setAttribute('aria-hidden','true');
-  }
-
-  // ----- ICS export -----
+  // ICS export
   function toICS(evts){
     function esc(s){ return String(s||'').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n'); }
-    function dt(v){ // assume local time; export as floating (no TZ)
-      const d = new Date(v);
-      const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
-      const hh=String(d.getHours()).padStart(2,'0'), mm=String(d.getMinutes()).padStart(2,'0'), ss='00';
-      return `${y}${m}${day}T${hh}${mm}${ss}`;
-    }
+    function dt(v){ const d=new Date(v); const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); const hh=String(d.getHours()).padStart(2,'0'), mm=String(d.getMinutes()).padStart(2,'0'), ss='00'; return `${y}${m}${day}T${hh}${mm}${ss}`; }
     const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MEDI2101B//Timetable//EN'];
-    evts.forEach((e,i)=>{
-      lines.push('BEGIN:VEVENT');
-      lines.push('UID:'+ (e.start+'_'+i+'@medi2101b'));
-      lines.push('DTSTART:'+dt(e.start));
-      lines.push('DTEND:'+dt(e.end));
-      lines.push('SUMMARY:'+esc(e.title));
-      const desc = [e.domain, e.activity, e.campus, e.venue, e.staff].filter(Boolean).join(' · ');
-      if (desc) lines.push('DESCRIPTION:'+esc(desc));
-      lines.push('END:VEVENT');
-    });
-    lines.push('END:VCALENDAR');
-    return lines.join('\r\n');
+    evts.forEach((e,i)=>{ lines.push('BEGIN:VEVENT'); lines.push('UID:'+ (e.start+'_'+i+'@medi2101b')); lines.push('DTSTART:'+dt(e.start)); lines.push('DTEND:'+dt(e.end)); lines.push('SUMMARY:'+esc(e.title)); const desc=[e.domain,e.activity,e.campus,e.venue,e.staff].filter(Boolean).join(' · '); if(desc) lines.push('DESCRIPTION:'+esc(desc)); lines.push('END:VEVENT'); });
+    lines.push('END:VCALENDAR'); return lines.join('\r\n');
   }
 
-  // ----- Notifications -----
-  function requestNotify(){
-    if (!('Notification' in window)) { alert('Notifications not supported.'); return; }
-    Notification.requestPermission().then(res => {
-      localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off');
-      alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied');
-    });
-  }
-  function maybeNotify(){
-    if (localStorage.getItem('medi2101b_notify')!=='on') return;
-    const now = new Date();
-    const evts = filteredEvents();
-    evts.forEach(e => {
-      const s = new Date(e.start);
-      const key = e.start + '|' + e.title;
-      const mins = Math.floor((s-now)/60000);
-      if (mins === 10 && !notifiedKeys.has(key)){
-        notifiedKeys.add(key);
-        try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + s.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); } catch {}
-      }
-    });
-  }
+  // Notifications
+  function requestNotify(){ if (!('Notification' in window)) { alert('Notifications not supported.'); return; } Notification.requestPermission().then(res => { localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off'); alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied'); }); }
+  function maybeNotify(){ if (localStorage.getItem('medi2101b_notify')!=='on') return; const now = new Date(); const evts = filteredEvents(); evts.forEach(e => { const s = new Date(e.start); const key = e.start + '|' + e.title; const mins = Math.floor((s-now)/60000); if (mins === 10 && !notifiedKeys.has(key)){ notifiedKeys.add(key); try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + s.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); } catch {} } }); }
 
-  // ----- File handling -----
-  async function handleFile(file){
-    const text = await file.text();
-    if (file.name.endsWith('.json')){
-      EVENTS = JSON.parse(text);
-    } else if (file.name.endsWith('.csv')){
-      EVENTS = await parseCSV(text);
-    } else {
-      alert('Use timetable.json or timetable.csv'); return;
-    }
-    localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
-    populateDomainFilter(EVENTS);
-    render();
-    $('#notice').textContent = `Loaded ${file.name} (cached).`;
-  }
+  // Theme / compact state
+  function applyTheme(){ const theme = localStorage.getItem('medi2101b_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark'); const root = document.getElementById('root'); if (theme==='light') root.classList.add('theme-light'); else root.classList.remove('theme-light'); }
+  function toggleTheme(){ const cur = localStorage.getItem('medi2101b_theme') || 'dark'; const next = cur==='dark'?'light':'dark'; localStorage.setItem('medi2101b_theme', next); applyTheme(); }
 
   document.addEventListener('DOMContentLoaded', ()=>{
+    // Apply theme
+    applyTheme();
+
     // Tabs
     $$('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
       const name = btn.dataset.tab;
       $$('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
-      document.getElementById('today-view').classList.toggle('hidden', name!=='today');
-      document.getElementById('all-view').classList.toggle('hidden', name!=='all');
+      $('#today-view').classList.toggle('hidden', name!=='today');
+      $('#week-view').classList.toggle('hidden', name!=='week');
+      $('#all-view').classList.toggle('hidden', name!=='all');
       if (name==='all'){ setTimeout(scrollAllToToday, 30); }
+      if (name==='week'){ renderWeek(); }
     }));
 
+    // Week nav
+    $('#wk-prev').addEventListener('click', ()=>{ WEEK_OFFSET--; renderWeek(); });
+    $('#wk-next').addEventListener('click', ()=>{ WEEK_OFFSET++; renderWeek(); });
+    $('#wk-today').addEventListener('click', ()=>{ WEEK_OFFSET=0; renderWeek(); });
+
     // Settings
-    $('#btn-settings').addEventListener('click', openModal);
-    $('#btn-save').addEventListener('click', ()=>{ savePrefs({ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value, home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10) }); closeModal(); render(); });
-    $('#btn-close').addEventListener('click', closeModal);
-    $('#btn-x').addEventListener('click', closeModal);
-    // backdrop click closes if prefs already exist
-    $('#modal-backdrop').addEventListener('click', (e)=>{ if (e.target.id==='modal-backdrop'){ if (loadPrefs()) closeModal(); }});
-    // ESC key to close
-    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape'){ if (loadPrefs()) closeModal(); }});
+    $('#btn-settings').addEventListener('click', ()=>{ const mb = document.getElementById('modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false'); const p=Object.assign(defaultPrefs(), loadPrefs()||{}); $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf; });
+    $('#btn-save').addEventListener('click', ()=>{ const prefs = { campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value, home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10) }; savePrefs(prefs); document.getElementById('modal-backdrop').style.display='none'; renderToday(); renderAll(); renderWeek(); });
+    $('#btn-close').addEventListener('click', ()=>{ document.getElementById('modal-backdrop').style.display='none'; });
+    $('#btn-x').addEventListener('click', ()=>{ document.getElementById('modal-backdrop').style.display='none'; });
+    $('#modal-backdrop').addEventListener('click', (e)=>{ if (e.target.id==='modal-backdrop'){ document.getElementById('modal-backdrop').style.display='none'; }});
+    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape'){ document.getElementById('modal-backdrop').style.display='none'; }});
 
     // Load data
     $('#btn-load').addEventListener('click', ()=>$('#file-input').click());
-    $('#file-input').addEventListener('change', e=>{ const f=e.target.files?.[0]; if (f) handleFile(f); });
+    $('#file-input').addEventListener('change', e=>{ const f=e.target.files?.[0]; if (!f) return; f.text().then(async text=>{ if (f.name.endsWith('.json')){ EVENTS = JSON.parse(text); EVENTS = normalizeAndEnhance(EVENTS); } else if (f.name.endsWith('.csv')){ EVENTS = await parseCSV(text); EVENTS = normalizeAndEnhance(EVENTS); } else { alert('Use timetable.json or timetable.csv'); return; } localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS)); populateDomainFilter(EVENTS); renderAll(); renderToday(); renderWeek(); $('#notice').textContent = `Loaded ${f.name} (cached).`; }); });
     const dz = $('#dropzone');
-    ;['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='#3aa0ff';}));
+    ;['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='var(--accent)';}));
     ;['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='var(--border)';}));
-    dz.addEventListener('drop', async e=>{ const f = e.dataTransfer.files?.[0]; if (f) handleFile(f); });
+    dz.addEventListener('drop', async e=>{ const f = e.dataTransfer.files?.[0]; if (f){ const text = await f.text(); if (f.name.endsWith('.json')) EVENTS = JSON.parse(text); EVENTS = normalizeAndEnhance(EVENTS); else if (f.name.endsWith('.csv')) EVENTS = await parseCSV(text); EVENTS = normalizeAndEnhance(EVENTS); else return alert('Use timetable.json or timetable.csv'); localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS)); populateDomainFilter(EVENTS); renderAll(); renderToday(); renderWeek(); $('#notice').textContent = `Loaded ${f.name} (cached).`; }});
 
     // Domain filter
-    $('#sel-domain').addEventListener('change', (e)=>{ DOMAIN = e.target.value; render(); });
+    $('#sel-domain').addEventListener('change', (e)=>{ DOMAIN = e.target.value; renderAll(); renderToday(); renderWeek(); });
 
     // Jump
     $('#btn-jump').addEventListener('click', scrollAllToToday);
 
     // ICS
-    $('#btn-ics').addEventListener('click', ()=>{
-      const ics = toICS(filteredEvents());
-      const blob = new Blob([ics], {type:'text/calendar'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'medi2101b_filtered.ics';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(()=>URL.revokeObjectURL(a.href), 500);
-    });
+    $('#btn-ics').addEventListener('click', ()=>{ const ics = toICS(filteredEvents()); const blob = new Blob([ics], {type:'text/calendar'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'medi2101b_filtered.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 500); });
 
     // Notifications
     $('#btn-bell').addEventListener('click', requestNotify);
 
+    // Only mandatory
+    const ONLYMAND = localStorage.getItem('medi2101b_onlymand')==='1';
+    $('#toggle-mand').checked = ONLYMAND;
+    $('#toggle-mand').addEventListener('change', (e)=>{ localStorage.setItem('medi2101b_onlymand', e.target.checked?'1':'0'); renderAll(); renderToday(); renderWeek(); });
+
+    // Compact
+    COMPACT = localStorage.getItem('medi2101b_compact') === '1';
+    $('#toggle-compact').checked = COMPACT;
+    $('#toggle-compact').addEventListener('change', (e)=>{ COMPACT = e.target.checked; localStorage.setItem('medi2101b_compact', COMPACT?'1':'0'); renderAll(); renderToday(); renderWeek(); });
+
+    // Theme
+    $('#btn-theme').addEventListener('click', toggleTheme);
+
     // Restore cached data if present
     const cached = localStorage.getItem('medi2101b_data');
-    if (cached){
-      try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {}
-    }
+    if (cached){ try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {} }
 
-    // First-run prefs: open modal but allow closing if they don't want to set yet
-    if (!loadPrefs()) openModal();
+    // First-run prefs: optional modal
+    if (!loadPrefs()) { const mb = document.getElementById('modal-backdrop'); mb.style.display='flex'; }
 
     // Auto-load same-folder files (works when served via http://)
     tryAutoLoad();
 
-    // Render & tick
-    render();
-    setInterval(()=>{ render(); maybeNotify(); }, 60*1000);
+    // Initial renders
+    renderAll(); renderToday(); renderWeek();
+    setInterval(()=>{ renderToday(); maybeNotify(); }, 60*1000);
     document.getElementById('nowstr').textContent = new Date().toLocaleString();
   });
 </script>
