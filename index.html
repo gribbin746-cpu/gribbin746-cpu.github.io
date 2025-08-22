@@ -11,19 +11,21 @@
 
     --good:#2ecc71; --warn:#f1c40f; --bad:#e74c3c; --accent:#3aa0ff; --accent2:#7c4dff;
 
-    --anatomy:#3b82f6; /* blue */
-    --pbl:#10b981;     /* green */
-    --clinical:#f59e0b;/* orange */
+    --anatomy:#3b82f6;    /* blue */
+    --pbl:#10b981;        /* green */
+    --clinical:#f59e0b;   /* orange */
     --physiology:#06b6d4; /* cyan */
-    --info:#a78bfa;    /* purple */
-    --lecture:#e11d48; /* lecture (rose) */
-    --default:#94a3b8; /* slate */
+    --info:#a78bfa;       /* purple */
+    --lecture:#eab308;    /* yellow */
+    --default:#94a3b8;    /* slate */
   }
   html[data-theme="dark"]{
     --bg:var(--bg-dark); --card:var(--card-dark); --text:var(--text-dark); --muted:var(--muted-dark); --border:var(--border-dark); --chip:var(--chip-dark);
+    color-scheme: dark;
   }
   html[data-theme="light"]{
     --bg:var(--bg-light); --card:var(--card-light); --text:var(--text-light); --muted:var(--muted-light); --border:var(--border-light); --chip:var(--chip-light);
+    color-scheme: light;
   }
   html, body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; background:var(--bg); color:var(--text); }
   .wrap { max-width:1200px; margin:0 auto; padding:16px 16px 96px; }
@@ -35,11 +37,8 @@
   .tab-btn.active { color:var(--text); background:rgba(127,127,127,.12); }
   .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; }
+  .btn:hover { filter: brightness(1.08); }
   .pill { display:inline-flex; gap:8px; align-items:center; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
-  select, input[type=text], input[type=number] { background: var(--card); color: var(--text); border:1px solid var(--border); border-radius:10px; padding:8px 10px; appearance:none; -webkit-appearance:none; -moz-appearance:none; color-scheme: dark; }
-  select:focus, input:focus { outline: 2px solid var(--accent); }
-  option { background: var(--card); color: var(--text); }
-
   .grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:12px; }
   .card { grid-column:span 12; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
   .event { display:grid; grid-template-columns:8px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:rgba(127,127,127,.08); }
@@ -70,22 +69,15 @@
   .event.compact .when, .event.compact .where, .event.compact .who { display:none; }
   .event.compact .title { font-size: 13px; }
 
+  /* Inputs themed */
+  select, input[type=text], input[type=number] { background: var(--card); color: var(--text); border:1px solid var(--border); border-radius:10px; padding:10px 12px; appearance:none; -webkit-appearance:none; -moz-appearance:none; }
+  option { background: var(--card); color: var(--text); }
+  select:focus, input:focus { outline: 2px solid var(--accent); }
+  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+
   footer { position:fixed; bottom:0; left:0; right:0; background:linear-gradient(transparent, var(--bg) 20%, var(--bg)); padding:10px 12px; }
   .foot-inner { max-width:1200px; margin:0 auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
-
-  /* Transit helper */
-  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px; }
-  .tile { border:1px solid var(--border); border-radius:12px; padding:10px; background: rgba(127,127,127,.06); }
-  .tile .big { font-weight:800; font-size:18px; }
-  .tile .small { color:var(--muted); font-size:12px; }
-
-  select, input, button { font: inherit; }
-  select, input[type=text], input[type=number] {
-    background: var(--card); color: var(--text);
-    border:1px solid var(--border); border-radius:10px; padding:10px 12px;
-    appearance:none; -webkit-appearance:none; -moz-appearance:none;
-  }
-  option { background: var(--card); color: var(--text); }
 </style>
 </head>
 <body>
@@ -105,9 +97,7 @@
       <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔 Notify</button>
       <button class="btn" id="btn-compact">Compact</button>
       <button class="btn" id="btn-theme">Light/Dark</button>
-      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:4px 8px;appearance:none;-webkit-appearance:none;-moz-appearance:none;color-scheme: dark;">
-        <option value="ALL">ALL</option>
-      </select></span>
+      <span class="pill">Domain: <select id="sel-domain"><option value="ALL">ALL</option></select></span>
       <span class="pill" id="weather-pill">Weather: <span id="weather-now">loading…</span></span>
     </div>
   </header>
@@ -135,7 +125,7 @@
   <div class="foot-inner">
     <span class="pill">Local time: <span id="nowstr"></span></span>
     <span class="pill">Filters: <span id="filterstr"></span></span>
-    <span class="pill">Legend: Anatomy blue · PBL green · Clinical orange · Lecture rose</span>
+    <span class="pill">Legend: Anatomy blue · PBL green · Clinical orange · Lecture yellow</span>
   </div>
 </footer>
 
@@ -144,46 +134,43 @@
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="width:min(680px,94vw);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;position:relative;">
     <button class="x" id="btn-x" title="Close" style="position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">✕</button>
     <div style="font-size:18px;font-weight:800;margin-bottom:6px" id="modal-title">Setup</div>
-    <div class="sub" style="margin-bottom:10px">Campus, PBL, labels, transit and buffers.</div>
+    <div class="sub" style="margin-bottom:10px">Campus, PBL, name, transit, buffers.</div>
     <div style="display:flex;gap:12px">
       <div style="flex:1">
         <div class="sub">Campus</div>
-        <select id="sel-campus" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
-          <option value="Both">Both</option>
-          <option value="Callaghan">Callaghan</option>
-          <option value="CCS">CCS</option>
-        </select>
+        <select id="sel-campus"><option>Both</option><option>Callaghan</option><option>CCS</option></select>
       </div>
       <div style="flex:1">
         <div class="sub">PBL Group</div>
-        <select id="sel-group" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
-          <option value="ALL">ALL</option>
-          <option>A</option><option>B</option><option>C</option><option>D</option>
-          <option>E</option><option>F</option><option>G</option><option>H</option>
-          <option>I</option><option>J</option><option>K</option><option>L</option>
-          <option>M</option><option>N</option><option>O</option><option>P</option>
-        </select>
+        <select id="sel-group"><option>ALL</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option><option>K</option><option>L</option><option>M</option><option>N</option><option>O</option><option>P</option></select>
       </div>
     </div>
-    <div style="margin-top:10px">      <div class="sub">Optional label</div>      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">    </div>    <div style="margin-top:10px">      <div class="sub">Your name (optional)</div>      <input id="txt-username" placeholder="e.g., Noofie" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">    </div>
+    <div style="margin-top:10px">
+      <div class="sub">Optional label</div>
+      <input id="txt-label" placeholder="e.g., Callaghan – Group H">
+    </div>
+    <div style="margin-top:10px">
+      <div class="sub">Your name (optional)</div>
+      <input id="txt-user" placeholder="e.g., Noofie">
+    </div>
     <div style="display:flex;gap:12px;margin-top:10px">
       <div style="flex:1">
         <div class="sub">Home station / address</div>
-        <input id="txt-home" placeholder="e.g., Hamilton Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
+        <input id="txt-home" placeholder="e.g., Hamilton Station">
       </div>
       <div style="flex:1">
         <div class="sub">Campus station</div>
-        <input id="txt-campus-st" placeholder="Gosford Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
+        <input id="txt-campus-st" placeholder="Gosford Station">
       </div>
     </div>
     <div style="display:flex;gap:12px;margin-top:10px">
       <div style="flex:1">
         <div class="sub">Arrive buffer (min)</div>
-        <input id="num-arrive" type="number" min="0" value="15" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
+        <input id="num-arrive" type="number" min="0" value="15">
       </div>
       <div style="flex:1">
         <div class="sub">Leave buffer (min)</div>
-        <input id="num-leave" type="number" min="0" value="10" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
+        <input id="num-leave" type="number" min="0" value="10">
       </div>
     </div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
@@ -204,12 +191,12 @@
   let weekOffset = 0; // 0 = current week
 
   const DOMAIN_COLORS = {
-    "anatomy":"var(--anatomy)",
-    "pbl":"var(--pbl)",
-    "clinical":"var(--clinical)",
-    "physiology":"var(--physiology)",
-    "info":"var(--info)",
-    "lecture":"var(--lecture)"
+    anatomy:"var(--anatomy)",
+    pbl:"var(--pbl)",
+    clinical:"var(--clinical)",
+    physiology:"var(--physiology)",
+    info:"var(--info)",
+    lecture:"var(--lecture)"
   };
 
   function theme(){ return localStorage.getItem('medi_theme') || 'dark'; }
@@ -223,44 +210,32 @@
   const $$ = s => Array.from(document.querySelectorAll(s));
   const sanitize = s => String(s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
   const pad = n => String(n).padStart(2,'0');
-  function toDate(s){
-    // Accept 'YYYY-MM-DDTHH:MM' or 'YYYY-MM-DDTHH:MM:SS' as local time.
+  const toDate = s => {
     if (s instanceof Date) return s;
-    const m = String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
-    if (m){
-      return new Date(Number(m[1]), Number(m[2])-1, Number(m[3]), Number(m[4]), Number(m[5]), m[6]?Number(m[6]):0);
-    }
-    // Fallback to native parser
+    const m = String(s||'').match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2})(?::(\\d{2}))?$/);
+    if (m) return new Date(Number(m[1]), Number(m[2])-1, Number(m[3]), Number(m[4]), Number(m[5]), m[6]?Number(m[6]):0);
     return new Date(s);
-  }
-  function normalizeGroups(g){
-    if (Array.isArray(g)) return g;
-    if (g == null) return ['ALL'];
-    const parts = String(g).split(/[;,\s]+/).map(x=>x.trim()).filter(Boolean);
-    const out = parts.filter(x=>/^[A-P]$/.test(x.toUpperCase()));
-    return out.length?out:['ALL'];
-  }
+  };
 
   function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   function fmtDate(d){ return d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'}); }
   function byStart(a,b){ return toDate(a.start) - toDate(b.start); }
-  function todayKey(d){ const y=d.getFullYear(), m=pad(d.getMonth()+1), day=pad(d.getDate()); return `${y}-${m}-${day}`; }
+  function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
   function statusFor(ev, now){ const s=toDate(ev.start), e=toDate(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
-  function categoryColor(ev){ const d=String(ev.domain||'').toLowerCase(); const a=String(ev.activity||'').toLowerCase(); if (a.includes('lecture')) return 'var(--lecture)'; if (d.includes('anatomy')) return 'var(--anatomy)'; if (d.includes('pbl')) return 'var(--pbl)'; if (d.includes('clinical')) return 'var(--clinical)'; if (d.includes('physiology')) return 'var(--physiology)'; if (d.includes('info')) return 'var(--info)'; return 'var(--default)'; }
-
-  function campusMatch(evCampus, prefCampus){
-    const e = String(evCampus||'').toUpperCase().replace(/\s+/g,'');
-    const p = String(prefCampus||'').toUpperCase();
-    if (p==='BOTH') return true;
-    if (e==='BOTH') return true;
-    if (/CAL/.test(e) && /CC/.test(e)) return true; // shared
-    // Map long names
-    const map = { 'CALLAGHAN':'CAL', 'CCS':'CC' };
-    const em = map[e] || e;
-    const pm = map[p] || p;
-    return em===pm;
+  function categoryColor(ev){ const d=String(ev.domain||'').toLowerCase(); const a=String(ev.activity||'').toLowerCase();
+    if (d in DOMAIN_COLORS) return DOMAIN_COLORS[d];
+    if (a.includes('lecture')) return DOMAIN_COLORS.lecture;
+    if (d.includes('anatomy')) return DOMAIN_COLORS.anatomy;
+    if (d.includes('clinical')) return DOMAIN_COLORS.clinical;
+    if (d.includes('pbl')) return DOMAIN_COLORS.pbl;
+    if (d.includes('physiology')) return DOMAIN_COLORS.physiology;
+    if (d.includes('info')) return DOMAIN_COLORS.info;
+    return 'var(--default)';
   }
-  function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
+
+  function normCampus(x){ x=String(x||'').trim().toLowerCase(); if (!x) return 'both'; if (x.includes('/')) return 'both'; if (x==='cal'||x==='callaghan') return 'callaghan'; if (x==='cc'||x==='ccs') return 'ccs'; if (x==='both') return 'both'; return x; }
+  function campusMatch(evCampus, prefCampus){ const e=normCampus(evCampus), p=normCampus(prefCampus); if (p==='both' || e==='both') return true; return e===p; }
+  function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; const gs = Array.isArray(evGroups)? evGroups : String(evGroups||'').split(/[;,\s]+/); return gs.includes(prefGroup) || gs.includes('ALL'); }
   function domainMatch(evDomain){ return DOMAIN==='ALL' || String(evDomain||'').toLowerCase()===DOMAIN.toLowerCase(); }
 
   function filteredEvents(){
@@ -269,7 +244,7 @@
   }
 
   function computeNext(evts, now){
-    return evts.filter(e => new Date(e.end) > now).sort((a,b)=>new Date(a.start)-new Date(b.start))[0] || null;
+    return evts.filter(e => toDate(e.end) > now).sort((a,b)=>toDate(a.start)-toDate(b.start))[0] || null;
   }
 
   function isRemote(ev){
@@ -277,15 +252,15 @@
     return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t);
   }
 
-  // --- Weather (Open-Meteo for Gosford by default) ---
+  // Weather via Open-Meteo
   async function fetchWeather(){
-    const cache = localStorage.getItem('medi_weather_cache');
-    if (cache){
-      try{
+    try{
+      const cache = localStorage.getItem('medi_weather_cache');
+      if (cache){
         const obj = JSON.parse(cache);
-        if (Date.now() - obj.ts < 30*60*1000) return obj.data; // 30 min cache
-      }catch{}
-    }
+        if (Date.now() - obj.ts < 30*60*1000) return obj.data;
+      }
+    }catch{}
     const lat = -33.425, lon = 151.341;
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
     const r = await fetch(url);
@@ -293,128 +268,64 @@
     localStorage.setItem('medi_weather_cache', JSON.stringify({ts:Date.now(), data}));
     return data;
   }
-  function wmoIcon(code){
-    // simple mapping
-    const m = {
-      0:'☀️', 1:'🌤️', 2:'⛅', 3:'☁️', 45:'🌫️', 48:'🌫️', 51:'🌦️', 53:'🌦️', 55:'🌦️',
-      61:'🌧️', 63:'🌧️', 65:'🌧️', 66:'🌧️', 67:'🌧️', 71:'🌨️', 73:'🌨️', 75:'🌨️',
-      80:'🌦️', 81:'🌧️', 82:'🌧️', 95:'⛈️', 96:'⛈️', 99:'⛈️'
-    };
-    return m[code] || '🌡️';
-  }
-
-  // --- Renderers ---
-  function renderMorningDigestMerged(container, todayKeyStr, weather){
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
-    if (!todays.length) return;
-    const inPerson = todays.filter(ev => !isRemote(ev));
-    const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
-    const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
-    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
-    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
-    const wNow = weather?.current_weather, d0 = weather?.daily;
-    const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
-
-    const card = document.createElement('div'); card.className='card';
-    card.innerHTML = `
-      <div class="title2">${prefs.name ? 'Good day, '+sanitize(prefs.name)+'.' : 'Morning digest'}</div>
-      <div class="sub">Today: ${todays.length} sessions (${inPerson.length} in-person)</div>
-      <div class="grid2">
-        <div class="tile">
-          <div class="small">First</div>
-          <div class="big">${fmtHM(toDate(first.start))}</div>
-          <div class="small">${sanitize(first.title)}</div>
-        </div>
-        <div class="tile">
-          <div class="small">Last</div>
-          <div class="big">${fmtHM(toDate(last.end))}</div>
-          <div class="small">${sanitize(last.title)}</div>
-        </div>
-      </div>
-      <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
-      ${inPerson.length ? `
-      <div class="grid2" style="margin-top:8px">
-        <div class="tile">
-          <div class="small">Arrive by</div>
-          <div class="big">${fmtHM(arriveBy)}</div>
-          <div class="small">for ${sanitize(inPerson[0].title)}</div>
-        </div>
-        <div class="tile">
-          <div class="small">Leave after</div>
-          <div class="big">${fmtHM(leaveAfter)}</div>
-          <div class="small">after ${sanitize(inPerson[inPerson.length-1].title)}</div>
-        </div>
-      </div>
-      <div style="margin-top:8px">
-        <a class="btn" target="_blank" rel="noopener" href="${mapsTransitLink(prefs.home, prefs.campusStation)}">See arrival trains</a>
-        <a class="btn" target="_blank" rel="noopener" href="${mapsTransitLink(prefs.campusStation, prefs.home)}">See return trains</a>
-      </div>
-      ` : ''}
-    `;
-    container.appendChild(card);
-  }
+  function wmoIcon(code){ const m={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',66:'🌧️',67:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌦️',81:'🌧️',82:'🌧️',95:'⛈️',96:'⛈️',99:'⛈️'}; return m[code]||'🌡️'; }
 
   function renderCountdownBanner(container, ev, now){
-    const banner = document.createElement('div');
     const st = toDate(ev.start), en = toDate(ev.end);
     const live = now>=st && now<en;
-    banner.className = 'banner ' + (live?'live':'next');
-    const title = live? 'Live now' : 'Next';
     const mins = live ? Math.max(0, Math.floor((en-now)/60000)) : Math.max(0, Math.floor((st-now)/60000));
-    banner.innerHTML = `<strong>${title}:</strong> ${sanitize(ev.title)} · ${fmtHM(live?en:st)} <span class="sub">(${mins} min)</span>`;
+    const banner = document.createElement('div'); banner.className = 'banner ' + (live?'live':'next');
+    banner.innerHTML = `<strong>${live?'Live now':'Next'}:</strong> ${sanitize(ev.title)} · ${fmtHM(live?en:st)} <span class="sub">(${mins} min)</span>`;
     container.appendChild(banner);
   }
 
   function renderMorningDigest(container, todayKeyStr, weather){
-  const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-  const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
-  const inPerson = todays.filter(ev => !isRemote(ev));
-  if (!todays.length) return;
-  const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
-  const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
-  const arriveBy = inPerson.length ? new Date(new Date(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
-  const leaveAfter = inPerson.length ? new Date(new Date(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
-  const card = document.createElement('div'); card.className='card';
-  const wNow = weather?.current_weather, d0 = weather?.daily;
-  const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
-  const prefsName = (loadPrefs()||{}).name || '';
-  const heading = prefsName ? `${prefsName}, here’s your day` : `Today at a glance`;
-  card.innerHTML = `
-    <div class="title2">${heading}</div>
-    <div class="sub">${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
-    <div class="grid2">
-      <div class="tile">
-        <div class="small">First</div>
-        <div class="big">${fmtHM(new Date(first.start))}</div>
-        <div class="small">${sanitize(first.title)}</div>
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
+    if (!todays.length) return;
+    const inPerson = todays.filter(ev => !isRemote(ev));
+    const first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]);
+    const last = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]);
+    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+    const wNow = weather?.current_weather, d0 = weather?.daily;
+    const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
+    const heading = prefs.name ? `${sanitize(prefs.name)}, here’s your day` : `Today at a glance`;
+
+    const card = document.createElement('div'); card.className='card';
+    card.innerHTML = `
+      <div class="title2">${heading}</div>
+      <div class="sub">${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
+      <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:10px;margin-top:6px">
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">First</div>
+          <div class="title2">${fmtHM(toDate(first.start))}</div>
+          <div class="sub">${sanitize(first.title)}</div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">Last</div>
+          <div class="title2">${fmtHM(toDate(last.end))}</div>
+          <div class="sub">${sanitize(last.title)}</div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">Arrive by</div>
+          <div class="title2">${arriveBy?fmtHM(arriveBy):'—'}</div>
+          <div class="sub">in‑person only</div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">Leave after</div>
+          <div class="title2">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
+          <div class="sub">in‑person only</div>
+        </div>
       </div>
-      <div class="tile">
-        <div class="small">Last</div>
-        <div class="big">${fmtHM(new Date(last.end))}</div>
-        <div class="small">${sanitize(last.title)}</div>
+      <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
+      <div style="margin-top:8px">
+        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
+        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
       </div>
-    </div>
-    <div class="grid2" style="margin-top:8px;">
-      <div class="tile">
-        <div class="small">Arrive by</div>
-        <div class="big">${arriveBy?fmtHM(arriveBy):'—'}</div>
-        <div class="small">in‑person only</div>
-      </div>
-      <div class="tile">
-        <div class="small">Leave after</div>
-        <div class="big">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
-        <div class="small">in‑person only</div>
-      </div>
-    </div>
-    <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
-    <div style="margin-top:8px">
-      <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
-      <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
-    </div>
-  `;
-  container.appendChild(card);
-}
+    `;
+    container.appendChild(card);
+  }
 
   function renderEventsList(container, evs, now){
     const card = document.createElement('div'); card.className='card';
@@ -426,8 +337,7 @@
       const when = document.createElement('div'); when.className='when';
       const ds = toDate(ev.start), de=toDate(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
       const title = document.createElement('div'); title.className='title';
-      const mand = ev.mandatory ? ' <span class="chip" title="Mandatory">MANDATORY</span>' : '';
-      title.innerHTML = '<div class="title2">'+sanitize(ev.title)+mand+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
+      title.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
       const where = document.createElement('div'); where.className='where';
       where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'');
       const who = document.createElement('div'); who.className='who'; who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
@@ -436,59 +346,45 @@
     card.appendChild(inner); container.appendChild(card);
   }
 
-  function renderTransitHelper(){} // merged into Morning Digest
-
   function mapsTransitLink(origin, dest){
     const base = 'https://www.google.com/maps/dir/?api=1';
     const urlEncode = s => encodeURIComponent(String(s||''));
     return `${base}&travelmode=transit&origin=${urlEncode(origin)}&destination=${urlEncode(dest)}&transit_mode=train`;
   }
 
-  // --- Views ---
   async function render(){
     const now = new Date();
     $('#nowstr').textContent = now.toLocaleString();
 
     const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const filterStr = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
-    $('#filterstr').textContent = filterStr;
+    $('#filterstr').textContent = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
     $('#banner').textContent = prefs.label || '';
 
     const filtered = filteredEvents();
 
-    // Today banners: countdown or live
+    // Countdown
     const banners = $('#today-banners'); banners.innerHTML = '';
-    // Greeting (uses optional name)
-    if ((Object.assign(defaultPrefs(), loadPrefs()||{})).name){
-      const g = document.createElement('div'); g.className='banner next';
-      const nm = (Object.assign(defaultPrefs(), loadPrefs()||{})).name;
-      g.innerHTML = `<strong>Welcome back,</strong> ${sanitize(nm)}.`;
-      banners.appendChild(g);
-    }
-
     const next = computeNext(filtered, now);
     if (next){ renderCountdownBanner(banners, next, now); }
 
-    
-    // Morning digest once per day (set flag before async to avoid dupes)
+    // Morning digest once per day
+    const today = todayKey(now);
     const shown = localStorage.getItem('medi_digest_shown');
     if (shown !== today){
       localStorage.setItem('medi_digest_shown', today);
-      let weather=null; try{ weather = await fetchWeather(); }catch{}
-      renderMorningDigestMerged(banners, today, weather);
+      try { const weather = await fetchWeather(); renderMorningDigest(banners, today, weather); } catch(e){ renderMorningDigest(banners, today, null); }
     }
-    
-    // Today list
+
+    // Today
     const tv = $('#today-view'); tv.innerHTML = '';
     const todays = filtered.filter(ev => ev.date === today);
     if (!todays.length){
       const d = document.createElement('div'); d.className='card'; d.innerHTML = '<div class="sub">No events today for the current filters.</div>'; tv.appendChild(d);
     } else {
       renderEventsList(tv, todays, now);
-      
     }
 
-    // All view (grouped by date)
+    // All
     const av = $('#all-view'); av.innerHTML = '';
     const byDate = new Map();
     filtered.forEach(ev => { if(!byDate.has(ev.date)) byDate.set(ev.date, []); byDate.get(ev.date).push(ev); });
@@ -497,7 +393,7 @@
       renderEventsList(av, byDate.get(k).sort(byStart), now);
     });
 
-    // Weather pill update (current)
+    // Weather pill
     try {
       const w = await fetchWeather();
       const cw = w.current_weather, d0 = w.daily;
@@ -513,9 +409,7 @@
     const day = d.getDay(); // 0 Sun..6 Sat
     const mondayOffset = (day === 0 ? -6 : 1 - day) + (offsetWeeks*7);
     const mon = new Date(d); mon.setDate(d.getDate() + mondayOffset);
-    const out = [];
-    for (let i=0;i<7;i++){ const x = new Date(mon); x.setDate(mon.getDate()+i); out.push(x); }
-    return out;
+    const out = []; for (let i=0;i<7;i++){ const x = new Date(mon); x.setDate(mon.getDate()+i); out.push(x); } return out;
   }
 
   function renderWeek(now){
@@ -534,7 +428,7 @@
         dayEvs.forEach(ev => {
           const row = document.createElement('div'); row.className='event' + (compact?' compact':'');
           const bar = document.createElement('div'); bar.className='bar'; bar.style.background = categoryColor(ev);
-          const title = document.createElement('div'); title.className='title'; const mand = ev.mandatory ? ' <span class="chip">MANDATORY</span>' : ''; title.innerHTML = `<span class="sub">${fmtHM(toDate(ev.start))}–${fmtHM(toDate(ev.end))}</span><br>${sanitize(ev.title)}${mand}`;
+          const title = document.createElement('div'); title.className='title'; title.innerHTML = `<span class="sub">${fmtHM(toDate(ev.start))}–${fmtHM(toDate(ev.end))}</span><br>${sanitize(ev.title)}`;
           row.append(bar, title);
           col.appendChild(row);
         });
@@ -543,23 +437,21 @@
     });
   }
 
-  // ----- CSV/JSON loading -----
+  // Data load (JSON/CSV)
   async function parseCSV(text){
-    const lines = text.split(/\r?\n/).filter(l => l.length);
+    // basic CSV (no quoted commas). Use JSON for complex fields.
+    const lines = text.split(/\\r?\\n/).filter(l => l.length);
     if (!lines.length) return [];
     const headers = lines[0].split(',').map(s=>s.trim());
     const idx = Object.fromEntries(headers.map((h,i)=>[h,i]));
     const out = [];
     for (let i=1;i<lines.length;i++){
       const row = lines[i].split(',');
-      function g(h){ return row[idx[h]] ?? ''; }
-      const groups = (g('groups')||'').split(';').map(s=>s.trim()).filter(Boolean);
-      const mandRaw = (g('mandatory')||g('mand')||'').toString().toLowerCase();
-      const mandatory = ['y','yes','true','1','mand','mandatory'].includes(mandRaw);
+      const g = (row[idx['groups']]||'').split(';').map(s=>s.trim()).filter(Boolean);
       out.push({
-        date: g('date'), start: g('start'), end: g('end'), title: g('title'),
-        domain: g('domain'), activity: g('activity'), campus: g('campus'),
-        groups: groups.length?groups:['ALL'], venue: g('venue'), staff: g('staff'), mandatory
+        date: row[idx['date']], start: row[idx['start']], end: row[idx['end']], title: row[idx['title']],
+        domain: row[idx['domain']], activity: row[idx['activity']], campus: row[idx['campus']],
+        groups: g.length?g:['ALL'], venue: row[idx['venue']], staff: row[idx['staff']]
       });
     }
     return out;
@@ -574,19 +466,17 @@
 
   async function tryAutoLoad(){
     if (location.protocol === 'file:'){
-      $('#notice').innerHTML = 'Opened as <span class="sub">file://</span>. Auto-loading sibling files is blocked. Use <b>Load Data</b>, or run a local server.';
-      return;
+      $('#notice').innerHTML = 'Opened as <span class="sub">file://</span>. Auto-loading sibling files is blocked by browsers. Use <b>Load Data</b>, or run a local server.';
+      return; // keep, to avoid fetch failures
     }
     try {
       const r = await fetch('timetable.json', {cache:'no-cache'});
       if (r.ok){
         EVENTS = await r.json();
-        // normalize groups in case they came as a string
-        EVENTS.forEach(e=>{ e.groups = normalizeGroups(e.groups); });
         localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
         render();
-        $('#notice').textContent = `Loaded timetable.json · ${EVENTS.length} events`;
+        $('#notice').textContent = 'Loaded timetable.json';
         return;
       }
     } catch {}
@@ -595,81 +485,42 @@
       if (r.ok){
         const txt = await r.text();
         EVENTS = await parseCSV(txt);
-        EVENTS.forEach(e=>{ e.groups = normalizeGroups(e.groups); });
         localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
         render();
-        $('#notice').textContent = `Loaded timetable.csv · ${EVENTS.length} events`;
+        $('#notice').textContent = 'Loaded timetable.csv';
         return;
       }
     } catch {}
     $('#notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found next to this file.';
   }
 
-  // ----- ICS export -----
+  // ICS export
   function toICS(evts){
-    function esc(s){ return String(s||'').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n'); }
-    function dt(v){
-      const d = new Date(v);
-      return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-    }
+    function esc(s){ return String(s||'').replace(/([,;])/g, '\\\\$1').replace(/\\n/g, '\\\\n'); }
+    function dt(v){ const d=toDate(v); return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`; }
     const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MEDI2101B//Timetable//EN'];
-    evts.forEach((e,i)=>{
-      lines.push('BEGIN:VEVENT');
-      lines.push('UID:'+ (e.start+'_'+i+'@medi2101b'));
-      lines.push('DTSTART:'+dt(e.start));
-      lines.push('DTEND:'+dt(e.end));
-      lines.push('SUMMARY:'+esc(e.title));
-      const desc = [e.domain, e.activity, e.campus, e.venue, e.staff].filter(Boolean).join(' · ');
-      if (desc) lines.push('DESCRIPTION:'+esc(desc));
-      lines.push('END:VEVENT');
-    });
-    lines.push('END:VCALENDAR');
-    return lines.join('\r\n');
+    evts.forEach((e,i)=>{ lines.push('BEGIN:VEVENT'); lines.push('UID:'+(e.start+'_'+i+'@medi2101b')); lines.push('DTSTART:'+dt(e.start)); lines.push('DTEND:'+dt(e.end)); lines.push('SUMMARY:'+esc(e.title)); const desc=[e.domain,e.activity,e.campus,e.venue,e.staff].filter(Boolean).join(' · '); if(desc) lines.push('DESCRIPTION:'+esc(desc)); lines.push('END:VEVENT'); });
+    lines.push('END:VCALENDAR'); return lines.join('\\r\\n');
   }
 
-  // ----- Notifications -----
-  function requestNotify(){
-    if (!('Notification' in window)) { alert('Notifications not supported.'); return; }
-    Notification.requestPermission().then(res => {
-      localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off');
-      alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied');
-    });
-  }
-  function maybeNotify(){
-    if (localStorage.getItem('medi2101b_notify')!=='on') return;
-    const now = new Date();
-    const evts = filteredEvents();
-    evts.forEach(e => {
-      const s = new Date(e.start);
-      const key = e.start + '|' + e.title;
-      const mins = Math.floor((s-now)/60000);
-      if (mins === 10 && !notifiedKeys.has(key)){
-        notifiedKeys.add(key);
-        try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + s.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); } catch {}
-      }
-    });
-  }
+  // Notifications
+  function requestNotify(){ if (!('Notification' in window)) { alert('Notifications not supported.'); return; } Notification.requestPermission().then(res => { localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off'); alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied'); }); }
+  function maybeNotify(){ if (localStorage.getItem('medi2101b_notify')!=='on') return; const now=new Date(); filteredEvents().forEach(e=>{ const s=toDate(e.start); const key=e.start+'|'+e.title; const mins=Math.floor((s-now)/60000); if(mins===10 && !notifiedKeys.has(key)){ notifiedKeys.add(key); try{ new Notification('Starts in 10 minutes', { body: e.title + ' · ' + fmtHM(s) }); }catch{} } }); }
 
-  // ----- File handling -----
+  // File handling
   async function handleFile(file){
     const text = await file.text();
-    if (file.name.endsWith('.json')){
-      EVENTS = JSON.parse(text);
-    } else if (file.name.endsWith('.csv')){
-      EVENTS = await parseCSV(text);
-    } else {
-      alert('Use timetable.json or timetable.csv'); return;
-    }
+    if (file.name.endsWith('.json')){ EVENTS = JSON.parse(text); }
+    else if (file.name.endsWith('.csv')){ EVENTS = await parseCSV(text); }
+    else { alert('Use timetable.json or timetable.csv'); return; }
     localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
     populateDomainFilter(EVENTS);
     render();
     $('#notice').textContent = `Loaded ${file.name} (cached).`;
   }
 
-  // ----- UI wiring -----
   document.addEventListener('DOMContentLoaded', ()=>{
-    // Theme
     setTheme(theme());
 
     // Tabs
@@ -687,12 +538,12 @@
     $('#btn-settings').addEventListener('click', ()=>{
       const mb = $('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
       const p=Object.assign(defaultPrefs(), loadPrefs()||{});
-      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; $('#txt-user').value=p.name||''; $('#txt-username').value=p.name || '';
-      $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf;
+      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-label').value=p.label;
+      $('#txt-user').value=p.name||''; $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf;
     });
     function closeModal(){ const mb=$('#modal-backdrop'); mb.style.display='none'; mb.setAttribute('aria-hidden','true'); }
     $('#btn-save').addEventListener('click', ()=>{ 
-      const p={ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value, name:$('#txt-username').value,
+      const p={ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-label').value, name:$('#txt-user').value,
                 home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10)};
       savePrefs(p); closeModal(); render();
     });
@@ -719,11 +570,8 @@
     $('#btn-ics').addEventListener('click', ()=>{
       const ics = toICS(filteredEvents());
       const blob = new Blob([ics], {type:'text/calendar'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'medi2101b_filtered.ics';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(()=>URL.revokeObjectURL(a.href), 500);
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'medi2101b_filtered.ics';
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 500);
     });
 
     // Notifications
@@ -739,16 +587,14 @@
     $('#btn-prev-week').addEventListener('click', ()=>{ weekOffset--; renderWeek(new Date()); });
     $('#btn-next-week').addEventListener('click', ()=>{ weekOffset++; renderWeek(new Date()); });
 
-    // Restore cached data if present
+    // Restore cached events
     const cached = localStorage.getItem('medi2101b_data');
-    if (cached){
-      try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {}
-    }
+    if (cached){ try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {} }
 
-    // First-run prefs: open modal but allow closing if they don't want to set yet
+    // First-run prefs
     if (!loadPrefs()) { const mb=$('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false'); }
 
-    // Auto-load same-folder files (works when served via http:///https://)
+    // Auto-load
     tryAutoLoad();
 
     // Render & tick
