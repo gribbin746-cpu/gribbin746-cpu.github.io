@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEDI2101B Widget</title>
+<style>
+  :root{ --bg:#0b0c10; --card:#111318; --text:#e5e7eb; --muted:#9aa1ac; --border:#222636; --ok:#22c55e; --info:#3aa0ff; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font:14px/1.35 system-ui, -apple-system, Segoe UI, Inter, Roboto, Arial; background:transparent; color:var(--text); }
+  .wrap{ padding:10px; }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px; }
+  .row{ display:flex; gap:8px; align-items:center; }
+  .title{ font-weight:800; font-size:14px }
+  .sub{ color:var(--muted); font-size:12px }
+  .live{ border:1px solid #256e3b; background:rgba(34,197,94,.12) }
+  .next{ border:1px solid #19476b; background:rgba(58,160,255,.12) }
+  .event{ margin-top:6px; padding-top:6px; border-top:1px dashed var(--border); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="head" class="card"><span class="sub">Loading…</span></div>
+  <div id="list" class="card" style="margin-top:8px"></div>
+</div>
+<script>
+  const pad=n=>String(n).padStart(2,'0');
+  const toDate=s=>s instanceof Date? s : new Date(s);
+  function loadPrefs(){ try{ return JSON.parse(localStorage.getItem('medi2101b_prefs')||'{}'); }catch{ return {}; } }
+  function timeFmt(){ return (loadPrefs().timeFmt||'24h'); }
+  function fmt12(d){ const h=d.getHours(), m=d.getMinutes(); const h12=((h+11)%12)+1; const ap=h<12?'am':'pm'; return m===0?`${h12} ${ap}`:`${h12}:${pad(m)} ${ap}`; }
+  function fmt24(d){ return `${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+  function fmtT(d){ return timeFmt()==='12h'?fmt12(d):fmt24(d); }
+  function fmtRange(s,e){ const S=toDate(s), E=toDate(e); return timeFmt()==='12h'?`${fmtT(S)} to ${fmtT(E)}`:`${fmtT(S)}-${fmtT(E)}`; }
+  function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+  function normCampus(x){ x=String(x||'').trim().toLowerCase(); if (!x) return 'both'; if (x.includes('/')) return 'both'; if (x==='cal'||x==='callaghan') return 'callaghan'; if (x==='cc'||x==='ccs') return 'ccs'; if (x==='both') return 'both'; return x; }
+  function campusMatch(evCampus){ const e=normCampus(evCampus); const p=normCampus((loadPrefs().campus)||'Both'); return p==='both'||e==='both'||e===p; }
+  function groupMatch(evGroups){ const pref=(loadPrefs().group||'ALL'); if (pref==='ALL') return true; const gs = Array.isArray(evGroups)? evGroups : String(evGroups||'').split(/[;,\s]+/); return gs.includes(pref)||gs.includes('ALL'); }
+  function domainMatch(d){ const pref=(localStorage.getItem('medi_domain')||'ALL'); return pref==='ALL'||String(d||'').toLowerCase()===pref.toLowerCase(); }
+
+  async function loadData(){
+    async function parseCSV(text){
+      const lines=text.split(/\r?\n/).filter(Boolean); if (!lines.length) return [];
+      const headers=lines[0].split(',').map(s=>s.trim()); const idx=Object.fromEntries(headers.map((h,i)=>[h,i]));
+      const out=[];
+      for (let i=1;i<lines.length;i++){ const row=lines[i].split(','); const g=String(row[idx['groups']]||'').split(';').map(s=>s.trim()).filter(Boolean);
+        out.push({ date:row[idx['date']], start:row[idx['start']], end:row[idx['end']], title:row[idx['title']], domain:row[idx['domain']], activity:row[idx['activity']], campus:row[idx['campus']], groups:g.length?g:['ALL'], venue:row[idx['venue']], staff:row[idx['staff']] });
+      } return out;
+    }
+    try{
+      const r1 = await fetch('timetable.json', {cache:'no-cache'});
+      if (r1.ok) return await r1.json();
+    }catch{}
+    try{
+      const r2 = await fetch('timetable.csv', {cache:'no-cache'});
+      if (r2.ok){ const txt=await r2.text(); return await parseCSV(txt); }
+    }catch{}
+    return [];
+  }
+
+  function render(data){
+    const now=new Date(), today=todayKey(now);
+    const todays = data.filter(e=>e.date===today && campusMatch(e.campus) && groupMatch(e.groups) && domainMatch(e.domain))
+                       .sort((a,b)=>toDate(a.start)-toDate(b.start));
+    const next = todays.find(e=>toDate(e.end)>now) || null;
+    const head=document.getElementById('head');
+    head.className='card';
+    if(next){
+      const live = now>=toDate(next.start) && now<toDate(next.end);
+      head.className = 'card ' + (live?'live':'next');
+      head.innerHTML = `<div class="row"><div class="title">${live?'Live now':'Next'}</div><div class="sub" style="margin-left:auto">${fmtRange(next.start,next.end)}</div></div>
+                        <div class="sub">${next.title}</div>
+                        <div class="sub">${[next.domain,next.activity,next.staff].filter(Boolean).join(' · ')}</div>`;
+    }else{
+      head.innerHTML = `<div class="title">No sessions today</div><div class="sub">Enjoy your day.</div>`;
+    }
+
+    const list=document.getElementById('list');
+    list.innerHTML='';
+    todays.slice(0,3).forEach(ev=>{
+      const div=document.createElement('div'); div.className='event';
+      div.innerHTML = `<div class="row"><div class="title">${fmtRange(ev.start,ev.end)}</div></div>
+                       <div>${ev.title}</div>
+                       <div class="sub">${[ev.domain,ev.activity,ev.venue,ev.staff].filter(Boolean).join(' · ')}</div>`;
+      list.append(div);
+    });
+  }
+
+  async function boot(){
+    const data = await loadData();
+    render(data);
+    // refresh every 5 min
+    setInterval(async ()=>{ render(await loadData()); }, 5*60*1000);
+  }
+  boot();
+</script>
+</body>
+</html>
