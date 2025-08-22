@@ -6,18 +6,18 @@
 <title>MEDI2101B Timetable</title>
 <style>
   :root { --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e8eb; --border:#222534;
-          --good:#2ecc71; --warn:#f1c40f; }
-  html, body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Inter, Arial; background:var(--bg); color:var(--text); }
-  .wrap { max-width:1100px; margin:0 auto; padding:16px 16px 80px; }
-  header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 6px; position:sticky; top:0; background:linear-gradient(var(--bg) 80%, transparent); }
+          --good:#2ecc71; --warn:#f1c40f; --chip:#1b1e27; --accent:#3aa0ff;}
+  html, body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; background:var(--bg); color:var(--text); }
+  .wrap { max-width:1100px; margin:0 auto; padding:16px 16px 88px; }
+  header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 6px; position:sticky; top:0; background:linear-gradient(var(--bg) 80%, transparent); z-index:5;}
   .title { font-size:20px; font-weight:800; }
   .tabs { display:inline-flex; background:#12141b; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-  .tab-btn { padding:10px 14px; color:var(--muted); border-right:1px solid var(--border); cursor:pointer; }
+  .tab-btn { padding:10px 14px; color:var(--muted); border-right:1px solid var(--border); cursor:pointer; user-select:none;}
   .tab-btn:last-child { border-right:none; }
   .tab-btn.active { color:var(--text); background:#1a1d27; }
-  .controls { display:flex; gap:8px; align-items:center; }
+  .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .btn { background:#12141b; border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; }
-  .pill { display:inline-flex; gap:8px; align-items:center; background:#1b1e27; border:1px solid var(--border); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
+  .pill { display:inline-flex; gap:8px; align-items:center; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
   .grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:12px; }
   .card { grid-column:span 12; background:#121319; border:1px solid var(--border); border-radius:14px; padding:14px; }
   .event { display:grid; grid-template-columns:26px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:#12141b; }
@@ -30,9 +30,15 @@
   .soon-dot { width:12px; height:12px; border-radius:50%; background:var(--warn); }
   .past-dot { width:12px; height:12px; border-radius:50%; background:#434a57; }
   .hidden { display:none; }
-  .date-header { font-weight:800; margin:22px 2px 10px; font-size:14px; color:#c7cbd2; }
+  .date-header { position:sticky; top:46px; background:linear-gradient(#0b0c10, #0b0c1000); padding:6px 2px; font-weight:800; font-size:14px; color:#c7cbd2; z-index:2; }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
   .warn { color:#f6d365; }
+  /* Modal */
+  .modal-backdrop { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6); z-index:999;}
+  .modal { width:min(680px,94vw); background:#121319; border:1px solid var(--border); border-radius:16px; padding:18px; position:relative;}
+  .modal .x { position:absolute; right:10px; top:10px; width:28px; height:28px; border-radius:8px; border:1px solid var(--border); background:#0e1016; color:#cbd1db; cursor:pointer;}
+  footer { position:fixed; bottom:0; left:0; right:0; background:linear-gradient(transparent, var(--bg) 20%, var(--bg)); padding:10px 12px; }
+  .foot-inner { max-width:1100px; margin:0 auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
 </style>
 </head>
 <body>
@@ -44,8 +50,14 @@
         <div class="tab-btn active" data-tab="today" role="tab" aria-selected="true">Today</div>
         <div class="tab-btn" data-tab="all" role="tab" aria-selected="false">All</div>
       </div>
-      <button class="btn" id="btn-settings">Settings</button>
-      <button class="btn" id="btn-load">Load Data</button>
+      <button class="btn" id="btn-settings" title="Campus / PBL">Settings</button>
+      <button class="btn" id="btn-load" title="Load JSON/CSV">Load Data</button>
+      <button class="btn" id="btn-jump" title="Scroll All → Today">Jump to Today</button>
+      <button class="btn" id="btn-ics" title="Export filtered events to calendar">Export ICS</button>
+      <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔 Notifications</button>
+      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;background:#0e1016;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:4px 8px;">
+        <option value="ALL">ALL</option>
+      </select></span>
     </div>
   </header>
 
@@ -53,22 +65,24 @@
   <div id="notice" class="sub"></div>
   <div class="dropzone" id="dropzone">Drop <b>timetable.json</b> or <b>timetable.csv</b> here, or click "Load Data".</div>
 
-  <div id="today-view" class="grid"></div>
-  <div id="all-view" class="grid hidden"></div>
+  <div id="today-view" class="grid" role="region" aria-live="polite"></div>
+  <div id="all-view" class="grid hidden" role="region"></div>
 </div>
 
-<footer style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(transparent, var(--bg) 20%, var(--bg));padding:12px">
-  <div style="max-width:1100px;margin:0 auto;display:flex;gap:8px;align-items:center;">
+<footer>
+  <div class="foot-inner">
     <span class="pill">Local time: <span id="nowstr"></span></span>
     <span class="pill">Filters: <span id="filterstr"></span></span>
+    <span class="pill">Next: <span id="nextup"></span></span>
     <span class="pill">Legend: <span class="live-dot" style="width:10px;height:10px"></span> live &nbsp; <span class="soon-dot" style="width:10px;height:10px"></span> soon &nbsp; <span class="past-dot" style="width:10px;height:10px"></span> past</span>
   </div>
 </footer>
 
-<!-- Settings modal (inline, simple) -->
-<div id="modal" class="hidden" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6)">
-  <div style="width:min(680px,94vw);background:#121319;border:1px solid var(--border);border-radius:16px;padding:18px">
-    <div style="font-size:18px;font-weight:800;margin-bottom:6px">Setup</div>
+<!-- Settings modal -->
+<div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="x" id="btn-x" title="Close">✕</button>
+    <div style="font-size:18px;font-weight:800;margin-bottom:6px" id="modal-title">Setup</div>
     <div class="sub" style="margin-bottom:10px">Choose your campus and PBL group.</div>
     <div style="display:flex;gap:12px">
       <div style="flex:1">
@@ -105,10 +119,15 @@
 
 <script>
   let EVENTS = [];
+  let DOMAIN = "ALL";
+  let notifiedKeys = new Set();
+
   function loadPrefs(){ try{ const r=localStorage.getItem('medi2101b_prefs'); return r?JSON.parse(r):null;}catch{ return null; } }
   function savePrefs(p){ localStorage.setItem('medi2101b_prefs', JSON.stringify(p)); }
   function campusMatch(evCampus, prefCampus){ if (prefCampus==='Both' || evCampus==='Both') return true; return evCampus===prefCampus; }
   function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
+  function domainMatch(evDomain){ return DOMAIN==='ALL' || String(evDomain||'').toLowerCase()===DOMAIN.toLowerCase(); }
+
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const sanitize = s => String(s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
@@ -119,15 +138,25 @@
   function todayKey(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
   function statusFor(ev, now){ const s=new Date(ev.start), e=new Date(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
 
+  function filteredEvents(){
+    const prefs = loadPrefs() || { campus:'Both', group:'ALL', label:'' };
+    return EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group) && domainMatch(ev.domain)).sort(byStart);
+  }
+
+  function computeNext(evts, now){
+    return evts.filter(e => new Date(e.end) > now).sort((a,b)=>new Date(a.start)-new Date(b.start))[0] || null;
+  }
+
   function render(){
     const now = new Date();
     $('#nowstr').textContent = now.toLocaleString();
+
     const prefs = loadPrefs() || { campus:'Both', group:'ALL', label:'' };
-    const filterStr = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '');
+    const filterStr = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
     $('#filterstr').textContent = filterStr;
     $('#banner').textContent = prefs.label || '';
 
-    const filtered = EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group)).sort(byStart);
+    const filtered = filteredEvents();
 
     // Today
     const tv = $('#today-view'); tv.innerHTML = '';
@@ -157,7 +186,7 @@
     const byDate = new Map();
     filtered.forEach(ev => { if(!byDate.has(ev.date)) byDate.set(ev.date, []); byDate.get(ev.date).push(ev); });
     [...byDate.keys()].sort().forEach(k => {
-      const dHead = document.createElement('div'); dHead.className='date-header'; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
+      const dHead = document.createElement('div'); dHead.className='date-header'; dHead.id = 'date-'+k; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
       const card = document.createElement('div'); card.className='card';
       const inner = document.createElement('div');
       byDate.get(k).sort(byStart).forEach(ev => {
@@ -173,10 +202,30 @@
       });
       card.appendChild(inner); av.appendChild(card);
     });
+
+    // Next up
+    const next = computeNext(filtered, now);
+    if (next){
+      const mins = Math.max(0, Math.floor((new Date(next.start)-now)/60000));
+      $('#nextup').textContent = `${next.title} · ${new Date(next.start).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})} (${mins} min)`;
+    } else {
+      $('#nextup').textContent = '—';
+    }
   }
 
+  // ----- Scrolling helpers -----
+  function scrollAllToToday(){
+    const now = new Date();
+    const id = 'date-'+todayKey(now);
+    const el = document.getElementById(id);
+    if (el){
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  // ----- Data loading -----
   async function parseCSV(text){
-    const lines = text.split(/\r?\n/).filter(Boolean);
+    const lines = text.split(/\r?\n/).filter(l => l.length);
     if (!lines.length) return [];
     const headers = lines[0].split(',').map(s=>s.trim());
     const idx = Object.fromEntries(headers.map((h,i)=>[h,i]));
@@ -194,17 +243,24 @@
     return out;
   }
 
+  function populateDomainFilter(data){
+    const doms = Array.from(new Set(data.map(e => String(e.domain||'').trim()).filter(Boolean))).sort();
+    const sel = document.getElementById('sel-domain');
+    sel.innerHTML = '<option value="ALL">ALL</option>' + doms.map(d=>`<option>${d}</option>`).join('');
+    sel.value = DOMAIN || 'ALL';
+  }
+
   async function tryAutoLoad(){
-    // If opened via file:// most browsers block fetch of sibling files.
     if (location.protocol === 'file:'){
       $('#notice').innerHTML = 'Opened as <span class="warn">file://</span>. Auto-loading local files is blocked by browsers. Use <b>Load Data</b>, or run a tiny local server.';
       return;
     }
-    // Try JSON then CSV
     try {
       const r = await fetch('timetable.json', {cache:'no-cache'});
       if (r.ok){
         EVENTS = await r.json();
+        localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+        populateDomainFilter(EVENTS);
         render();
         $('#notice').textContent = 'Loaded timetable.json from same folder.';
         return;
@@ -215,6 +271,8 @@
       if (r.ok){
         const txt = await r.text();
         EVENTS = await parseCSV(txt);
+        localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+        populateDomainFilter(EVENTS);
         render();
         $('#notice').textContent = 'Loaded timetable.csv from same folder.';
         return;
@@ -223,19 +281,66 @@
     $('#notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found. On GitHub Pages, put those files in the repo root next to index.html.';
   }
 
-  function openModal(){ $('#modal').classList.remove('hidden'); const p=loadPrefs()||{campus:'Both',group:'ALL',label:''}; $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; }
-  function closeModal(){ $('#modal').classList.add('hidden'); }
+  // ----- Modal controls -----
+  function openModal(){ 
+    const mb = document.getElementById('modal-backdrop');
+    mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
+    const p=loadPrefs()||{campus:'Both',group:'ALL',label:''};
+    document.getElementById('sel-campus').value=p.campus; document.getElementById('sel-group').value=p.group; document.getElementById('txt-name').value=p.label;
+  }
+  function closeModal(){
+    const mb = document.getElementById('modal-backdrop');
+    mb.style.display='none'; mb.setAttribute('aria-hidden','true');
+  }
 
-  function setupDnD(){
-    const dz = $('#dropzone');
-    ;['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='#3aa0ff';}));
-    ;['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='var(--border)';}));
-    dz.addEventListener('drop', async e=>{
-      const f = e.dataTransfer.files?.[0]; if (!f) return;
-      await handleFile(f);
+  // ----- ICS export -----
+  function toICS(evts){
+    function esc(s){ return String(s||'').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n'); }
+    function dt(v){ // assume local time; export as floating (no TZ)
+      const d = new Date(v);
+      const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
+      const hh=String(d.getHours()).padStart(2,'0'), mm=String(d.getMinutes()).padStart(2,'0'), ss='00';
+      return `${y}${m}${day}T${hh}${mm}${ss}`;
+    }
+    const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MEDI2101B//Timetable//EN'];
+    evts.forEach((e,i)=>{
+      lines.push('BEGIN:VEVENT');
+      lines.push('UID:'+ (e.start+'_'+i+'@medi2101b'));
+      lines.push('DTSTART:'+dt(e.start));
+      lines.push('DTEND:'+dt(e.end));
+      lines.push('SUMMARY:'+esc(e.title));
+      const desc = [e.domain, e.activity, e.campus, e.venue, e.staff].filter(Boolean).join(' · ');
+      if (desc) lines.push('DESCRIPTION:'+esc(desc));
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+
+  // ----- Notifications -----
+  function requestNotify(){
+    if (!('Notification' in window)) { alert('Notifications not supported.'); return; }
+    Notification.requestPermission().then(res => {
+      localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off');
+      alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied');
+    });
+  }
+  function maybeNotify(){
+    if (localStorage.getItem('medi2101b_notify')!=='on') return;
+    const now = new Date();
+    const evts = filteredEvents();
+    evts.forEach(e => {
+      const s = new Date(e.start);
+      const key = e.start + '|' + e.title;
+      const mins = Math.floor((s-now)/60000);
+      if (mins === 10 && !notifiedKeys.has(key)){
+        notifiedKeys.add(key);
+        try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + s.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); } catch {}
+      }
     });
   }
 
+  // ----- File handling -----
   async function handleFile(file){
     const text = await file.text();
     if (file.name.endsWith('.json')){
@@ -243,32 +348,69 @@
     } else if (file.name.endsWith('.csv')){
       EVENTS = await parseCSV(text);
     } else {
-      alert('Unsupported file. Use timetable.json or timetable.csv.');
-      return;
+      alert('Use timetable.json or timetable.csv'); return;
     }
     localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
-    $('#notice').textContent = `Loaded ${file.name} (saved to local storage for next time).`;
+    populateDomainFilter(EVENTS);
     render();
+    $('#notice').textContent = `Loaded ${file.name} (cached).`;
   }
 
   document.addEventListener('DOMContentLoaded', ()=>{
-    // UI wiring
-    $$('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{ $$('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn)); $('#today-view').classList.toggle('hidden', btn.dataset.tab!=='today'); $('#all-view').classList.toggle('hidden', btn.dataset.tab!=='all'); }));
+    // Tabs
+    $$('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
+      const name = btn.dataset.tab;
+      $$('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
+      document.getElementById('today-view').classList.toggle('hidden', name!=='today');
+      document.getElementById('all-view').classList.toggle('hidden', name!=='all');
+      if (name==='all'){ setTimeout(scrollAllToToday, 30); }
+    }));
+
+    // Settings
     $('#btn-settings').addEventListener('click', openModal);
     $('#btn-save').addEventListener('click', ()=>{ savePrefs({ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value }); closeModal(); render(); });
     $('#btn-close').addEventListener('click', closeModal);
+    $('#btn-x').addEventListener('click', closeModal);
+    // backdrop click closes if prefs already exist
+    $('#modal-backdrop').addEventListener('click', (e)=>{ if (e.target.id==='modal-backdrop'){ if (loadPrefs()) closeModal(); }});
+    // ESC key to close
+    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape'){ if (loadPrefs()) closeModal(); }});
+
+    // Load data
     $('#btn-load').addEventListener('click', ()=>$('#file-input').click());
     $('#file-input').addEventListener('change', e=>{ const f=e.target.files?.[0]; if (f) handleFile(f); });
+    const dz = $('#dropzone');
+    ;['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='#3aa0ff';}));
+    ;['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='var(--border)';}));
+    dz.addEventListener('drop', async e=>{ const f = e.dataTransfer.files?.[0]; if (f) handleFile(f); });
 
-    setupDnD();
+    // Domain filter
+    $('#sel-domain').addEventListener('change', (e)=>{ DOMAIN = e.target.value; render(); });
+
+    // Jump
+    $('#btn-jump').addEventListener('click', scrollAllToToday);
+
+    // ICS
+    $('#btn-ics').addEventListener('click', ()=>{
+      const ics = toICS(filteredEvents());
+      const blob = new Blob([ics], {type:'text/calendar'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'medi2101b_filtered.ics';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 500);
+    });
+
+    // Notifications
+    $('#btn-bell').addEventListener('click', requestNotify);
 
     // Restore cached data if present
     const cached = localStorage.getItem('medi2101b_data');
     if (cached){
-      try { EVENTS = JSON.parse(cached); } catch {}
+      try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {}
     }
 
-    // First-run prefs
+    // First-run prefs: open modal but allow closing if they don't want to set yet
     if (!loadPrefs()) openModal();
 
     // Auto-load same-folder files (works when served via http://)
@@ -276,7 +418,7 @@
 
     // Render & tick
     render();
-    setInterval(render, 60*1000);
+    setInterval(()=>{ render(); maybeNotify(); }, 60*1000);
     document.getElementById('nowstr').textContent = new Date().toLocaleString();
   });
 </script>
