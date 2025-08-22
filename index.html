@@ -16,6 +16,7 @@
     --clinical:#f59e0b;/* orange */
     --physiology:#06b6d4; /* cyan */
     --info:#a78bfa;    /* purple */
+    --lecture:#e11d48; /* lecture (rose) */
     --default:#94a3b8; /* slate */
   }
   html[data-theme="dark"]{
@@ -73,6 +74,14 @@
   .tile { border:1px solid var(--border); border-radius:12px; padding:10px; background: rgba(127,127,127,.06); }
   .tile .big { font-weight:800; font-size:18px; }
   .tile .small { color:var(--muted); font-size:12px; }
+
+  select, input, button { font: inherit; }
+  select, input[type=text], input[type=number] {
+    background: var(--card); color: var(--text);
+    border:1px solid var(--border); border-radius:10px; padding:10px 12px;
+    appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  }
+  option { background: var(--card); color: var(--text); }
 </style>
 </head>
 <body>
@@ -122,7 +131,7 @@
   <div class="foot-inner">
     <span class="pill">Local time: <span id="nowstr"></span></span>
     <span class="pill">Filters: <span id="filterstr"></span></span>
-    <span class="pill">Legend: Anatomy blue · PBL green · Clinical orange</span>
+    <span class="pill">Legend: Anatomy blue · PBL green · Clinical orange · Lecture rose</span>
   </div>
 </footer>
 
@@ -152,10 +161,7 @@
         </select>
       </div>
     </div>
-    <div style="margin-top:10px">
-      <div class="sub">Optional label</div>
-      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
-    </div>
+    <div style="margin-top:10px">      <div class="sub">Optional label</div>      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">    </div>    <div style="margin-top:10px">      <div class="sub">Your name (optional)</div>      <input id="txt-username" placeholder="e.g., Noofie" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">    </div>
     <div style="display:flex;gap:12px;margin-top:10px">
       <div style="flex:1">
         <div class="sub">Home station / address</div>
@@ -205,7 +211,7 @@
   function setTheme(t){ document.documentElement.setAttribute('data-theme', t==='light'?'light':'dark'); localStorage.setItem('medi_theme', t); }
 
   function loadPrefs(){ try{ const r=localStorage.getItem('medi2101b_prefs'); return r?JSON.parse(r):null;}catch{ return null; } }
-  function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10 }; }
+  function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', name:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10 }; }
   function savePrefs(p){ localStorage.setItem('medi2101b_prefs', JSON.stringify(p)); }
 
   const $ = s => document.querySelector(s);
@@ -218,9 +224,20 @@
   function byStart(a,b){ return new Date(a.start) - new Date(b.start); }
   function todayKey(d){ const y=d.getFullYear(), m=pad(d.getMonth()+1), day=pad(d.getDate()); return `${y}-${m}-${day}`; }
   function statusFor(ev, now){ const s=new Date(ev.start), e=new Date(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
-  function domainColor(d){ const k=String(d||'').toLowerCase(); return DOMAIN_COLORS[k] || 'var(--default)'; }
+  function categoryColor(ev){ const d=String(ev.domain||'').toLowerCase(); const a=String(ev.activity||'').toLowerCase(); if (a.includes('lecture')) return 'var(--lecture)'; if (d.includes('anatomy')) return 'var(--anatomy)'; if (d.includes('pbl')) return 'var(--pbl)'; if (d.includes('clinical')) return 'var(--clinical)'; if (d.includes('physiology')) return 'var(--physiology)'; if (d.includes('info')) return 'var(--info)'; return 'var(--default)'; }
 
-  function campusMatch(evCampus, prefCampus){ if (prefCampus==='Both' || evCampus==='Both') return true; return evCampus===prefCampus; }
+  function campusMatch(evCampus, prefCampus){
+    const e = String(evCampus||'').toUpperCase().replace(/\s+/g,'');
+    const p = String(prefCampus||'').toUpperCase();
+    if (p==='BOTH') return true;
+    if (e==='BOTH') return true;
+    if (/CAL/.test(e) && /CC/.test(e)) return true; // shared
+    // Map long names
+    const map = { 'CALLAGHAN':'CAL', 'CCS':'CC' };
+    const em = map[e] || e;
+    const pm = map[p] || p;
+    return em===pm;
+  }
   function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
   function domainMatch(evDomain){ return DOMAIN==='ALL' || String(evDomain||'').toLowerCase()===DOMAIN.toLowerCase(); }
 
@@ -265,6 +282,57 @@
   }
 
   // --- Renderers ---
+  function renderMorningDigestMerged(container, todayKeyStr, weather){
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
+    if (!todays.length) return;
+    const inPerson = todays.filter(ev => !isRemote(ev));
+    const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
+    const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
+    const arriveBy = inPerson.length ? new Date(new Date(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+    const leaveAfter = inPerson.length ? new Date(new Date(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+    const wNow = weather?.current_weather, d0 = weather?.daily;
+    const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
+
+    const card = document.createElement('div'); card.className='card';
+    card.innerHTML = `
+      <div class="title2">${prefs.name ? 'Good day, '+sanitize(prefs.name)+'.' : 'Morning digest'}</div>
+      <div class="sub">Today: ${todays.length} sessions (${inPerson.length} in-person)</div>
+      <div class="grid2">
+        <div class="tile">
+          <div class="small">First</div>
+          <div class="big">${fmtHM(new Date(first.start))}</div>
+          <div class="small">${sanitize(first.title)}</div>
+        </div>
+        <div class="tile">
+          <div class="small">Last</div>
+          <div class="big">${fmtHM(new Date(last.end))}</div>
+          <div class="small">${sanitize(last.title)}</div>
+        </div>
+      </div>
+      <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
+      ${inPerson.length ? `
+      <div class="grid2" style="margin-top:8px">
+        <div class="tile">
+          <div class="small">Arrive by</div>
+          <div class="big">${fmtHM(arriveBy)}</div>
+          <div class="small">for ${sanitize(inPerson[0].title)}</div>
+        </div>
+        <div class="tile">
+          <div class="small">Leave after</div>
+          <div class="big">${fmtHM(leaveAfter)}</div>
+          <div class="small">after ${sanitize(inPerson[inPerson.length-1].title)}</div>
+        </div>
+      </div>
+      <div style="margin-top:8px">
+        <a class="btn" target="_blank" rel="noopener" href="${mapsTransitLink(prefs.home, prefs.campusStation)}">See arrival trains</a>
+        <a class="btn" target="_blank" rel="noopener" href="${mapsTransitLink(prefs.campusStation, prefs.home)}">See return trains</a>
+      </div>
+      ` : ''}
+    `;
+    container.appendChild(card);
+  }
+
   function renderCountdownBanner(container, ev, now){
     const banner = document.createElement('div');
     const st = new Date(ev.start), en = new Date(ev.end);
@@ -315,11 +383,12 @@
     evs.forEach(ev => {
       const st = statusFor(ev, now);
       const row = document.createElement('div'); row.className='event ' + st + (compact?' compact':'');
-      const bar = document.createElement('div'); bar.className='bar'; bar.style.background = domainColor(ev.domain);
+      const bar = document.createElement('div'); bar.className='bar'; bar.style.background = categoryColor(ev);
       const when = document.createElement('div'); when.className='when';
       const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
       const title = document.createElement('div'); title.className='title';
-      title.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
+      const mand = ev.mandatory ? ' <span class="chip" title="Mandatory">MANDATORY</span>' : '';
+      title.innerHTML = '<div class="title2">'+sanitize(ev.title)+mand+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
       const where = document.createElement('div'); where.className='where';
       where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'');
       const who = document.createElement('div'); who.className='who'; who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
@@ -372,17 +441,26 @@
 
     // Today banners: countdown or live
     const banners = $('#today-banners'); banners.innerHTML = '';
+    // Greeting (uses optional name)
+    if ((Object.assign(defaultPrefs(), loadPrefs()||{})).name){
+      const g = document.createElement('div'); g.className='banner next';
+      const nm = (Object.assign(defaultPrefs(), loadPrefs()||{})).name;
+      g.innerHTML = `<strong>Welcome back,</strong> ${sanitize(nm)}.`;
+      banners.appendChild(g);
+    }
+
     const next = computeNext(filtered, now);
     if (next){ renderCountdownBanner(banners, next, now); }
 
-    // Morning digest once per day
-    const today = todayKey(now);
+    
+    // Morning digest once per day (set flag before async to avoid dupes)
     const shown = localStorage.getItem('medi_digest_shown');
     if (shown !== today){
-      try { const weather = await fetchWeather(); renderMorningDigest(banners, today, weather); } catch(e){ renderMorningDigest(banners, today, null); }
       localStorage.setItem('medi_digest_shown', today);
+      let weather=null; try{ weather = await fetchWeather(); }catch{}
+      renderMorningDigestMerged(banners, today, weather);
     }
-
+    
     // Today list
     const tv = $('#today-view'); tv.innerHTML = '';
     const todays = filtered.filter(ev => ev.date === today);
@@ -390,7 +468,7 @@
       const d = document.createElement('div'); d.className='card'; d.innerHTML = '<div class="sub">No events today for the current filters.</div>'; tv.appendChild(d);
     } else {
       renderEventsList(tv, todays, now);
-      renderTransitHelper(tv, today);
+      
     }
 
     // All view (grouped by date)
@@ -438,8 +516,8 @@
       } else {
         dayEvs.forEach(ev => {
           const row = document.createElement('div'); row.className='event' + (compact?' compact':'');
-          const bar = document.createElement('div'); bar.className='bar'; bar.style.background = domainColor(ev.domain);
-          const title = document.createElement('div'); title.className='title'; title.innerHTML = `<span class="sub">${fmtHM(new Date(ev.start))}–${fmtHM(new Date(ev.end))}</span><br>${sanitize(ev.title)}`;
+          const bar = document.createElement('div'); bar.className='bar'; bar.style.background = categoryColor(ev);
+          const title = document.createElement('div'); title.className='title'; const mand = ev.mandatory ? ' <span class="chip">MANDATORY</span>' : ''; title.innerHTML = `<span class="sub">${fmtHM(new Date(ev.start))}–${fmtHM(new Date(ev.end))}</span><br>${sanitize(ev.title)}${mand}`;
           row.append(bar, title);
           col.appendChild(row);
         });
@@ -459,10 +537,12 @@
       const row = lines[i].split(',');
       function g(h){ return row[idx[h]] ?? ''; }
       const groups = (g('groups')||'').split(';').map(s=>s.trim()).filter(Boolean);
+      const mandRaw = (g('mandatory')||g('mand')||'').toString().toLowerCase();
+      const mandatory = ['y','yes','true','1','mand','mandatory'].includes(mandRaw);
       out.push({
         date: g('date'), start: g('start'), end: g('end'), title: g('title'),
         domain: g('domain'), activity: g('activity'), campus: g('campus'),
-        groups: groups.length?groups:['ALL'], venue: g('venue'), staff: g('staff')
+        groups: groups.length?groups:['ALL'], venue: g('venue'), staff: g('staff'), mandatory
       });
     }
     return out;
@@ -587,12 +667,12 @@
     $('#btn-settings').addEventListener('click', ()=>{
       const mb = $('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
       const p=Object.assign(defaultPrefs(), loadPrefs()||{});
-      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label;
+      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; $('#txt-username').value=p.name || '';
       $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf;
     });
     function closeModal(){ const mb=$('#modal-backdrop'); mb.style.display='none'; mb.setAttribute('aria-hidden','true'); }
     $('#btn-save').addEventListener('click', ()=>{ 
-      const p={ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value,
+      const p={ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value, name:$('#txt-username').value,
                 home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10)};
       savePrefs(p); closeModal(); render();
     });
