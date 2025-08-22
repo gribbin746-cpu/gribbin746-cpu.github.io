@@ -30,7 +30,7 @@
   .soon-dot { width:12px; height:12px; border-radius:50%; background:var(--warn); }
   .past-dot { width:12px; height:12px; border-radius:50%; background:#434a57; }
   .hidden { display:none; }
-  .date-header { position: sticky; top: 60px; background: var(--bg); padding: 8px 2px; font-weight: 800; font-size: 14px; color: #c7cbd2; z-index: 1; border-bottom: 1px solid var(--border); scroll-margin-top: 70px; }
+  .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #c7cbd2; border-bottom: 1px solid var(--border); }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
   .warn { color:#f6d365; }
   /* Modal */
@@ -104,10 +104,7 @@
         </select>
       </div>
     </div>
-    <div style="margin-top:10px">
-      <div class="sub">Optional label</div>
-      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">
-    </div>
+    <div style="margin-top:10px">      <div class="sub">Optional label</div>      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">    </div>    <div style="display:flex;gap:12px;margin-top:10px">      <div style="flex:1">        <div class="sub">Home station / address</div>        <input id="txt-home" placeholder="e.g., Hamilton Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>      <div style="flex:1">        <div class="sub">Campus station</div>        <input id="txt-campus-st" placeholder="Gosford Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>    </div>    <div style="display:flex;gap:12px;margin-top:10px">      <div style="flex:1">        <div class="sub">Arrive buffer (min)</div>        <input id="num-arrive" type="number" min="0" value="15" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>      <div style="flex:1">        <div class="sub">Leave buffer (min)</div>        <input id="num-leave" type="number" min="0" value="10" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1016;color:var(--text)">      </div>    </div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
       <button class="btn" id="btn-save">Save</button>
       <button class="btn" id="btn-close">Close</button>
@@ -123,6 +120,7 @@
   let notifiedKeys = new Set();
 
   function loadPrefs(){ try{ const r=localStorage.getItem('medi2101b_prefs'); return r?JSON.parse(r):null;}catch{ return null; } }
+  function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10 }; }
   function savePrefs(p){ localStorage.setItem('medi2101b_prefs', JSON.stringify(p)); }
   function campusMatch(evCampus, prefCampus){ if (prefCampus==='Both' || evCampus==='Both') return true; return evCampus===prefCampus; }
   function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
@@ -138,8 +136,42 @@
   function todayKey(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
   function statusFor(ev, now){ const s=new Date(ev.start), e=new Date(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
 
+  function isRemote(ev){
+    const v = String(ev.venue||''); const t = String(ev.title||''); const a = String(ev.activity||'');
+    return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t) || /Lecture/i.test(a) && /zoom|panopto/i.test(v);
+  }
+  function urlEncode(s){ return encodeURIComponent(String(s||'')); }
+  function mapsTransitLink(origin, dest){
+    const base = 'https://www.google.com/maps/dir/?api=1';
+    return `${base}&travelmode=transit&origin=${urlEncode(origin)}&destination=${urlEncode(dest)}&transit_mode=train`;
+  }
+  function addTransitHelper(container, dateKey){
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    const dayEvents = filteredEvents().filter(ev => ev.date === dateKey && !isRemote(ev));
+    if (!dayEvents.length) return;
+    const first = dayEvents.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, dayEvents[0]);
+    const last = dayEvents.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, dayEvents[0]);
+    const arriveBy = new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000);
+    const leaveAfter = new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000);
+    const card = document.createElement('div'); card.className='card';
+    const inner = document.createElement('div');
+    const h = document.createElement('div'); h.className='title2'; h.textContent = 'Transit helper';
+    const p = document.createElement('div'); p.className='sub';
+    p.textContent = 'For in-person sessions only. Times are local and buffers are configurable in Settings.';
+    const row = document.createElement('div'); row.style.marginTop='8px';
+    const a1 = document.createElement('a'); a1.className='btn'; a1.href = mapsTransitLink(prefs.home, prefs.campusStation); a1.target='_blank'; a1.rel='noopener'; a1.textContent = 'Open arrival options';
+    const a2 = document.createElement('a'); a2.className='btn'; a2.href = mapsTransitLink(prefs.campusStation, prefs.home); a2.style.marginLeft='8px'; a2.target='_blank'; a2.rel='noopener'; a2.textContent='Open return options';
+    const info = document.createElement('div'); info.className='sub'; info.style.marginTop='8px';
+    info.textContent = `Arrive by ${arriveBy.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})} · Leave after ${leaveAfter.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
+    inner.append(h,p,row,info);
+    row.append(a1,a2);
+    card.appendChild(inner);
+    container.prepend(card);
+  }
+
+
   function filteredEvents(){
-    const prefs = loadPrefs() || { campus:'Both', group:'ALL', label:'' };
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
     return EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group) && domainMatch(ev.domain)).sort(byStart);
   }
 
@@ -151,7 +183,7 @@
     const now = new Date();
     $('#nowstr').textContent = now.toLocaleString();
 
-    const prefs = loadPrefs() || { campus:'Both', group:'ALL', label:'' };
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
     const filterStr = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
     $('#filterstr').textContent = filterStr;
     $('#banner').textContent = prefs.label || '';
@@ -179,6 +211,7 @@
         row.append(dot, when, title, where, who); inner.appendChild(row);
       });
       card.appendChild(inner); tv.appendChild(card);
+      addTransitHelper(tv, today);
     }
 
     // All
@@ -285,8 +318,9 @@
   function openModal(){ 
     const mb = document.getElementById('modal-backdrop');
     mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
-    const p=loadPrefs()||{campus:'Both',group:'ALL',label:''};
+    const p=Object.assign(defaultPrefs(), loadPrefs()||{});
     document.getElementById('sel-campus').value=p.campus; document.getElementById('sel-group').value=p.group; document.getElementById('txt-name').value=p.label;
+    document.getElementById('txt-home').value=p.home; document.getElementById('txt-campus-st').value=p.campusStation; document.getElementById('num-arrive').value=p.arriveBuf; document.getElementById('num-leave').value=p.leaveBuf;
   }
   function closeModal(){
     const mb = document.getElementById('modal-backdrop');
@@ -368,7 +402,7 @@
 
     // Settings
     $('#btn-settings').addEventListener('click', openModal);
-    $('#btn-save').addEventListener('click', ()=>{ savePrefs({ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value }); closeModal(); render(); });
+    $('#btn-save').addEventListener('click', ()=>{ savePrefs({ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value, home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10) }); closeModal(); render(); });
     $('#btn-close').addEventListener('click', closeModal);
     $('#btn-x').addEventListener('click', closeModal);
     // backdrop click closes if prefs already exist
