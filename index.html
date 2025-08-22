@@ -36,6 +36,10 @@
   .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; }
   .pill { display:inline-flex; gap:8px; align-items:center; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
+  select, input[type=text], input[type=number] { background: var(--card); color: var(--text); border:1px solid var(--border); border-radius:10px; padding:8px 10px; appearance:none; -webkit-appearance:none; -moz-appearance:none; color-scheme: dark; }
+  select:focus, input:focus { outline: 2px solid var(--accent); }
+  option { background: var(--card); color: var(--text); }
+
   .grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:12px; }
   .card { grid-column:span 12; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
   .event { display:grid; grid-template-columns:8px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:rgba(127,127,127,.08); }
@@ -101,7 +105,7 @@
       <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔 Notify</button>
       <button class="btn" id="btn-compact">Compact</button>
       <button class="btn" id="btn-theme">Light/Dark</button>
-      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:4px 8px;">
+      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:4px 8px;appearance:none;-webkit-appearance:none;-moz-appearance:none;color-scheme: dark;">
         <option value="ALL">ALL</option>
       </select></span>
       <span class="pill" id="weather-pill">Weather: <span id="weather-now">loading…</span></span>
@@ -204,7 +208,8 @@
     "pbl":"var(--pbl)",
     "clinical":"var(--clinical)",
     "physiology":"var(--physiology)",
-    "info":"var(--info)"
+    "info":"var(--info)",
+    "lecture":"var(--lecture)"
   };
 
   function theme(){ return localStorage.getItem('medi_theme') || 'dark'; }
@@ -218,12 +223,29 @@
   const $$ = s => Array.from(document.querySelectorAll(s));
   const sanitize = s => String(s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
   const pad = n => String(n).padStart(2,'0');
+  function toDate(s){
+    // Accept 'YYYY-MM-DDTHH:MM' or 'YYYY-MM-DDTHH:MM:SS' as local time.
+    if (s instanceof Date) return s;
+    const m = String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
+    if (m){
+      return new Date(Number(m[1]), Number(m[2])-1, Number(m[3]), Number(m[4]), Number(m[5]), m[6]?Number(m[6]):0);
+    }
+    // Fallback to native parser
+    return new Date(s);
+  }
+  function normalizeGroups(g){
+    if (Array.isArray(g)) return g;
+    if (g == null) return ['ALL'];
+    const parts = String(g).split(/[;,\s]+/).map(x=>x.trim()).filter(Boolean);
+    const out = parts.filter(x=>/^[A-P]$/.test(x.toUpperCase()));
+    return out.length?out:['ALL'];
+  }
 
   function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   function fmtDate(d){ return d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'}); }
-  function byStart(a,b){ return new Date(a.start) - new Date(b.start); }
+  function byStart(a,b){ return toDate(a.start) - toDate(b.start); }
   function todayKey(d){ const y=d.getFullYear(), m=pad(d.getMonth()+1), day=pad(d.getDate()); return `${y}-${m}-${day}`; }
-  function statusFor(ev, now){ const s=new Date(ev.start), e=new Date(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
+  function statusFor(ev, now){ const s=toDate(ev.start), e=toDate(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
   function categoryColor(ev){ const d=String(ev.domain||'').toLowerCase(); const a=String(ev.activity||'').toLowerCase(); if (a.includes('lecture')) return 'var(--lecture)'; if (d.includes('anatomy')) return 'var(--anatomy)'; if (d.includes('pbl')) return 'var(--pbl)'; if (d.includes('clinical')) return 'var(--clinical)'; if (d.includes('physiology')) return 'var(--physiology)'; if (d.includes('info')) return 'var(--info)'; return 'var(--default)'; }
 
   function campusMatch(evCampus, prefCampus){
@@ -289,8 +311,8 @@
     const inPerson = todays.filter(ev => !isRemote(ev));
     const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
     const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
-    const arriveBy = inPerson.length ? new Date(new Date(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
-    const leaveAfter = inPerson.length ? new Date(new Date(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
     const wNow = weather?.current_weather, d0 = weather?.daily;
     const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
 
@@ -301,12 +323,12 @@
       <div class="grid2">
         <div class="tile">
           <div class="small">First</div>
-          <div class="big">${fmtHM(new Date(first.start))}</div>
+          <div class="big">${fmtHM(toDate(first.start))}</div>
           <div class="small">${sanitize(first.title)}</div>
         </div>
         <div class="tile">
           <div class="small">Last</div>
-          <div class="big">${fmtHM(new Date(last.end))}</div>
+          <div class="big">${fmtHM(toDate(last.end))}</div>
           <div class="small">${sanitize(last.title)}</div>
         </div>
       </div>
@@ -335,7 +357,7 @@
 
   function renderCountdownBanner(container, ev, now){
     const banner = document.createElement('div');
-    const st = new Date(ev.start), en = new Date(ev.end);
+    const st = toDate(ev.start), en = toDate(ev.end);
     const live = now>=st && now<en;
     banner.className = 'banner ' + (live?'live':'next');
     const title = live? 'Live now' : 'Next';
@@ -345,37 +367,54 @@
   }
 
   function renderMorningDigest(container, todayKeyStr, weather){
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
-    const inPerson = todays.filter(ev => !isRemote(ev));
-    if (!todays.length) return;
-    const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
-    const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
-    const arriveBy = new Date(new Date((inPerson[0]||first).start).getTime() - prefs.arriveBuf*60000);
-    const leaveAfter = new Date(new Date((inPerson.length?inPerson[inPerson.length-1]:last).end).getTime() + prefs.leaveBuf*60000);
-
-    const card = document.createElement('div'); card.className='card';
-    const wNow = weather?.current_weather, d0 = weather?.daily;
-    const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
-    card.innerHTML = `
-      <div class="title2">Morning digest</div>
-      <div class="sub">Today: ${todays.length} sessions (${inPerson.length} in-person)</div>
-      <div class="grid2">
-        <div class="tile">
-          <div class="small">Arrive by</div>
-          <div class="big">${fmtHM(arriveBy)}</div>
-          <div class="small">for first session: ${sanitize(first.title)}</div>
-        </div>
-        <div class="tile">
-          <div class="small">Leave after</div>
-          <div class="big">${fmtHM(leaveAfter)}</div>
-          <div class="small">after last session: ${sanitize(last.title)}</div>
-        </div>
+  const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+  const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
+  const inPerson = todays.filter(ev => !isRemote(ev));
+  if (!todays.length) return;
+  const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
+  const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
+  const arriveBy = inPerson.length ? new Date(new Date(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+  const leaveAfter = inPerson.length ? new Date(new Date(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+  const card = document.createElement('div'); card.className='card';
+  const wNow = weather?.current_weather, d0 = weather?.daily;
+  const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
+  const prefsName = (loadPrefs()||{}).name || '';
+  const heading = prefsName ? `${prefsName}, here’s your day` : `Today at a glance`;
+  card.innerHTML = `
+    <div class="title2">${heading}</div>
+    <div class="sub">${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
+    <div class="grid2">
+      <div class="tile">
+        <div class="small">First</div>
+        <div class="big">${fmtHM(new Date(first.start))}</div>
+        <div class="small">${sanitize(first.title)}</div>
       </div>
-      <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
-    `;
-    container.appendChild(card);
-  }
+      <div class="tile">
+        <div class="small">Last</div>
+        <div class="big">${fmtHM(new Date(last.end))}</div>
+        <div class="small">${sanitize(last.title)}</div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:8px;">
+      <div class="tile">
+        <div class="small">Arrive by</div>
+        <div class="big">${arriveBy?fmtHM(arriveBy):'—'}</div>
+        <div class="small">in‑person only</div>
+      </div>
+      <div class="tile">
+        <div class="small">Leave after</div>
+        <div class="big">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
+        <div class="small">in‑person only</div>
+      </div>
+    </div>
+    <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
+    <div style="margin-top:8px">
+      <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
+      <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
+    </div>
+  `;
+  container.appendChild(card);
+}
 
   function renderEventsList(container, evs, now){
     const card = document.createElement('div'); card.className='card';
@@ -385,7 +424,7 @@
       const row = document.createElement('div'); row.className='event ' + st + (compact?' compact':'');
       const bar = document.createElement('div'); bar.className='bar'; bar.style.background = categoryColor(ev);
       const when = document.createElement('div'); when.className='when';
-      const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
+      const ds = toDate(ev.start), de=toDate(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
       const title = document.createElement('div'); title.className='title';
       const mand = ev.mandatory ? ' <span class="chip" title="Mandatory">MANDATORY</span>' : '';
       title.innerHTML = '<div class="title2">'+sanitize(ev.title)+mand+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
@@ -397,29 +436,7 @@
     card.appendChild(inner); container.appendChild(card);
   }
 
-  function renderTransitHelper(container, dateKey){
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const dayEvents = filteredEvents().filter(ev => ev.date === dateKey && !isRemote(ev));
-    if (!dayEvents.length) return;
-    const first = dayEvents.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, dayEvents[0]);
-    const last = dayEvents.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, dayEvents[0]);
-    const arriveBy = new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000);
-    const leaveAfter = new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000);
-
-    const card = document.createElement('div'); card.className='card';
-    const inner = document.createElement('div');
-    const h = document.createElement('div'); h.className='title2'; h.textContent = 'Transit';
-    const p = document.createElement('div'); p.className='sub';
-    p.textContent = 'In-person sessions only. Buffers in Settings.';
-    const tiles = document.createElement('div'); tiles.className='grid2';
-    const t1 = document.createElement('div'); t1.className='tile'; t1.innerHTML = `<div class="small">Arrive by</div><div class="big">${fmtHM(arriveBy)}</div><div class="small">for: ${sanitize(first.title)}</div>`;
-    const t2 = document.createElement('div'); t2.className='tile'; t2.innerHTML = `<div class="small">Leave after</div><div class="big">${fmtHM(leaveAfter)}</div><div class="small">after: ${sanitize(last.title)}</div>`;
-    const row = document.createElement('div'); row.style.marginTop='8px';
-    const a1 = document.createElement('a'); a1.className='btn'; a1.href = mapsTransitLink(prefs.home, prefs.campusStation); a1.target='_blank'; a1.rel='noopener'; a1.textContent = 'See arrival trains';
-    const a2 = document.createElement('a'); a2.className='btn'; a2.href = mapsTransitLink(prefs.campusStation, prefs.home); a2.style.marginLeft='8px'; a2.target='_blank'; a2.rel='noopener'; a2.textContent='See return trains';
-    tiles.append(t1,t2); inner.append(h,p,tiles,row); row.append(a1,a2);
-    card.appendChild(inner); container.appendChild(card);
-  }
+  function renderTransitHelper(){} // merged into Morning Digest
 
   function mapsTransitLink(origin, dest){
     const base = 'https://www.google.com/maps/dir/?api=1';
@@ -517,7 +534,7 @@
         dayEvs.forEach(ev => {
           const row = document.createElement('div'); row.className='event' + (compact?' compact':'');
           const bar = document.createElement('div'); bar.className='bar'; bar.style.background = categoryColor(ev);
-          const title = document.createElement('div'); title.className='title'; const mand = ev.mandatory ? ' <span class="chip">MANDATORY</span>' : ''; title.innerHTML = `<span class="sub">${fmtHM(new Date(ev.start))}–${fmtHM(new Date(ev.end))}</span><br>${sanitize(ev.title)}${mand}`;
+          const title = document.createElement('div'); title.className='title'; const mand = ev.mandatory ? ' <span class="chip">MANDATORY</span>' : ''; title.innerHTML = `<span class="sub">${fmtHM(toDate(ev.start))}–${fmtHM(toDate(ev.end))}</span><br>${sanitize(ev.title)}${mand}`;
           row.append(bar, title);
           col.appendChild(row);
         });
@@ -564,10 +581,12 @@
       const r = await fetch('timetable.json', {cache:'no-cache'});
       if (r.ok){
         EVENTS = await r.json();
+        // normalize groups in case they came as a string
+        EVENTS.forEach(e=>{ e.groups = normalizeGroups(e.groups); });
         localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
         render();
-        $('#notice').textContent = 'Loaded timetable.json';
+        $('#notice').textContent = `Loaded timetable.json · ${EVENTS.length} events`;
         return;
       }
     } catch {}
@@ -576,10 +595,11 @@
       if (r.ok){
         const txt = await r.text();
         EVENTS = await parseCSV(txt);
+        EVENTS.forEach(e=>{ e.groups = normalizeGroups(e.groups); });
         localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
         render();
-        $('#notice').textContent = 'Loaded timetable.csv';
+        $('#notice').textContent = `Loaded timetable.csv · ${EVENTS.length} events`;
         return;
       }
     } catch {}
@@ -667,7 +687,7 @@
     $('#btn-settings').addEventListener('click', ()=>{
       const mb = $('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
       const p=Object.assign(defaultPrefs(), loadPrefs()||{});
-      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; $('#txt-username').value=p.name || '';
+      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; $('#txt-user').value=p.name||''; $('#txt-username').value=p.name || '';
       $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf;
     });
     function closeModal(){ const mb=$('#modal-backdrop'); mb.style.display='none'; mb.setAttribute('aria-hidden','true'); }
