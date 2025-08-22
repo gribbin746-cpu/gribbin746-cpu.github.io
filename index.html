@@ -1,122 +1,101 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MEDI2101B Timetable</title>
 <style>
-  :root {
-    /* Dark theme (default) */
-    --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e8eb; --border:#222534;
-    --good:#2ecc71; --warn:#f1c40f; --chip:#1b1e27; --accent:#3aa0ff; --accent2:#7c4dff;
-    --dom-Anatomy:#3a9bff; --dom-PBL:#2ecc71; --dom-Clinical:#ff9f43; --dom-Physiology:#8e44ad;
-    --dom-Biochem:#00c1a3; --dom-Info:#8899aa; --dom-Pharmacology:#e67e22; --dom-Pathology:#ff5252;
-    --shadow: 0 4px 14px rgba(0,0,0,.2);
+  :root{
+    --bg-dark:#0b0c10; --card-dark:#121319; --text-dark:#e6e8eb; --muted-dark:#9aa1ac; --border-dark:#222534; --chip-dark:#1b1e27;
+    --bg-light:#f7f8fa; --card-light:#ffffff; --text-light:#0c1220; --muted-light:#5d6470; --border-light:#dfe3ea; --chip-light:#eff2f6;
+
+    --good:#2ecc71; --warn:#f1c40f; --bad:#e74c3c; --accent:#3aa0ff; --accent2:#7c4dff;
+
+    --anatomy:#3b82f6; /* blue */
+    --pbl:#10b981;     /* green */
+    --clinical:#f59e0b;/* orange */
+    --physiology:#06b6d4; /* cyan */
+    --info:#a78bfa;    /* purple */
+    --default:#94a3b8; /* slate */
   }
-  .theme-light {
-    --bg:#f7f8fb; --card:#ffffff; --muted:#5e6a75; --text:#0f141b; --border:#dde2ea;
-    --good:#2e8b57; --warn:#b58900; --chip:#eff3f8; --accent:#0b84ff; --accent2:#5f3aff;
-    --dom-Anatomy:#0b84ff; --dom-PBL:#1e9e5a; --dom-Clinical:#d97706; --dom-Physiology:#7c3aed;
-    --dom-Biochem:#0ea5a4; --dom-Info:#64748b; --dom-Pharmacology:#d35400; --dom-Pathology:#dc2626;
-    --shadow: 0 6px 18px rgba(10,20,40,.08);
+  html[data-theme="dark"]{
+    --bg:var(--bg-dark); --card:var(--card-dark); --text:var(--text-dark); --muted:var(--muted-dark); --border:var(--border-dark); --chip:var(--chip-dark);
+  }
+  html[data-theme="light"]{
+    --bg:var(--bg-light); --card:var(--card-light); --text:var(--text-light); --muted:var(--muted-light); --border:var(--border-light); --chip:var(--chip-light);
   }
   html, body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; background:var(--bg); color:var(--text); }
   .wrap { max-width:1200px; margin:0 auto; padding:16px 16px 96px; }
-  header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 8px; position:sticky; top:0;
-           background:linear-gradient(var(--bg) 80%, transparent); z-index:5; }
-  .title { font-size:21px; font-weight:800; letter-spacing:.2px; }
-  .tabs { display:inline-flex; background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
-  .tab-btn { padding:10px 14px; color:var(--muted); border-right:1px solid var(--border); cursor:pointer; user-select:none; }
+  header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 6px; position:sticky; top:0; background:linear-gradient(var(--bg) 85%, transparent); z-index:5;}
+  .title { font-size:20px; font-weight:800; }
+  .tabs { display:inline-flex; background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .tab-btn { padding:10px 14px; color:var(--muted); border-right:1px solid var(--border); cursor:pointer; user-select:none;}
   .tab-btn:last-child { border-right:none; }
-  .tab-btn.active { color:var(--text); background:#1a1d27; }
-  .theme-light .tab-btn.active { background:#eef2f8; }
+  .tab-btn.active { color:var(--text); background:rgba(127,127,127,.12); }
   .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  .btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; box-shadow:var(--shadow); }
-  .btn:active { transform: translateY(1px); }
+  .btn { background:var(--card); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; }
   .pill { display:inline-flex; gap:8px; align-items:center; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; color:var(--muted); font-size:12px; }
   .grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:12px; }
-  .card { grid-column:span 12; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow:var(--shadow); }
-  .event { display:grid; grid-template-columns:26px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:linear-gradient(#12141b, #151a24); }
-  .theme-light .event { background:linear-gradient(#ffffff, #fbfdff); }
+  .card { grid-column:span 12; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+  .event { display:grid; grid-template-columns:8px 1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; border:1px solid var(--border); background:rgba(127,127,127,.08); }
   .event + .event { margin-top:8px; }
-  .event.compact { grid-template-columns:18px 1fr; gap:8px; padding:6px; }
+  .bar { width:8px; height:100%; border-radius:6px; background: var(--default); }
   .when { font-variant-numeric: tabular-nums; font-weight:600; }
   .title2 { font-weight:700; }
   .sub { color:var(--muted); font-size:12px; }
-  .chip { display:inline-block; background:#1a2130; border:1px solid var(--border); padding:4px 8px; border-radius:8px; font-size:12px; color:var(--muted); }
-  .chip.mand { background: rgba(231,76,60,.15); color:#ff9aa2; border-color:#5b2b2b; }
-  .theme-light .chip.mand { background: rgba(220,38,38,.12); color:#b91c1c; border-color:#fecaca; }
-  .theme-light .chip { background:#eef2f8; color:#4b5563; }
-  .live-dot { width:12px; height:12px; border-radius:50%; background:var(--good); box-shadow:0 0 0 4px rgba(46,204,113,.15), 0 0 10px rgba(46,204,113,.6); }
-  .soon-dot { width:12px; height:12px; border-radius:50%; background:var(--warn); }
-  .past-dot { width:12px; height:12px; border-radius:50%; background:#434a57; }
+  .chip { display:inline-block; background:var(--chip); border:1px solid var(--border); padding:4px 8px; border-radius:8px; font-size:12px; color:var(--muted); }
+  .live { outline: 2px solid var(--good); }
+  .soon { outline: 2px dashed var(--warn); }
+  .past { opacity: .55; }
   .hidden { display:none; }
   .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #c7cbd2; border-bottom: 1px solid var(--border); }
-  .theme-light .date-header { color:#374151; }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
-  .warn { color:#f6d365; }
 
-  /* Domain color accents */
-  .dombar { width:6px; height:100%; border-radius:6px; }
-  .event-body { display:grid; grid-template-columns:1.2fr 2fr 1fr 1fr; gap:10px; align-items:center; }
-  .event.compact .event-body { display:none; }
-  .event.compact .when { font-weight:600; }
-  .event.compact .title2 { font-weight:700; }
-  .event.compact .title-wrap { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  /* Countdown banner */
+  .banner { grid-column: span 12; border-radius: 12px; padding: 12px 14px; display:flex; align-items:center; gap:10px; border:1px solid var(--border); }
+  .banner.live { background: rgba(46,204,113,.12); }
+  .banner.next { background: rgba(58,160,255,.12); }
 
   /* Week grid */
-  .weekbar { display:grid; grid-template-columns:repeat(7, 1fr); gap:12px; }
-  .daycol { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px; min-height:240px; box-shadow:var(--shadow); }
-  .dayhead { font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between; color:var(--muted); }
-  .daybody .event { background:transparent; box-shadow:none; }
-  .nav-week { display:flex; gap:6px; align-items:center; }
-
-  /* Modal */
-  .modal-backdrop { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6); z-index:999;}
-  .modal { width:min(780px,94vw); background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; position:relative; box-shadow:var(--shadow);}
-  .modal .x { position:absolute; right:10px; top:10px; width:28px; height:28px; border-radius:8px; border:1px solid var(--border); background:#0e1016; color:#cbd1db; cursor:pointer;}
-  .theme-light .modal .x { background:#eef2f8; color:#111827; }
-  label { display:block; margin-bottom:6px; font-size:13px; color:var(--muted); }
-  select, input[type=text], input[type=number] { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#0e1016; color:var(--text); }
-  .theme-light select, .theme-light input[type=text], .theme-light input[type=number] { background:#fff; color:#0f141b; }
+  .week-controls { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+  .week-grid { display:grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .week-col { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px; }
+  .week-col h4 { margin:4px 0 8px; font-size:13px; color:var(--muted); font-weight:800; }
+  .event.compact { grid-template-columns: 8px 1fr; }
+  .event.compact .when, .event.compact .where, .event.compact .who { display:none; }
+  .event.compact .title { font-size: 13px; }
 
   footer { position:fixed; bottom:0; left:0; right:0; background:linear-gradient(transparent, var(--bg) 20%, var(--bg)); padding:10px 12px; }
   .foot-inner { max-width:1200px; margin:0 auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
 
-  /* Countdown banner */
-  .banner { grid-column: span 12; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(90deg, rgba(58,160,255,.12), transparent); box-shadow:var(--shadow); }
-  .theme-light .banner { background:linear-gradient(90deg, rgba(11,132,255,.12), #ffffff); }
-  .banner .primary { font-weight:700; }
-  .banner .meta { color:var(--muted); font-size:12px; }
-
-  /* Transit helper prettier */
-  .transit { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  .cta { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; border:1px solid var(--border); text-decoration:none; color:var(--text); background:var(--chip); }
-  .cta:hover { filter:brightness(1.05); }
-
-  /* Toggles */
-  .switch { display:inline-flex; align-items:center; gap:6px; }
+  /* Transit helper */
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px; }
+  .tile { border:1px solid var(--border); border-radius:12px; padding:10px; background: rgba(127,127,127,.06); }
+  .tile .big { font-weight:800; font-size:18px; }
+  .tile .small { color:var(--muted); font-size:12px; }
 </style>
 </head>
 <body>
-<div class="wrap" id="root">
+<div class="wrap">
   <header>
     <div class="title">MEDI2101B Timetable</div>
     <div class="controls">
       <div class="tabs" role="tablist">
         <div class="tab-btn active" data-tab="today" role="tab" aria-selected="true">Today</div>
-        <div class="tab-btn" data-tab="week" role="tab" aria-selected="false">Week</div>
         <div class="tab-btn" data-tab="all" role="tab" aria-selected="false">All</div>
+        <div class="tab-btn" data-tab="week" role="tab" aria-selected="false">Week</div>
       </div>
-      <button class="btn" id="btn-settings" title="Campus / PBL">Settings</button>
+      <button class="btn" id="btn-settings" title="Campus / PBL / Transit">Settings</button>
       <button class="btn" id="btn-load" title="Load JSON/CSV">Load Data</button>
       <button class="btn" id="btn-jump" title="Scroll All → Today">Jump to Today</button>
       <button class="btn" id="btn-ics" title="Export filtered events to calendar">Export ICS</button>
-      <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔</button>
-      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;"><option value="ALL">ALL</option></select></span>
-      <span class="pill switch"><input type="checkbox" id="toggle-compact"> <label for="toggle-compact">Compact</label></span>
-      <span class="pill switch"><input type="checkbox" id="toggle-mand"> <label for="toggle-mand">Only mandatory</label></span>
-      <button class="btn" id="btn-theme">Theme</button>
+      <button class="btn" id="btn-bell" title="Notify 10 min before next event">🔔 Notify</button>
+      <button class="btn" id="btn-compact">Compact</button>
+      <button class="btn" id="btn-theme">Light/Dark</button>
+      <span class="pill" id="domain-pill">Domain: <select id="sel-domain" style="margin-left:6px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:4px 8px;">
+        <option value="ALL">ALL</option>
+      </select></span>
+      <span class="pill" id="weather-pill">Weather: <span id="weather-now">loading…</span></span>
     </div>
   </header>
 
@@ -124,50 +103,47 @@
   <div id="notice" class="sub"></div>
   <div class="dropzone" id="dropzone">Drop <b>timetable.json</b> or <b>timetable.csv</b> here, or click "Load Data".</div>
 
-  <div id="countdown" class="banner hidden"></div>
-
+  <div id="today-banners" class="grid"></div>
   <div id="today-view" class="grid" role="region" aria-live="polite"></div>
-  <div id="week-view" class="grid hidden" role="region">
-    <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
-      <div class="nav-week">
-        <button class="btn" id="wk-prev">← Prev</button>
-        <button class="btn" id="wk-today">This week</button>
-        <button class="btn" id="wk-next">Next →</button>
-      </div>
-      <div class="sub" id="wk-range"></div>
-    </div>
-    <div id="weekbar" class="weekbar card" style="background:none;border:none;box-shadow:none;padding:0;"></div>
-  </div>
   <div id="all-view" class="grid hidden" role="region"></div>
+  <div id="week-view" class="grid hidden" role="region">
+    <div class="card" style="grid-column:span 12">
+      <div class="week-controls">
+        <button class="btn" id="btn-prev-week">◀ Prev</button>
+        <div class="sub" id="week-label">Week</div>
+        <button class="btn" id="btn-next-week">Next ▶</button>
+      </div>
+      <div class="week-grid" id="week-grid"></div>
+    </div>
+  </div>
 </div>
 
 <footer>
   <div class="foot-inner">
     <span class="pill">Local time: <span id="nowstr"></span></span>
     <span class="pill">Filters: <span id="filterstr"></span></span>
-    <span class="pill">Next: <span id="nextup"></span></span>
-    <span class="pill">Legend: <span class="live-dot" style="width:10px;height:10px"></span> live &nbsp; <span class="soon-dot" style="width:10px;height:10px"></span> soon &nbsp; <span class="past-dot" style="width:10px;height:10px"></span> past</span>
+    <span class="pill">Legend: Anatomy blue · PBL green · Clinical orange</span>
   </div>
 </footer>
 
 <!-- Settings modal -->
-<div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <button class="x" id="btn-x" title="Close">✕</button>
+<div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:999;">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="width:min(680px,94vw);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;position:relative;">
+    <button class="x" id="btn-x" title="Close" style="position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">✕</button>
     <div style="font-size:18px;font-weight:800;margin-bottom:6px" id="modal-title">Setup</div>
-    <div class="sub" style="margin-bottom:10px">Choose your campus and PBL group.</div>
+    <div class="sub" style="margin-bottom:10px">Campus, PBL, labels, transit and buffers.</div>
     <div style="display:flex;gap:12px">
       <div style="flex:1">
-        <label for="sel-campus">Campus</label>
-        <select id="sel-campus">
+        <div class="sub">Campus</div>
+        <select id="sel-campus" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
           <option value="Both">Both</option>
           <option value="Callaghan">Callaghan</option>
           <option value="CCS">CCS</option>
         </select>
       </div>
       <div style="flex:1">
-        <label for="sel-group">PBL Group</label>
-        <select id="sel-group">
+        <div class="sub">PBL Group</div>
+        <select id="sel-group" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
           <option value="ALL">ALL</option>
           <option>A</option><option>B</option><option>C</option><option>D</option>
           <option>E</option><option>F</option><option>G</option><option>H</option>
@@ -177,27 +153,27 @@
       </div>
     </div>
     <div style="margin-top:10px">
-      <label for="txt-name">Optional label</label>
-      <input id="txt-name" placeholder="e.g., Callaghan – Group H">
+      <div class="sub">Optional label</div>
+      <input id="txt-name" placeholder="e.g., Callaghan – Group H" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
     </div>
     <div style="display:flex;gap:12px;margin-top:10px">
       <div style="flex:1">
-        <label for="txt-home">Home station / address</label>
-        <input id="txt-home" placeholder="e.g., Hamilton Station">
+        <div class="sub">Home station / address</div>
+        <input id="txt-home" placeholder="e.g., Hamilton Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
       </div>
       <div style="flex:1">
-        <label for="txt-campus-st">Campus station</label>
-        <input id="txt-campus-st" placeholder="Gosford Station" value="Gosford Station">
+        <div class="sub">Campus station</div>
+        <input id="txt-campus-st" placeholder="Gosford Station" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
       </div>
     </div>
     <div style="display:flex;gap:12px;margin-top:10px">
       <div style="flex:1">
-        <label for="num-arrive">Arrive buffer (min)</label>
-        <input id="num-arrive" type="number" min="0" value="15">
+        <div class="sub">Arrive buffer (min)</div>
+        <input id="num-arrive" type="number" min="0" value="15" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
       </div>
       <div style="flex:1">
-        <label for="num-leave">Leave buffer (min)</label>
-        <input id="num-leave" type="number" min="0" value="10">
+        <div class="sub">Leave buffer (min)</div>
+        <input id="num-leave" type="number" min="0" value="10" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text)">
       </div>
     </div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
@@ -210,129 +186,183 @@
 <input type="file" id="file-input" accept=".json,.csv" class="hidden"/>
 
 <script>
-  // ---------- State & prefs ----------
+  // --- State & prefs ---
   let EVENTS = [];
   let DOMAIN = "ALL";
   let notifiedKeys = new Set();
-  let WEEK_OFFSET = 0; // 0 = this week, -1 = prev, +1 = next
-  let COMPACT = false;
+  let compact = false;
+  let weekOffset = 0; // 0 = current week
+
+  const DOMAIN_COLORS = {
+    "anatomy":"var(--anatomy)",
+    "pbl":"var(--pbl)",
+    "clinical":"var(--clinical)",
+    "physiology":"var(--physiology)",
+    "info":"var(--info)"
+  };
+
+  function theme(){ return localStorage.getItem('medi_theme') || 'dark'; }
+  function setTheme(t){ document.documentElement.setAttribute('data-theme', t==='light'?'light':'dark'); localStorage.setItem('medi_theme', t); }
 
   function loadPrefs(){ try{ const r=localStorage.getItem('medi2101b_prefs'); return r?JSON.parse(r):null;}catch{ return null; } }
   function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10 }; }
   function savePrefs(p){ localStorage.setItem('medi2101b_prefs', JSON.stringify(p)); }
 
-  // ---------- Utils ----------
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const sanitize = s => String(s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const pad = n => String(n).padStart(2,'0');
+
   function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   function fmtDate(d){ return d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'}); }
   function byStart(a,b){ return new Date(a.start) - new Date(b.start); }
-  function todayKey(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
+  function todayKey(d){ const y=d.getFullYear(), m=pad(d.getMonth()+1), day=pad(d.getDate()); return `${y}-${m}-${day}`; }
   function statusFor(ev, now){ const s=new Date(ev.start), e=new Date(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
-  function startOfWeek(d){ const dd = new Date(d); const day = dd.getDay(); const diff = (day === 0 ? -6 : 1 - day); dd.setDate(dd.getDate() + diff); dd.setHours(0,0,0,0); return dd; } // Monday
-  function addDays(d, n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
-  function colorForDomain(dom){ const key = String(dom||'').trim(); const map = { 'Anatomy':'var(--dom-Anatomy)','PBL':'var(--dom-PBL)','Clinical':'var(--dom-Clinical)','Physiology':'var(--dom-Physiology)','Biochem':'var(--dom-Biochem)','Info':'var(--dom-Info)','Pharmacology':'var(--dom-Pharmacology)','Pathology':'var(--dom-Pathology)' }; return map[key] || 'var(--accent2)'; }
+  function domainColor(d){ const k=String(d||'').toLowerCase(); return DOMAIN_COLORS[k] || 'var(--default)'; }
 
   function campusMatch(evCampus, prefCampus){ if (prefCampus==='Both' || evCampus==='Both') return true; return evCampus===prefCampus; }
   function groupMatch(evGroups, prefGroup){ if (prefGroup==='ALL') return true; return Array.isArray(evGroups) ? (evGroups.includes(prefGroup) || evGroups.includes('ALL')) : true; }
   function domainMatch(evDomain){ return DOMAIN==='ALL' || String(evDomain||'').toLowerCase()===DOMAIN.toLowerCase(); }
-  function filteredEvents(){ const prefs = Object.assign(defaultPrefs(), loadPrefs()||{}); const onlyMand = localStorage.getItem('medi2101b_onlymand')==='1'; return EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group) && domainMatch(ev.domain) && (!onlyMand || computeMandatory(ev))).sort(byStart); }
-  // --- Data normalization & mandatory tagging ---
-  function normalizeCampus(raw){
-    const s = String(raw||'').toLowerCase().replace(/\s+/g,'').replace('&','/');
-    if (!s) return 'Both';
-    if (s.includes('cal/cc') || s.includes('cc/cal') || s.includes('calcc') || s.includes('cccal') || s.includes('both')) return 'Both';
-    if (s.startsWith('cal')) return 'Callaghan';
-    if (s.startsWith('cc') || s.startsWith('ccs')) return 'CCS';
-    return raw; // fallback
+
+  function filteredEvents(){
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    return EVENTS.filter(ev => campusMatch(ev.campus, prefs.campus) && groupMatch(ev.groups, prefs.group) && domainMatch(ev.domain)).sort(byStart);
   }
-  function normalizeGroups(g){
-    if (Array.isArray(g)) return g.length ? g : ['ALL'];
-    if (!g) return ['ALL'];
-    const s = String(g);
-    const parts = s.split(/[,\s;\/]+/).map(x=>x.trim()).filter(Boolean);
-    const letters = parts.map(x=>x.toUpperCase()).filter(x=>x==='ALL' || /^[A-P]$/.test(x));
-    return letters.length ? letters : ['ALL'];
+
+  function computeNext(evts, now){
+    return evts.filter(e => new Date(e.end) > now).sort((a,b)=>new Date(a.start)-new Date(b.start))[0] || null;
   }
-  function computeMandatory(ev){
-    if (ev.mandatory === true) return true;
-    // Heuristics: explicit keywords OR small-group (not ALL)
-    const t = (String(ev.title||'') + ' ' + String(ev.activity||'')).toLowerCase();
-    if (/(mandatory|compulsory|attendance required)/i.test(t)) return true;
-    const gs = normalizeGroups(ev.groups);
-    if (gs.some(x => x!=='ALL')) return true;
-    return false;
+
+  function isRemote(ev){
+    const v = String(ev.venue||''); const t = String(ev.title||''); const a = String(ev.activity||'');
+    return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t);
   }
-  function normalizeAndEnhance(data){
-    data.forEach(e => {
-      e.campusNorm = normalizeCampus(e.campus);
-      e.groups = normalizeGroups(e.groups);
-      e.mandatory = computeMandatory(e);
-    });
+
+  // --- Weather (Open-Meteo for Gosford by default) ---
+  async function fetchWeather(){
+    const cache = localStorage.getItem('medi_weather_cache');
+    if (cache){
+      try{
+        const obj = JSON.parse(cache);
+        if (Date.now() - obj.ts < 30*60*1000) return obj.data; // 30 min cache
+      }catch{}
+    }
+    const lat = -33.425, lon = 151.341;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
+    const r = await fetch(url);
+    const data = await r.json();
+    localStorage.setItem('medi_weather_cache', JSON.stringify({ts:Date.now(), data}));
     return data;
   }
-  // Override campus/group matchers to use normalized values
-  function campusMatch(evCampus, prefCampus){
-    const ec = normalizeCampus(evCampus);
-    if (prefCampus==='Both') return true;
-    if (ec==='Both') return true;
-    return ec === prefCampus;
-  }
-  function groupMatch(evGroups, prefGroup){
-    const gs = normalizeGroups(evGroups);
-    if (prefGroup==='ALL') return true;
-    return gs.includes(prefGroup) || gs.includes('ALL');
-  }
-
-
-  function computeNext(evts, now){ return evts.filter(e => new Date(e.end) > now).sort((a,b)=>new Date(a.start)-new Date(b.start))[0] || null; }
-  function isRemote(ev){ const v = String(ev.venue||''); const t = String(ev.title||''); const a = String(ev.activity||''); return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t); }
-
-  // ---------- Weather (Open-Meteo) ----------
-  async function fetchWeather(){
-    // Gosford default
-    const defLat = -33.424, defLon = 151.342;
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${defLat}&longitude=${defLon}&current=temperature_2m,apparent_temperature,precipitation&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
-    try {
-      const r = await fetch(url, {cache:'no-cache'});
-      if (!r.ok) throw new Error('weather fetch failed');
-      const j = await r.json();
-      return j;
-    } catch(e){
-      return null;
-    }
-  }
-  function weatherIcon(code){
-    // minimal mapping
-    const m = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',61:'🌧️',71:'🌨️',80:'🌧️',95:'⛈️'};
+  function wmoIcon(code){
+    // simple mapping
+    const m = {
+      0:'☀️', 1:'🌤️', 2:'⛅', 3:'☁️', 45:'🌫️', 48:'🌫️', 51:'🌦️', 53:'🌦️', 55:'🌦️',
+      61:'🌧️', 63:'🌧️', 65:'🌧️', 66:'🌧️', 67:'🌧️', 71:'🌨️', 73:'🌨️', 75:'🌨️',
+      80:'🌦️', 81:'🌧️', 82:'🌧️', 95:'⛈️', 96:'⛈️', 99:'⛈️'
+    };
     return m[code] || '🌡️';
   }
 
-  // ---------- Transit ----------
-  function urlEncode(s){ return encodeURIComponent(String(s||'')); }
+  // --- Renderers ---
+  function renderCountdownBanner(container, ev, now){
+    const banner = document.createElement('div');
+    const st = new Date(ev.start), en = new Date(ev.end);
+    const live = now>=st && now<en;
+    banner.className = 'banner ' + (live?'live':'next');
+    const title = live? 'Live now' : 'Next';
+    const mins = live ? Math.max(0, Math.floor((en-now)/60000)) : Math.max(0, Math.floor((st-now)/60000));
+    banner.innerHTML = `<strong>${title}:</strong> ${sanitize(ev.title)} · ${fmtHM(live?en:st)} <span class="sub">(${mins} min)</span>`;
+    container.appendChild(banner);
+  }
+
+  function renderMorningDigest(container, todayKeyStr, weather){
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
+    const inPerson = todays.filter(ev => !isRemote(ev));
+    if (!todays.length) return;
+    const first = todays.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, todays[0]);
+    const last = todays.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, todays[0]);
+    const arriveBy = new Date(new Date((inPerson[0]||first).start).getTime() - prefs.arriveBuf*60000);
+    const leaveAfter = new Date(new Date((inPerson.length?inPerson[inPerson.length-1]:last).end).getTime() + prefs.leaveBuf*60000);
+
+    const card = document.createElement('div'); card.className='card';
+    const wNow = weather?.current_weather, d0 = weather?.daily;
+    const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
+    card.innerHTML = `
+      <div class="title2">Morning digest</div>
+      <div class="sub">Today: ${todays.length} sessions (${inPerson.length} in-person)</div>
+      <div class="grid2">
+        <div class="tile">
+          <div class="small">Arrive by</div>
+          <div class="big">${fmtHM(arriveBy)}</div>
+          <div class="small">for first session: ${sanitize(first.title)}</div>
+        </div>
+        <div class="tile">
+          <div class="small">Leave after</div>
+          <div class="big">${fmtHM(leaveAfter)}</div>
+          <div class="small">after last session: ${sanitize(last.title)}</div>
+        </div>
+      </div>
+      <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
+    `;
+    container.appendChild(card);
+  }
+
+  function renderEventsList(container, evs, now){
+    const card = document.createElement('div'); card.className='card';
+    const inner = document.createElement('div');
+    evs.forEach(ev => {
+      const st = statusFor(ev, now);
+      const row = document.createElement('div'); row.className='event ' + st + (compact?' compact':'');
+      const bar = document.createElement('div'); bar.className='bar'; bar.style.background = domainColor(ev.domain);
+      const when = document.createElement('div'); when.className='when';
+      const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
+      const title = document.createElement('div'); title.className='title';
+      title.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
+      const where = document.createElement('div'); where.className='where';
+      where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'');
+      const who = document.createElement('div'); who.className='who'; who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
+      row.append(bar, when, title, where, who); inner.appendChild(row);
+    });
+    card.appendChild(inner); container.appendChild(card);
+  }
+
+  function renderTransitHelper(container, dateKey){
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    const dayEvents = filteredEvents().filter(ev => ev.date === dateKey && !isRemote(ev));
+    if (!dayEvents.length) return;
+    const first = dayEvents.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, dayEvents[0]);
+    const last = dayEvents.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, dayEvents[0]);
+    const arriveBy = new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000);
+    const leaveAfter = new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000);
+
+    const card = document.createElement('div'); card.className='card';
+    const inner = document.createElement('div');
+    const h = document.createElement('div'); h.className='title2'; h.textContent = 'Transit';
+    const p = document.createElement('div'); p.className='sub';
+    p.textContent = 'In-person sessions only. Buffers in Settings.';
+    const tiles = document.createElement('div'); tiles.className='grid2';
+    const t1 = document.createElement('div'); t1.className='tile'; t1.innerHTML = `<div class="small">Arrive by</div><div class="big">${fmtHM(arriveBy)}</div><div class="small">for: ${sanitize(first.title)}</div>`;
+    const t2 = document.createElement('div'); t2.className='tile'; t2.innerHTML = `<div class="small">Leave after</div><div class="big">${fmtHM(leaveAfter)}</div><div class="small">after: ${sanitize(last.title)}</div>`;
+    const row = document.createElement('div'); row.style.marginTop='8px';
+    const a1 = document.createElement('a'); a1.className='btn'; a1.href = mapsTransitLink(prefs.home, prefs.campusStation); a1.target='_blank'; a1.rel='noopener'; a1.textContent = 'See arrival trains';
+    const a2 = document.createElement('a'); a2.className='btn'; a2.href = mapsTransitLink(prefs.campusStation, prefs.home); a2.style.marginLeft='8px'; a2.target='_blank'; a2.rel='noopener'; a2.textContent='See return trains';
+    tiles.append(t1,t2); inner.append(h,p,tiles,row); row.append(a1,a2);
+    card.appendChild(inner); container.appendChild(card);
+  }
+
   function mapsTransitLink(origin, dest){
     const base = 'https://www.google.com/maps/dir/?api=1';
+    const urlEncode = s => encodeURIComponent(String(s||''));
     return `${base}&travelmode=transit&origin=${urlEncode(origin)}&destination=${urlEncode(dest)}&transit_mode=train`;
   }
 
-  // ---------- Renderers ----------
-  function renderCountdown(){
-    const now = new Date();
-    const evts = filteredEvents();
-    const next = computeNext(evts, now);
-    const el = $('#countdown');
-    if (!next){ el.classList.add('hidden'); return; }
-    const st = new Date(next.start);
-    const diff = Math.max(0, Math.floor((st-now)/60000));
-    el.classList.remove('hidden');
-    el.innerHTML = `<div class="primary">Next: ${sanitize(next.title)} in ${diff} min</div>
-                    <div class="meta">${fmtHM(st)} · ${sanitize(next.domain)} · ${sanitize(next.activity)} · ${sanitize(next.campus)}</div>`;
-  }
-
-  function renderToday(){
+  // --- Views ---
+  async function render(){
     const now = new Date();
     $('#nowstr').textContent = now.toLocaleString();
+
     const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
     const filterStr = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
     $('#filterstr').textContent = filterStr;
@@ -340,175 +370,85 @@
 
     const filtered = filteredEvents();
 
-    // Countdown banner
-    renderCountdown();
+    // Today banners: countdown or live
+    const banners = $('#today-banners'); banners.innerHTML = '';
+    const next = computeNext(filtered, now);
+    if (next){ renderCountdownBanner(banners, next, now); }
 
-    const tv = $('#today-view'); tv.innerHTML = '';
+    // Morning digest once per day
     const today = todayKey(now);
-    const todays = filtered.filter(ev => ev.date === today);
-    // Morning digest (once per day)
-    const digestKey = 'medi2101b_digest_date';
-    const lastDigest = localStorage.getItem(digestKey);
-    if (lastDigest !== today){
-      localStorage.setItem(digestKey, today);
-      // build digest card
-      const dig = document.createElement('div'); dig.className='card';
-      dig.innerHTML = `<div class="title2">Morning digest</div>
-        <div class="sub" id="digest-sub">Loading weather…</div>`;
-      tv.appendChild(dig);
-      // async fill: sessions + weather + transit windows
-      const oncampus = todays.filter(e => !isRemote(e));
-      const first = oncampus.length ? oncampus.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, oncampus[0]) : null;
-      const last = oncampus.length ? oncampus.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, oncampus[0]) : null;
-      const arriveBy = first ? new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000) : null;
-      const leaveAfter = last ? new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000) : null;
-
-      const summary = `${todays.length} session${todays.length===1?'':'s'} · ` + (oncampus.length?`${oncampus.length} on-campus`:`all remote`);
-      let lines = [summary];
-      if (arriveBy) lines.push(`Arrive by ${fmtHM(arriveBy)}`);
-      if (leaveAfter) lines.push(`Leave after ${fmtHM(leaveAfter)}`);
-
-      fetchWeather().then(w => {
-        let wx = 'Weather unavailable';
-        if (w && w.daily){
-          const wcode = w.daily.weathercode[0];
-          const tmax = w.daily.temperature_2m_max[0];
-          const tmin = w.daily.temperature_2m_min[0];
-          const p = w.daily.precipitation_probability_max[0];
-          wx = `${weatherIcon(wcode)} ${Math.round(tmin)}–${Math.round(tmax)}°C · rain ${p}%`;
-        }
-        $('#digest-sub').textContent = lines.join(' · ') + ' · ' + wx;
-      });
+    const shown = localStorage.getItem('medi_digest_shown');
+    if (shown !== today){
+      try { const weather = await fetchWeather(); renderMorningDigest(banners, today, weather); } catch(e){ renderMorningDigest(banners, today, null); }
+      localStorage.setItem('medi_digest_shown', today);
     }
 
+    // Today list
+    const tv = $('#today-view'); tv.innerHTML = '';
+    const todays = filtered.filter(ev => ev.date === today);
     if (!todays.length){
       const d = document.createElement('div'); d.className='card'; d.innerHTML = '<div class="sub">No events today for the current filters.</div>'; tv.appendChild(d);
     } else {
-      const card = document.createElement('div'); card.className='card';
-      const inner = document.createElement('div');
-      todays.forEach(ev => {
-        const st = statusFor(ev, now);
-        const row = document.createElement('div'); row.className='event' + (COMPACT?' compact':'');
-        const dom = document.createElement('div'); dom.className='dombar'; dom.style.background = colorForDomain(ev.domain);
-        const when = document.createElement('div'); when.className='when'; const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
-        const titleWrap = document.createElement('div'); titleWrap.className='title-wrap';
-        titleWrap.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
-        const where = document.createElement('div'); where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'') + (computeMandatory(ev)?' <span class="chip mand">Mandatory</span>':'');
-        const who = document.createElement('div'); who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
-        const dot = document.createElement('div'); dot.className = st==='live'?'live-dot':(st==='soon'?'soon-dot':'past-dot');
-        // layout
-        if (COMPACT){
-          row.append(dom, dot, when, titleWrap);
-        } else {
-          const body = document.createElement('div'); body.className='event-body';
-          body.append(when, titleWrap, where, who);
-          row.append(dom, dot, body);
-        }
-        inner.appendChild(row);
-      });
-      card.appendChild(inner); tv.appendChild(card);
-
-      // Transit helper, prettier
-      const oncampus = todays.filter(e => !isRemote(e));
-      if (oncampus.length){
-        const first = oncampus.reduce((m,e)=> new Date(e.start)<new Date(m.start)?e:m, oncampus[0]);
-        const last = oncampus.reduce((m,e)=> new Date(e.end)>new Date(m.end)?e:m, oncampus[0]);
-        const arriveBy = new Date(new Date(first.start).getTime() - prefs.arriveBuf*60000);
-        const leaveAfter = new Date(new Date(last.end).getTime() + prefs.leaveBuf*60000);
-        const tcard = document.createElement('div'); tcard.className='card';
-        const innerT = document.createElement('div');
-        innerT.innerHTML = `<div class="title2">Transit</div>
-          <div class="sub">Plan around buffers · arrive by <b>${fmtHM(arriveBy)}</b> · leave after <b>${fmtHM(leaveAfter)}</b></div>`;
-        const row = document.createElement('div'); row.className='transit';
-        const a1 = document.createElement('a'); a1.className='cta'; a1.href=mapsTransitLink(prefs.home, prefs.campusStation); a1.target='_blank'; a1.rel='noopener'; a1.textContent='Arrival options (train)';
-        const a2 = document.createElement('a'); a2.className='cta'; a2.href=mapsTransitLink(prefs.campusStation, prefs.home); a2.target='_blank'; a2.rel='noopener'; a2.textContent='Return options';
-        row.append(a1,a2);
-        innerT.append(row);
-        tcard.append(innerT);
-        tv.appendChild(tcard);
-      }
+      renderEventsList(tv, todays, now);
+      renderTransitHelper(tv, today);
     }
-  }
 
-  function renderAll(){
-    const now = new Date();
+    // All view (grouped by date)
     const av = $('#all-view'); av.innerHTML = '';
-    const filtered = filteredEvents();
     const byDate = new Map();
     filtered.forEach(ev => { if(!byDate.has(ev.date)) byDate.set(ev.date, []); byDate.get(ev.date).push(ev); });
-    const today = todayKey(now);
     [...byDate.keys()].sort().forEach(k => {
-      const dHead = document.createElement('div'); dHead.className='date-header'; dHead.id = 'date-'+k; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
-      const card = document.createElement('div'); card.className='card';
-      const inner = document.createElement('div');
-      byDate.get(k).sort(byStart).forEach(ev => {
-        const st = statusFor(ev, now);
-        const row = document.createElement('div'); row.className='event' + (COMPACT?' compact':'');
-        const dom = document.createElement('div'); dom.className='dombar'; dom.style.background = colorForDomain(ev.domain);
-        const when = document.createElement('div'); when.className='when'; const ds = new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
-        const titleWrap = document.createElement('div'); titleWrap.className='title-wrap';
-        titleWrap.innerHTML = '<div class="title2">'+sanitize(ev.title)+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
-        const where = document.createElement('div'); where.innerHTML = '<span class="chip">'+sanitize(ev.campus)+'</span> ' + (ev.venue?'<span class="chip">'+sanitize(ev.venue)+'</span>':'') + (computeMandatory(ev)?' <span class="chip mand">Mandatory</span>':'');
-        const who = document.createElement('div'); who.innerHTML = ev.staff?'<span class="sub">'+sanitize(ev.staff)+'</span>':'<span class="sub">&nbsp;</span>';
-        const dot = document.createElement('div'); dot.className = st==='live'?'live-dot':(st==='soon'?'soon-dot':'past-dot');
-        if (COMPACT){
-          row.append(dom, dot, when, titleWrap);
-        } else {
-          const body = document.createElement('div'); body.className='event-body';
-          body.append(when, titleWrap, where, who);
-          row.append(dom, dot, body);
-        }
-        inner.appendChild(row);
-      });
-      card.appendChild(inner); av.appendChild(card);
+      const dHead = document.createElement('div'); dHead.className='date-header'; dHead.id='date-'+k; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
+      renderEventsList(av, byDate.get(k).sort(byStart), now);
+    });
+
+    // Weather pill update (current)
+    try {
+      const w = await fetchWeather();
+      const cw = w.current_weather, d0 = w.daily;
+      $('#weather-now').textContent = `${wmoIcon(cw.weathercode)} ${Math.round(cw.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%`;
+    } catch { $('#weather-now').textContent = 'weather unavailable'; }
+
+    // Week view
+    renderWeek(now);
+  }
+
+  function weekRange(baseDate, offsetWeeks){
+    const d = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
+    const day = d.getDay(); // 0 Sun..6 Sat
+    const mondayOffset = (day === 0 ? -6 : 1 - day) + (offsetWeeks*7);
+    const mon = new Date(d); mon.setDate(d.getDate() + mondayOffset);
+    const out = [];
+    for (let i=0;i<7;i++){ const x = new Date(mon); x.setDate(mon.getDate()+i); out.push(x); }
+    return out;
+  }
+
+  function renderWeek(now){
+    const days = weekRange(now, weekOffset);
+    $('#week-label').textContent = `Week of ${days[0].toLocaleDateString([], {month:'short', day:'numeric'})}`;
+    const grid = $('#week-grid'); grid.innerHTML = '';
+    const evs = filteredEvents();
+    days.forEach(day => {
+      const key = todayKey(day);
+      const col = document.createElement('div'); col.className='week-col';
+      const h = document.createElement('h4'); h.textContent = day.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'}); col.appendChild(h);
+      const dayEvs = evs.filter(e => e.date === key).sort(byStart);
+      if (!dayEvs.length){
+        const empty = document.createElement('div'); empty.className='sub'; empty.textContent='—'; col.appendChild(empty);
+      } else {
+        dayEvs.forEach(ev => {
+          const row = document.createElement('div'); row.className='event' + (compact?' compact':'');
+          const bar = document.createElement('div'); bar.className='bar'; bar.style.background = domainColor(ev.domain);
+          const title = document.createElement('div'); title.className='title'; title.innerHTML = `<span class="sub">${fmtHM(new Date(ev.start))}–${fmtHM(new Date(ev.end))}</span><br>${sanitize(ev.title)}`;
+          row.append(bar, title);
+          col.appendChild(row);
+        });
+      }
+      grid.appendChild(col);
     });
   }
 
-  // Week grid
-  function renderWeek(){
-    const now = new Date();
-    const base = startOfWeek(addDays(now, 7*WEEK_OFFSET));
-    const end = addDays(base, 6);
-    $('#wk-range').textContent = fmtDate(base) + ' — ' + fmtDate(end);
-    const area = $('#weekbar'); area.innerHTML = '';
-    const days = Array.from({length:7}, (_,i)=> addDays(base, i));
-    const data = filteredEvents();
-    days.forEach(d => {
-      const key = todayKey(d);
-      const col = document.createElement('div'); col.className='daycol';
-      const head = document.createElement('div'); head.className='dayhead';
-      head.innerHTML = `<span>${d.toLocaleDateString([], {weekday:'short'})}</span><span>${d.getDate()} ${d.toLocaleDateString([], {month:'short'})}</span>`;
-      const body = document.createElement('div'); body.className='daybody';
-      data.filter(e => e.date===key).forEach(ev => {
-        const row = document.createElement('div'); row.className='event' + (COMPACT?' compact':'');
-        row.style.background='transparent';
-        row.style.border='1px dashed var(--border)';
-        const dom = document.createElement('div'); dom.className='dombar'; dom.style.background = colorForDomain(ev.domain);
-        const when = document.createElement('div'); when.className='when'; const ds=new Date(ev.start), de=new Date(ev.end); when.textContent = fmtHM(ds)+'–'+fmtHM(de);
-        const tw = document.createElement('div'); tw.className='title-wrap'; tw.innerHTML = '<div class="title2">'+sanitize(ev.title)+' '+(computeMandatory(ev)?'<span class="chip mand">Mandatory</span>':'')+'</div><div class="sub">'+[ev.domain,ev.activity].filter(Boolean).join(' · ')+'</div>';
-        if (COMPACT){ row.append(dom, when, tw); } else { const body2=document.createElement('div'); body2.className='event-body'; body2.append(when, tw); row.append(dom, body2); }
-        body.appendChild(row);
-      });
-      col.append(head, body);
-      area.appendChild(col);
-    });
-  }
-
-  function scrollAllToToday(){
-    const id = 'date-'+todayKey(new Date());
-    const el = document.getElementById(id);
-    if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
-  }
-
-  // Populate domain dropdown
-  function populateDomainFilter(data){
-    const doms = Array.from(new Set(data.map(e => String(e.domain||'').trim()).filter(Boolean))).sort();
-    const sel = document.getElementById('sel-domain');
-    sel.innerHTML = '<option value="ALL">ALL</option>' + doms.map(d=>`<option>${d}</option>`).join('');
-    sel.value = DOMAIN || 'ALL';
-  }
-
-  // CSV parser
+  // ----- CSV/JSON loading -----
   async function parseCSV(text){
     const lines = text.split(/\r?\n/).filter(l => l.length);
     if (!lines.length) return [];
@@ -528,66 +468,26 @@
     return out;
   }
 
-  // Auto-load data (works on http/https; blocked under file:)
-  
-  async function fetchText(url){
-    try {
-      const r = await fetch(url + (url.includes('?')?'&':'?') + 't=' + Date.now(), {cache:'no-store'});
-      if (!r.ok) return {ok:false, status:r.status, url};
-      const txt = await r.text();
-      return {ok:true, text:txt, url};
-    } catch (e){
-      return {ok:false, status:'network', url};
-    }
-  }
-  async function tryAutoLoad(){
-    // Under file://, auto-loading is blocked. Bail with guidance.
-    if (location.protocol === 'file:'){
-      const n=document.getElementById('notice'); if(n) n.innerHTML='Opened as <span class="warn">file://</span>. Use <b>Load Data</b> or run a tiny local server.';
-      return;
-    }
-    const base = location.pathname.endsWith('/') ? location.pathname : location.pathname.replace(/[^\/]+$/, '');
-    const guesses = [
-      'timetable.json', base + 'timetable.json', '/timetable.json', 'docs/timetable.json', base + 'docs/timetable.json',
-      'timetable.csv', base + 'timetable.csv', '/timetable.csv', 'docs/timetable.csv', base + 'docs/timetable.csv'
-    ];
-    let lastErr = null;
-    for (const g of guesses){
-      const res = await fetchText(g);
-      if (res.ok){
-        try{
-          if (g.endsWith('.json')){
-            EVENTS = JSON.parse(res.text);
-          } else {
-            EVENTS = await parseCSV(res.text);
-          }
-          localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
-          populateDomainFilter(EVENTS);
-          try{ renderAll(); }catch(e){}
-          try{ renderToday(); }catch(e){}
-          try{ renderWeek(); }catch(e){}
-          const n=document.getElementById('notice'); if(n) n.textContent = 'Loaded '+g;
-          return;
-        }catch(parseErr){
-          lastErr = 'Parse error for '+g;
-        }
-      } else {
-        lastErr = 'Fetch '+res.url+' → '+res.status;
-      }
-    }
-    const n=document.getElementById('notice');
-    if (n) n.textContent = 'Could not load data. Tried: ' + guesses.join(', ') + (lastErr?(' | Last error: '+lastErr):'');
+  function populateDomainFilter(data){
+    const doms = Array.from(new Set(data.map(e => String(e.domain||'').trim()).filter(Boolean))).sort();
+    const sel = document.getElementById('sel-domain');
+    sel.innerHTML = '<option value="ALL">ALL</option>' + doms.map(d=>`<option>${d}</option>`).join('');
+    sel.value = DOMAIN || 'ALL';
   }
 
+  async function tryAutoLoad(){
+    if (location.protocol === 'file:'){
+      $('#notice').innerHTML = 'Opened as <span class="sub">file://</span>. Auto-loading sibling files is blocked. Use <b>Load Data</b>, or run a local server.';
+      return;
+    }
     try {
       const r = await fetch('timetable.json', {cache:'no-cache'});
       if (r.ok){
-        EVENTS = await r.json(); EVENTS = normalizeAndEnhance(EVENTS); localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+        EVENTS = await r.json();
+        localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
-        try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); }
-        $('#notice').textContent = 'Loaded timetable.json from same folder.';
+        render();
+        $('#notice').textContent = 'Loaded timetable.json';
         return;
       }
     } catch {}
@@ -595,122 +495,165 @@
       const r = await fetch('timetable.csv', {cache:'no-cache'});
       if (r.ok){
         const txt = await r.text();
-        EVENTS = await parseCSV(txt); EVENTS = normalizeAndEnhance(EVENTS); localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+        EVENTS = await parseCSV(txt);
+        localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
-        try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); }
-        $('#notice').textContent = 'Loaded timetable.csv from same folder.';
+        render();
+        $('#notice').textContent = 'Loaded timetable.csv';
         return;
       }
     } catch {}
-    $('#notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found. On GitHub Pages, put those files in the repo root next to index.html.';
+    $('#notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found next to this file.';
   }
 
-  // ICS export
+  // ----- ICS export -----
   function toICS(evts){
     function esc(s){ return String(s||'').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n'); }
-    function dt(v){ const d=new Date(v); const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); const hh=String(d.getHours()).padStart(2,'0'), mm=String(d.getMinutes()).padStart(2,'0'), ss='00'; return `${y}${m}${day}T${hh}${mm}${ss}`; }
+    function dt(v){
+      const d = new Date(v);
+      return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+    }
     const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MEDI2101B//Timetable//EN'];
-    evts.forEach((e,i)=>{ lines.push('BEGIN:VEVENT'); lines.push('UID:'+ (e.start+'_'+i+'@medi2101b')); lines.push('DTSTART:'+dt(e.start)); lines.push('DTEND:'+dt(e.end)); lines.push('SUMMARY:'+esc(e.title)); const desc=[e.domain,e.activity,e.campus,e.venue,e.staff].filter(Boolean).join(' · '); if(desc) lines.push('DESCRIPTION:'+esc(desc)); lines.push('END:VEVENT'); });
-    lines.push('END:VCALENDAR'); return lines.join('\r\n');
+    evts.forEach((e,i)=>{
+      lines.push('BEGIN:VEVENT');
+      lines.push('UID:'+ (e.start+'_'+i+'@medi2101b'));
+      lines.push('DTSTART:'+dt(e.start));
+      lines.push('DTEND:'+dt(e.end));
+      lines.push('SUMMARY:'+esc(e.title));
+      const desc = [e.domain, e.activity, e.campus, e.venue, e.staff].filter(Boolean).join(' · ');
+      if (desc) lines.push('DESCRIPTION:'+esc(desc));
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
   }
 
-  // Notifications
-  function requestNotify(){ if (!('Notification' in window)) { alert('Notifications not supported.'); return; } Notification.requestPermission().then(res => { localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off'); alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied'); }); }
-  function maybeNotify(){ if (localStorage.getItem('medi2101b_notify')!=='on') return; const now = new Date(); const evts = filteredEvents(); evts.forEach(e => { const s = new Date(e.start); const key = e.start + '|' + e.title; const mins = Math.floor((s-now)/60000); if (mins === 10 && !notifiedKeys.has(key)){ notifiedKeys.add(key); try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + s.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); } catch {} } }); }
+  // ----- Notifications -----
+  function requestNotify(){
+    if (!('Notification' in window)) { alert('Notifications not supported.'); return; }
+    Notification.requestPermission().then(res => {
+      localStorage.setItem('medi2101b_notify', res === 'granted' ? 'on' : 'off');
+      alert(res === 'granted' ? 'Notifications enabled' : 'Notifications denied');
+    });
+  }
+  function maybeNotify(){
+    if (localStorage.getItem('medi2101b_notify')!=='on') return;
+    const now = new Date();
+    const evts = filteredEvents();
+    evts.forEach(e => {
+      const s = new Date(e.start);
+      const key = e.start + '|' + e.title;
+      const mins = Math.floor((s-now)/60000);
+      if (mins === 10 && !notifiedKeys.has(key)){
+        notifiedKeys.add(key);
+        try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + s.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); } catch {}
+      }
+    });
+  }
 
-  // Theme / compact state
-  function applyTheme(){ const theme = localStorage.getItem('medi2101b_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark'); const root = document.getElementById('root'); if (theme==='light') root.classList.add('theme-light'); else root.classList.remove('theme-light'); }
-  function toggleTheme(){ const cur = localStorage.getItem('medi2101b_theme') || 'dark'; const next = cur==='dark'?'light':'dark'; localStorage.setItem('medi2101b_theme', next); applyTheme(); }
+  // ----- File handling -----
+  async function handleFile(file){
+    const text = await file.text();
+    if (file.name.endsWith('.json')){
+      EVENTS = JSON.parse(text);
+    } else if (file.name.endsWith('.csv')){
+      EVENTS = await parseCSV(text);
+    } else {
+      alert('Use timetable.json or timetable.csv'); return;
+    }
+    localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+    populateDomainFilter(EVENTS);
+    render();
+    $('#notice').textContent = `Loaded ${file.name} (cached).`;
+  }
 
+  // ----- UI wiring -----
   document.addEventListener('DOMContentLoaded', ()=>{
-    const on=(id,ev,fn)=>{ const el=document.getElementById(id); if(el) el.addEventListener(ev,fn); };
-    // Apply theme
-    applyTheme();
+    // Theme
+    setTheme(theme());
 
     // Tabs
     $$('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
       const name = btn.dataset.tab;
       $$('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
       $('#today-view').classList.toggle('hidden', name!=='today');
-      $('#week-view').classList.toggle('hidden', name!=='week');
+      $('#today-banners').classList.toggle('hidden', name!=='today');
       $('#all-view').classList.toggle('hidden', name!=='all');
-      if (name==='all'){ setTimeout(scrollAllToToday, 30); }
-      if (name==='week'){ renderWeek(); }
+      $('#week-view').classList.toggle('hidden', name!=='week');
+      if (name==='all'){ setTimeout(()=>{ const id='date-'+todayKey(new Date()); const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); }, 30); }
     }));
 
-    // Week nav
-    on('wk-prev','click', ()=>{ WEEK_OFFSET--; renderWeek(); });
-    on('wk-next','click', ()=>{ WEEK_OFFSET++; renderWeek(); });
-    on('wk-today','click', ()=>{ WEEK_OFFSET=0; renderWeek(); });
-
     // Settings
-    on('btn-settings','click', ()=>{ const mb = document.getElementById('modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false'); const p=Object.assign(defaultPrefs(), loadPrefs()||{}); $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label; $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf; });
-    on('btn-save','click', ()=>{ const prefs = { campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value, home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10) }; savePrefs(prefs); document.getElementById('modal-backdrop').style.display='none'; renderToday(); renderAll(); renderWeek(); });
-    on('btn-close','click', ()=>{ document.getElementById('modal-backdrop').style.display='none'; });
-    on('btn-x','click', ()=>{ document.getElementById('modal-backdrop').style.display='none'; });
-    on('modal-backdrop','click', (e)=>{ if (e.target.id==='modal-backdrop'){ document.getElementById('modal-backdrop').style.display='none'; }});
-    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape'){ document.getElementById('modal-backdrop').style.display='none'; }});
+    $('#btn-settings').addEventListener('click', ()=>{
+      const mb = $('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
+      const p=Object.assign(defaultPrefs(), loadPrefs()||{});
+      $('#sel-campus').value=p.campus; $('#sel-group').value=p.group; $('#txt-name').value=p.label;
+      $('#txt-home').value=p.home; $('#txt-campus-st').value=p.campusStation; $('#num-arrive').value=p.arriveBuf; $('#num-leave').value=p.leaveBuf;
+    });
+    function closeModal(){ const mb=$('#modal-backdrop'); mb.style.display='none'; mb.setAttribute('aria-hidden','true'); }
+    $('#btn-save').addEventListener('click', ()=>{ 
+      const p={ campus:$('#sel-campus').value, group:$('#sel-group').value, label:$('#txt-name').value,
+                home:$('#txt-home').value, campusStation:$('#txt-campus-st').value, arriveBuf:parseInt($('#num-arrive').value||'15',10), leaveBuf:parseInt($('#num-leave').value||'10',10)};
+      savePrefs(p); closeModal(); render();
+    });
+    $('#btn-close').addEventListener('click', closeModal);
+    $('#btn-x').addEventListener('click', closeModal);
+    $('#modal-backdrop').addEventListener('click', (e)=>{ if (e.target.id==='modal-backdrop'){ if (loadPrefs()) closeModal(); }});
+    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape'){ if (loadPrefs()) closeModal(); }});
 
     // Load data
-    on('btn-load','click', ()=>{ const f=document.getElementById('file-input'); if(f) f.click(); });
-    on('file-input','change', e=>{ const f=e.target.files?.[0]; if (!f) return; f.text().then(async text=>{ if (f.name.endsWith('.json')){ EVENTS = JSON.parse(text); EVENTS = normalizeAndEnhance(EVENTS); } else if (f.name.endsWith('.csv')){ EVENTS = await parseCSV(text); EVENTS = normalizeAndEnhance(EVENTS); } else { alert('Use timetable.json or timetable.csv'); return; } localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS)); populateDomainFilter(EVENTS); try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); } $('#notice').textContent = `Loaded ${f.name} (cached).`; }); });
+    $('#btn-load').addEventListener('click', ()=>$('#file-input').click());
+    $('#file-input').addEventListener('change', e=>{ const f=e.target.files?.[0]; if (f) handleFile(f); });
     const dz = $('#dropzone');
     ;['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='var(--accent)';}));
     ;['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault(); dz.style.borderColor='var(--border)';}));
-    dz.addEventListener('drop', async e=>{ const f = e.dataTransfer.files?.[0]; if (f){ const text = await f.text(); if (f.name.endsWith('.json')) EVENTS = JSON.parse(text); EVENTS = normalizeAndEnhance(EVENTS); else if (f.name.endsWith('.csv')) EVENTS = await parseCSV(text); EVENTS = normalizeAndEnhance(EVENTS); else return alert('Use timetable.json or timetable.csv'); localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS)); populateDomainFilter(EVENTS); try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); } $('#notice').textContent = `Loaded ${f.name} (cached).`; }});
+    dz.addEventListener('drop', async e=>{ const f = e.dataTransfer.files?.[0]; if (f) handleFile(f); });
 
     // Domain filter
-    on('sel-domain','change', (e)=>{ DOMAIN = e.target.value; try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); } });
+    $('#sel-domain').addEventListener('change', (e)=>{ DOMAIN = e.target.value; render(); });
 
     // Jump
-    on('btn-jump','click', scrollAllToToday);
+    $('#btn-jump').addEventListener('click', ()=>{ const id='date-'+todayKey(new Date()); const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
 
     // ICS
-    on('btn-ics','click', ()=>{ const ics = toICS(filteredEvents()); const blob = new Blob([ics], {type:'text/calendar'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'medi2101b_filtered.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 500); });
+    $('#btn-ics').addEventListener('click', ()=>{
+      const ics = toICS(filteredEvents());
+      const blob = new Blob([ics], {type:'text/calendar'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'medi2101b_filtered.ics';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 500);
+    });
 
     // Notifications
-    on('btn-bell','click', requestNotify);
-
-    // Only mandatory
-    const ONLYMAND = localStorage.getItem('medi2101b_onlymand')==='1';
-    $('#toggle-mand').checked = ONLYMAND;
-    $('#toggle-mand').addEventListener('change', (e)=>{ localStorage.setItem('medi2101b_onlymand', e.target.checked?'1':'0'); try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); } });
+    $('#btn-bell').addEventListener('click', requestNotify);
 
     // Compact
-    COMPACT = localStorage.getItem('medi2101b_compact') === '1';
-    const tc=document.getElementById('toggle-compact'); if(tc) tc.checked = COMPACT;
-    on('toggle-compact','change', (e)=>{ COMPACT = e.target.checked; localStorage.setItem('medi2101b_compact', COMPACT?'1':'0'); try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); } });
+    $('#btn-compact').addEventListener('click', ()=>{ compact = !compact; $('#btn-compact').textContent = compact ? 'Expanded' : 'Compact'; render(); });
 
-    // Theme
-    on('btn-theme','click', toggleTheme);
+    // Theme toggle
+    $('#btn-theme').addEventListener('click', ()=>{ const t = theme()==='dark' ? 'light':'dark'; setTheme(t); render(); });
+
+    // Week nav
+    $('#btn-prev-week').addEventListener('click', ()=>{ weekOffset--; renderWeek(new Date()); });
+    $('#btn-next-week').addEventListener('click', ()=>{ weekOffset++; renderWeek(new Date()); });
 
     // Restore cached data if present
     const cached = localStorage.getItem('medi2101b_data');
-    if (cached){ try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {} }
+    if (cached){
+      try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {}
+    }
 
-    // First-run prefs: optional modal
-    if (!loadPrefs()) { const mb = document.getElementById('modal-backdrop'); mb.style.display='flex'; }
+    // First-run prefs: open modal but allow closing if they don't want to set yet
+    if (!loadPrefs()) { const mb=$('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false'); }
 
-    // Auto-load same-folder files (works when served via http://)
+    // Auto-load same-folder files (works when served via http:///https://)
     tryAutoLoad();
 
-    // Initial renders
-    try{ renderAll(); }catch(e){ console.error('renderAll failed', e); }
-    try{ renderToday(); }catch(e){ console.error('renderToday failed', e); }
-    try{ renderWeek(); }catch(e){ console.error('renderWeek failed', e); }
-    setInterval(()=>{ try{ renderToday(); maybeNotify(); }catch(e){ console.error('tick failed', e); } }, 60*1000);
+    // Render & tick
+    render();
+    setInterval(()=>{ render(); maybeNotify(); }, 60*1000);
     document.getElementById('nowstr').textContent = new Date().toLocaleString();
   });
 </script>
