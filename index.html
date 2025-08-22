@@ -9,7 +9,7 @@
     --bg-dark:#0b0c10; --card-dark:#121319; --text-dark:#e6e8eb; --muted-dark:#9aa1ac; --border-dark:#222534; --chip-dark:#1b1e27;
     --bg-light:#f7f8fa; --card-light:#ffffff; --text-light:#0c1220; --muted-light:#5d6470; --border-light:#dfe3ea; --chip-light:#eff2f6;
 
-    --good:#2ecc71; --warn:#f1c40f; --bad:#e74c3c; --accent:#3aa0ff; --accent2:#7c4dff;
+    --good:#2ecc71; --warn:#f1c40f; --bad:#e74c3c; --accent:#3aa0ff;
 
     --anatomy:#3b82f6;    /* blue */
     --pbl:#10b981;        /* green */
@@ -53,14 +53,8 @@
   .past { opacity: .55; }
   .hidden { display:none; }
   .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #6b7280; border-bottom: 1px solid var(--border); }
-.date-header.highlight { background: rgba(58,160,255,.12); color: var(--text); border-left: 3px solid var(--accent); padding-left: 6px; border-radius: 6px; }
+  .date-header.highlight { background: rgba(58,160,255,.12); color: var(--text); border-left: 3px solid var(--accent); padding-left: 6px; border-radius: 6px; }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
-  details.digest { grid-column: span 12; }
-  details.digest > summary { list-style: none; background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 10px 12px; cursor: pointer; display:flex; align-items:center; gap:10px; }
-  details.digest[open] > summary { outline: 2px solid rgba(58,160,255,.35); }
-  .digest-body { background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 12px; margin-top: 8px; }
-  .digest-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
-
 
   /* Countdown banner */
   .banner { grid-column: span 12; border-radius: 12px; padding: 12px 14px; display:flex; align-items:center; gap:10px; border:1px solid var(--border); }
@@ -82,6 +76,13 @@
   select:focus, input:focus { outline: 2px solid var(--accent); }
   input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   input[type=number] { -moz-appearance: textfield; }
+
+  /* Daily brief */
+  details.digest { grid-column: span 12; }
+  details.digest > summary { list-style: none; background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 10px 12px; cursor: pointer; display:flex; align-items:center; gap:10px; }
+  details.digest[open] > summary { outline: 2px solid rgba(58,160,255,.35); }
+  .digest-body { background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 12px; margin-top: 8px; }
+  .digest-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
 
   footer { position:fixed; bottom:0; left:0; right:0; background:linear-gradient(transparent, var(--bg) 20%, var(--bg)); padding:10px 12px; }
   .foot-inner { max-width:1200px; margin:0 auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
@@ -106,6 +107,7 @@
       <button class="btn" id="btn-theme">Light/Dark</button>
       <span class="pill">Domain: <select id="sel-domain"><option value="ALL">ALL</option></select></span>
       <span class="pill" id="weather-pill">Weather: <span id="weather-now">loading…</span></span>
+      <span class="pill" id="debug-pill" style="display:none"></span>
     </div>
   </header>
 
@@ -190,6 +192,12 @@
 <input type="file" id="file-input" accept=".json,.csv" class="hidden"/>
 
 <script>
+  // --- Simple debug helper ---
+  function debug(msg){
+    const el = document.getElementById('debug-pill'); el.style.display='inline-flex'; el.textContent = String(msg);
+  }
+  window.addEventListener('error', e => { debug('JS error: '+e.message); });
+
   // --- State & prefs ---
   let EVENTS = [];
   let DOMAIN = "ALL";
@@ -217,19 +225,22 @@
   const $$ = s => Array.from(document.querySelectorAll(s));
   const sanitize = s => String(s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
   const pad = n => String(n).padStart(2,'0');
-  const toDate = s => {
+  function toDate(s){
     if (s instanceof Date) return s;
-    const m = String(s||'').match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2})(?::(\\d{2}))?$/);
+    // Parse "YYYY-MM-DDTHH:mm" as local time
+    const m = String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
     if (m) return new Date(Number(m[1]), Number(m[2])-1, Number(m[3]), Number(m[4]), Number(m[5]), m[6]?Number(m[6]):0);
     return new Date(s);
-  };
+  }
 
   function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   function fmtDate(d){ return d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'}); }
   function byStart(a,b){ return toDate(a.start) - toDate(b.start); }
   function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
   function statusFor(ev, now){ const s=toDate(ev.start), e=toDate(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
-  function categoryColor(ev){ const d=String(ev.domain||'').toLowerCase(); const a=String(ev.activity||'').toLowerCase();
+  function categoryColor(ev){
+    const d=String(ev.domain||'').toLowerCase();
+    const a=String(ev.activity||'').toLowerCase();
     if (d in DOMAIN_COLORS) return DOMAIN_COLORS[d];
     if (a.includes('lecture')) return DOMAIN_COLORS.lecture;
     if (d.includes('anatomy')) return DOMAIN_COLORS.anatomy;
@@ -259,88 +270,7 @@
     return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t);
   }
 
-  
-  function digestKey(day){ return 'medi_digest_dismiss_'+day; }
-  function openKey(day){ return 'medi_digest_open_'+day; }
-
-  async function renderDailyBrief(container, todayKeyStr){
-    if (localStorage.getItem(digestKey(todayKeyStr)) === '1') return; // dismissed for today
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
-    const inPerson = todays.filter(ev => !isRemote(ev));
-    // Base summary text
-    const countStr = todays.length ? `${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}` : 'No sessions scheduled';
-
-    // Create details + summary
-    const det = document.createElement('details'); det.className = 'digest';
-    det.open = localStorage.getItem(openKey(todayKeyStr)) !== '0'; // default open unless user collapsed
-    const sum = document.createElement('summary');
-    sum.innerHTML = `<strong>Daily brief</strong> · ${countStr} · <span id="digest-weather">loading weather…</span>`;
-    det.appendChild(sum);
-
-    // Build body
-    const body = document.createElement('div'); body.className = 'digest-body';
-    // compute first/last, arrive/leave
-    let first=null, last=null;
-    if (todays.length){ first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]); last = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]); }
-    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
-    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
-
-    body.innerHTML = `
-      <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:10px;margin-top:6px">
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">First</div>
-          <div class="title2">${first?fmtHM(toDate(first.start)):'—'}</div>
-          <div class="sub">${first?sanitize(first.title):'—'}</div>
-        </div>
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">Last</div>
-          <div class="title2">${last?fmtHM(toDate(last.end)):'—'}</div>
-          <div class="sub">${last?sanitize(last.title):'—'}</div>
-        </div>
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">Arrive by</div>
-          <div class="title2">${arriveBy?fmtHM(arriveBy):'—'}</div>
-          <div class="sub">in‑person only</div>
-        </div>
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">Leave after</div>
-          <div class="title2">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
-          <div class="sub">in‑person only</div>
-        </div>
-      </div>
-      <div class="sub" style="margin-top:8px">Transit: 
-        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
-        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
-      </div>
-      <div class="digest-actions">
-        <button class="btn" id="btn-dismiss-digest">Dismiss today</button>
-      </div>
-    `;
-    det.appendChild(body);
-    container.appendChild(det);
-
-    // Persist open/close
-    det.addEventListener('toggle', ()=>{ localStorage.setItem(openKey(todayKeyStr), det.open ? '1':'0'); });
-
-    // Dismiss handler
-    body.querySelector('#btn-dismiss-digest').addEventListener('click', ()=>{
-      localStorage.setItem(digestKey(todayKeyStr), '1');
-      det.remove();
-    });
-
-    // Weather async
-    try {
-      const w = await fetchWeather();
-      const cw = w.current_weather, d0 = w.daily;
-      const wStr = `${wmoIcon(cw.weathercode)} ${Math.round(cw.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%`;
-      det.querySelector('#digest-weather').textContent = wStr;
-    } catch {
-      det.querySelector('#digest-weather').textContent = 'weather unavailable';
-    }
-  }
-
-  // Weather via Open-Meteo
+  // Weather via Open-Meteo (Gosford)
   async function fetchWeather(){
     try{
       const cache = localStorage.getItem('medi_weather_cache');
@@ -349,16 +279,93 @@
         if (Date.now() - obj.ts < 30*60*1000) return obj.data;
       }
     }catch{}
-    const lat = -33.425, lon = 151.341;
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
-    const r = await fetch(url);
-    const data = await r.json();
-    localStorage.setItem('medi_weather_cache', JSON.stringify({ts:Date.now(), data}));
-    return data;
+    try{
+      const lat = -33.425, lon = 151.341;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('weather http '+r.status);
+      const data = await r.json();
+      localStorage.setItem('medi_weather_cache', JSON.stringify({ts:Date.now(), data}));
+      return data;
+    }catch(e){
+      debug('weather fail'); throw e;
+    }
   }
   function wmoIcon(code){ const m={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',66:'🌧️',67:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌦️',81:'🌧️',82:'🌧️',95:'⛈️',96:'⛈️',99:'⛈️'}; return m[code]||'🌡️'; }
 
-  
+  // Daily brief (collapsible)
+  function digestKey(day){ return 'medi_digest_dismiss_'+day; }
+  function openKey(day){ return 'medi_digest_open_'+day; }
+  async function renderDailyBrief(container, todayKeyStr){
+    try{
+      if (localStorage.getItem(digestKey(todayKeyStr)) === '1') return;
+      const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+      const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
+      const inPerson = todays.filter(ev => !isRemote(ev));
+      const countStr = todays.length ? `${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}` : 'No sessions scheduled';
+
+      const det = document.createElement('details'); det.className = 'digest';
+      det.open = localStorage.getItem(openKey(todayKeyStr)) !== '0'; // open by default
+      const sum = document.createElement('summary');
+      sum.innerHTML = `<strong>${prefs.name ? sanitize(prefs.name)+',' : ''} Daily brief</strong> · ${countStr} · <span id="digest-weather">loading weather…</span>`;
+      det.appendChild(sum);
+
+      const body = document.createElement('div'); body.className = 'digest-body';
+      let first=null, last=null;
+      if (todays.length){ first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]); last = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]); }
+      const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+      const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+
+      body.innerHTML = `
+        <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:10px;margin-top:6px">
+          <div class="card" style="grid-column:span 6; padding:10px">
+            <div class="sub">First</div>
+            <div class="title2">${first?fmtHM(toDate(first.start)):'—'}</div>
+            <div class="sub">${first?sanitize(first.title):'—'}</div>
+          </div>
+          <div class="card" style="grid-column:span 6; padding:10px">
+            <div class="sub">Last</div>
+            <div class="title2">${last?fmtHM(toDate(last.end)):'—'}</div>
+            <div class="sub">${last?sanitize(last.title):'—'}</div>
+          </div>
+          <div class="card" style="grid-column:span 6; padding:10px">
+            <div class="sub">Arrive by</div>
+            <div class="title2">${arriveBy?fmtHM(arriveBy):'—'}</div>
+            <div class="sub">in‑person only</div>
+          </div>
+          <div class="card" style="grid-column:span 6; padding:10px">
+            <div class="sub">Leave after</div>
+            <div class="title2">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
+            <div class="sub">in‑person only</div>
+          </div>
+        </div>
+        <div class="sub" style="margin-top:8px">
+          Transit: <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
+          <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
+        </div>
+        <div class="digest-actions">
+          <button class="btn" id="btn-dismiss-digest">Dismiss today</button>
+        </div>
+      `;
+      det.appendChild(body);
+      container.appendChild(det);
+
+      det.addEventListener('toggle', ()=>{ localStorage.setItem(openKey(todayKeyStr), det.open ? '1':'0'); });
+      body.querySelector('#btn-dismiss-digest').addEventListener('click', ()=>{ localStorage.setItem(digestKey(todayKeyStr), '1'); det.remove(); });
+
+      try {
+        const w = await fetchWeather();
+        const cw = w.current_weather, d0 = w.daily;
+        const wStr = `${wmoIcon(cw.weathercode)} ${Math.round(cw.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%`;
+        det.querySelector('#digest-weather').textContent = wStr;
+      } catch {
+        det.querySelector('#digest-weather').textContent = 'weather unavailable';
+      }
+    }catch(e){
+      debug('digest fail');
+    }
+  }
+
   function renderCountdownBanner(container, ev, now){
     const st = toDate(ev.start), en = toDate(ev.end);
     const live = now>=st && now<en;
@@ -367,59 +374,6 @@
     const banner = document.createElement('div'); banner.className = 'banner ' + (live?'live':'next');
     banner.innerHTML = `<strong>${live?'Live now':'Next'}:</strong> ${sanitize(ev.title)} · ${range} <span class="sub">(${live?'ends in':'starts in'} ${mins} min)</span>`;
     container.appendChild(banner);
-  }
-
-  
-  function renderMorningDigest(container, todayKeyStr, weather){
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
-    const inPerson = todays.filter(ev => !isRemote(ev));
-    const wNow = weather?.current_weather, d0 = weather?.daily;
-    const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
-    const heading = prefs.name ? `${sanitize(prefs.name)}, here’s your day` : `Today at a glance`;
-
-    // compute first/last safely
-    let first = null, last = null;
-    if (todays.length){
-      first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]);
-      last  = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]);
-    }
-    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
-    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
-
-    const card = document.createElement('div'); card.className='card';
-    card.innerHTML = `
-      <div class="title2">${heading}</div>
-      <div class="sub">${todays.length? `${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}` : 'No sessions scheduled'}</div>
-      <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:10px;margin-top:6px">
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">First</div>
-          <div class="title2">${first?fmtHM(toDate(first.start)):'—'}</div>
-          <div class="sub">${first?sanitize(first.title):'—'}</div>
-        </div>
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">Last</div>
-          <div class="title2">${last?fmtHM(toDate(last.end)):'—'}</div>
-          <div class="sub">${last?sanitize(last.title):'—'}</div>
-        </div>
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">Arrive by</div>
-          <div class="title2">${arriveBy?fmtHM(arriveBy):'—'}</div>
-          <div class="sub">in‑person only</div>
-        </div>
-        <div class="card" style="grid-column:span 6; padding:10px">
-          <div class="sub">Leave after</div>
-          <div class="title2">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
-          <div class="sub">in‑person only</div>
-        </div>
-      </div>
-      <div class="sub" style="margin-top:8px">Gosford weather: ${wStr}</div>
-      <div style="margin-top:8px">
-        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
-        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
-      </div>
-    `;
-    container.appendChild(card);
   }
 
   function renderEventsList(container, evs, now){
@@ -447,51 +401,67 @@
     return `${base}&travelmode=transit&origin=${urlEncode(origin)}&destination=${urlEncode(dest)}&transit_mode=train`;
   }
 
-  async function render(){
+  function smartScrollAll(){
     const now = new Date();
-    $('#nowstr').textContent = now.toLocaleString();
+    const today = todayKey(now);
+    const todayEl = document.getElementById('date-'+today);
+    if (todayEl){ todayEl.scrollIntoView({behavior:'smooth', block:'start'}); todayEl.classList.add('highlight'); setTimeout(()=>todayEl.classList.remove('highlight'), 1600); return; }
+    const dates = Array.from(new Set(filteredEvents().map(e=>e.date))).sort();
+    const next = dates.find(d => d >= today) || dates[dates.length-1];
+    const el = document.getElementById('date-'+next);
+    if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('highlight'); setTimeout(()=>el.classList.remove('highlight'), 1600); }
+  }
 
-    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-    $('#filterstr').textContent = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
-    $('#banner').textContent = prefs.label || '';
+  async function render(){
+    try{
+      const now = new Date();
+      $('#nowstr').textContent = now.toLocaleString();
 
-    const filtered = filteredEvents();
+      const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+      $('#filterstr').textContent = `${prefs.campus} · ${prefs.group}` + (prefs.label ? ` · ${prefs.label}` : '') + (DOMAIN!=='ALL' ? ` · ${DOMAIN}` : '');
+      $('#banner').textContent = prefs.label || '';
 
-    // Countdown
-    const banners = $('#today-banners'); banners.innerHTML = '';
-    const next = computeNext(filtered, now);
-    if (next){ renderCountdownBanner(banners, next, now); }
+      const filtered = filteredEvents();
 
-    // Morning digest collapsible
-    try { await renderDailyBrief(banners, today); } catch(e){ console.warn('digest error', e); }
+      // Countdown
+      const banners = $('#today-banners'); banners.innerHTML = '';
+      const next = computeNext(filtered, now);
+      if (next){ renderCountdownBanner(banners, next, now); }
 
-    // Today
-    const tv = $('#today-view'); tv.innerHTML = '';
-    const todays = filtered.filter(ev => ev.date === today);
-    if (!todays.length){
-      const d = document.createElement('div'); d.className='card'; d.innerHTML = '<div class="sub">No events today for the current filters.</div>'; tv.appendChild(d);
-    } else {
-      renderEventsList(tv, todays, now);
+      // Daily brief (always rendered unless dismissed for the day)
+      const today = todayKey(now);
+      await renderDailyBrief(banners, today);
+
+      // Today
+      const tv = $('#today-view'); tv.innerHTML = '';
+      const todays = filtered.filter(ev => ev.date === today);
+      if (!todays.length){
+        const d = document.createElement('div'); d.className='card'; d.innerHTML = '<div class="sub">No events today for the current filters.</div>'; tv.appendChild(d);
+      } else {
+        renderEventsList(tv, todays, now);
+      }
+
+      // All
+      const av = $('#all-view'); av.innerHTML = '';
+      const byDate = new Map();
+      filtered.forEach(ev => { if(!byDate.has(ev.date)) byDate.set(ev.date, []); byDate.get(ev.date).push(ev); });
+      [...byDate.keys()].sort().forEach(k => {
+        const dHead = document.createElement('div'); dHead.className='date-header'; dHead.id='date-'+k; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
+        renderEventsList(av, byDate.get(k).sort(byStart), now);
+      });
+
+      // Weather pill
+      try {
+        const w = await fetchWeather();
+        const cw = w.current_weather, d0 = w.daily;
+        $('#weather-now').textContent = `${wmoIcon(cw.weathercode)} ${Math.round(cw.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%`;
+      } catch { $('#weather-now').textContent = 'weather unavailable'; }
+
+      // Week view
+      renderWeek(now);
+    }catch(e){
+      debug('render fail');
     }
-
-    // All
-    const av = $('#all-view'); av.innerHTML = '';
-    const byDate = new Map();
-    filtered.forEach(ev => { if(!byDate.has(ev.date)) byDate.set(ev.date, []); byDate.get(ev.date).push(ev); });
-    [...byDate.keys()].sort().forEach(k => {
-      const dHead = document.createElement('div'); dHead.className='date-header'; dHead.id='date-'+k; dHead.textContent = fmtDate(new Date(k+'T00:00')); av.appendChild(dHead);
-      renderEventsList(av, byDate.get(k).sort(byStart), now);
-    });
-
-    // Weather pill
-    try {
-      const w = await fetchWeather();
-      const cw = w.current_weather, d0 = w.daily;
-      $('#weather-now').textContent = `${wmoIcon(cw.weathercode)} ${Math.round(cw.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%`;
-    } catch { $('#weather-now').textContent = 'weather unavailable'; }
-
-    // Week view
-    renderWeek(now);
   }
 
   function weekRange(baseDate, offsetWeeks){
@@ -527,35 +497,21 @@
     });
   }
 
-
-  function smartScrollAll(){
-    // Find today's header; if not found, go to the next future date with events; otherwise last date
-    const now = new Date();
-    const today = todayKey(now);
-    const todayEl = document.getElementById('date-'+today);
-    if (todayEl){ todayEl.scrollIntoView({behavior:'smooth', block:'start'}); todayEl.classList.add('highlight'); setTimeout(()=>todayEl.classList.remove('highlight'), 1600); return; }
-    // Build sorted unique dates from events
-    const dates = Array.from(new Set(filteredEvents().map(e=>e.date))).sort();
-    const next = dates.find(d => d >= today) || dates[dates.length-1];
-    const el = document.getElementById('date-'+next);
-    if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('highlight'); setTimeout(()=>el.classList.remove('highlight'), 1600); }
-  }
-
   // Data load (JSON/CSV)
   async function parseCSV(text){
-    // basic CSV (no quoted commas). Use JSON for complex fields.
-    const lines = text.split(/\\r?\\n/).filter(l => l.length);
+    const lines = text.split(/\r?\n/).filter(l => l.length);
     if (!lines.length) return [];
     const headers = lines[0].split(',').map(s=>s.trim());
     const idx = Object.fromEntries(headers.map((h,i)=>[h,i]));
     const out = [];
     for (let i=1;i<lines.length;i++){
       const row = lines[i].split(',');
-      const g = (row[idx['groups']]||'').split(';').map(s=>s.trim()).filter(Boolean);
+      function g(h){ return row[idx[h]] ?? ''; }
+      const groups = String(g('groups')||'').split(';').map(s=>s.trim()).filter(Boolean);
       out.push({
-        date: row[idx['date']], start: row[idx['start']], end: row[idx['end']], title: row[idx['title']],
-        domain: row[idx['domain']], activity: row[idx['activity']], campus: row[idx['campus']],
-        groups: g.length?g:['ALL'], venue: row[idx['venue']], staff: row[idx['staff']]
+        date: g('date'), start: g('start'), end: g('end'), title: g('title'),
+        domain: g('domain'), activity: g('activity'), campus: g('campus'),
+        groups: groups.length?groups:['ALL'], venue: g('venue'), staff: g('staff')
       });
     }
     return out;
@@ -570,8 +526,8 @@
 
   async function tryAutoLoad(){
     if (location.protocol === 'file:'){
-      $('#notice').innerHTML = 'Opened as <span class="sub">file://</span>. Auto-loading sibling files is blocked by browsers. Use <b>Load Data</b>, or run a local server.';
-      return; // keep, to avoid fetch failures
+      document.getElementById('notice').innerHTML = 'Opened as <span class="sub">file://</span>. Auto-loading sibling files is blocked by browsers. Use <b>Load Data</b>, or run a local server.';
+      return;
     }
     try {
       const r = await fetch('timetable.json', {cache:'no-cache'});
@@ -580,10 +536,10 @@
         localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
         render();
-        $('#notice').textContent = 'Loaded timetable.json';
+        document.getElementById('notice').textContent = 'Loaded timetable.json';
         return;
       }
-    } catch {}
+    } catch(e) { debug('fetch json fail'); }
     try {
       const r = await fetch('timetable.csv', {cache:'no-cache'});
       if (r.ok){
@@ -592,20 +548,20 @@
         localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
         populateDomainFilter(EVENTS);
         render();
-        $('#notice').textContent = 'Loaded timetable.csv';
+        document.getElementById('notice').textContent = 'Loaded timetable.csv';
         return;
       }
-    } catch {}
-    $('#notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found next to this file.';
+    } catch(e) { debug('fetch csv fail'); }
+    document.getElementById('notice').innerHTML = 'No <b>timetable.json</b> or <b>timetable.csv</b> found next to this file.';
   }
 
   // ICS export
   function toICS(evts){
-    function esc(s){ return String(s||'').replace(/([,;])/g, '\\\\$1').replace(/\\n/g, '\\\\n'); }
+    function esc(s){ return String(s||'').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n'); }
     function dt(v){ const d=toDate(v); return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`; }
     const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MEDI2101B//Timetable//EN'];
     evts.forEach((e,i)=>{ lines.push('BEGIN:VEVENT'); lines.push('UID:'+(e.start+'_'+i+'@medi2101b')); lines.push('DTSTART:'+dt(e.start)); lines.push('DTEND:'+dt(e.end)); lines.push('SUMMARY:'+esc(e.title)); const desc=[e.domain,e.activity,e.campus,e.venue,e.staff].filter(Boolean).join(' · '); if(desc) lines.push('DESCRIPTION:'+esc(desc)); lines.push('END:VEVENT'); });
-    lines.push('END:VCALENDAR'); return lines.join('\\r\\n');
+    lines.push('END:VCALENDAR'); return lines.join('\r\n');
   }
 
   // Notifications
@@ -614,14 +570,16 @@
 
   // File handling
   async function handleFile(file){
-    const text = await file.text();
-    if (file.name.endsWith('.json')){ EVENTS = JSON.parse(text); }
-    else if (file.name.endsWith('.csv')){ EVENTS = await parseCSV(text); }
-    else { alert('Use timetable.json or timetable.csv'); return; }
-    localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
-    populateDomainFilter(EVENTS);
-    render();
-    $('#notice').textContent = `Loaded ${file.name} (cached).`;
+    try{
+      const text = await file.text();
+      if (file.name.endsWith('.json')){ EVENTS = JSON.parse(text); }
+      else if (file.name.endsWith('.csv')){ EVENTS = await parseCSV(text); }
+      else { alert('Use timetable.json or timetable.csv'); return; }
+      localStorage.setItem('medi2101b_data', JSON.stringify(EVENTS));
+      populateDomainFilter(EVENTS);
+      render();
+      document.getElementById('notice').textContent = `Loaded ${file.name} (cached).`;
+    }catch(e){ debug('load file fail'); }
   }
 
   document.addEventListener('DOMContentLoaded', ()=>{
@@ -693,7 +651,7 @@
 
     // Restore cached events
     const cached = localStorage.getItem('medi2101b_data');
-    if (cached){ try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch {} }
+    if (cached){ try { EVENTS = JSON.parse(cached); populateDomainFilter(EVENTS); } catch { debug('cache parse fail'); } }
 
     // First-run prefs
     if (!loadPrefs()) { const mb=$('#modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false'); }
