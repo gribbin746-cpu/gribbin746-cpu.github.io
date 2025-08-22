@@ -55,6 +55,12 @@
   .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #6b7280; border-bottom: 1px solid var(--border); }
 .date-header.highlight { background: rgba(58,160,255,.12); color: var(--text); border-left: 3px solid var(--accent); padding-left: 6px; border-radius: 6px; }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
+  details.digest { grid-column: span 12; }
+  details.digest > summary { list-style: none; background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 10px 12px; cursor: pointer; display:flex; align-items:center; gap:10px; }
+  details.digest[open] > summary { outline: 2px solid rgba(58,160,255,.35); }
+  .digest-body { background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 12px; margin-top: 8px; }
+  .digest-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
+
 
   /* Countdown banner */
   .banner { grid-column: span 12; border-radius: 12px; padding: 12px 14px; display:flex; align-items:center; gap:10px; border:1px solid var(--border); }
@@ -253,6 +259,87 @@
     return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t);
   }
 
+  
+  function digestKey(day){ return 'medi_digest_dismiss_'+day; }
+  function openKey(day){ return 'medi_digest_open_'+day; }
+
+  async function renderDailyBrief(container, todayKeyStr){
+    if (localStorage.getItem(digestKey(todayKeyStr)) === '1') return; // dismissed for today
+    const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
+    const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
+    const inPerson = todays.filter(ev => !isRemote(ev));
+    // Base summary text
+    const countStr = todays.length ? `${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}` : 'No sessions scheduled';
+
+    // Create details + summary
+    const det = document.createElement('details'); det.className = 'digest';
+    det.open = localStorage.getItem(openKey(todayKeyStr)) !== '0'; // default open unless user collapsed
+    const sum = document.createElement('summary');
+    sum.innerHTML = `<strong>Daily brief</strong> · ${countStr} · <span id="digest-weather">loading weather…</span>`;
+    det.appendChild(sum);
+
+    // Build body
+    const body = document.createElement('div'); body.className = 'digest-body';
+    // compute first/last, arrive/leave
+    let first=null, last=null;
+    if (todays.length){ first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]); last = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]); }
+    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+
+    body.innerHTML = `
+      <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:10px;margin-top:6px">
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">First</div>
+          <div class="title2">${first?fmtHM(toDate(first.start)):'—'}</div>
+          <div class="sub">${first?sanitize(first.title):'—'}</div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">Last</div>
+          <div class="title2">${last?fmtHM(toDate(last.end)):'—'}</div>
+          <div class="sub">${last?sanitize(last.title):'—'}</div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">Arrive by</div>
+          <div class="title2">${arriveBy?fmtHM(arriveBy):'—'}</div>
+          <div class="sub">in‑person only</div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:10px">
+          <div class="sub">Leave after</div>
+          <div class="title2">${leaveAfter?fmtHM(leaveAfter):'—'}</div>
+          <div class="sub">in‑person only</div>
+        </div>
+      </div>
+      <div class="sub" style="margin-top:8px">Transit: 
+        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation)}" target="_blank" rel="noopener">Arrival trains</a>
+        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home)}" target="_blank" rel="noopener" style="margin-left:8px">Return trains</a>
+      </div>
+      <div class="digest-actions">
+        <button class="btn" id="btn-dismiss-digest">Dismiss today</button>
+      </div>
+    `;
+    det.appendChild(body);
+    container.appendChild(det);
+
+    // Persist open/close
+    det.addEventListener('toggle', ()=>{ localStorage.setItem(openKey(todayKeyStr), det.open ? '1':'0'); });
+
+    // Dismiss handler
+    body.querySelector('#btn-dismiss-digest').addEventListener('click', ()=>{
+      localStorage.setItem(digestKey(todayKeyStr), '1');
+      det.remove();
+    });
+
+    // Weather async
+    try {
+      const w = await fetchWeather();
+      const cw = w.current_weather, d0 = w.daily;
+      const wStr = `${wmoIcon(cw.weathercode)} ${Math.round(cw.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%`;
+      det.querySelector('#digest-weather').textContent = wStr;
+    } catch {
+      det.querySelector('#digest-weather').textContent = 'weather unavailable';
+    }
+  }
+
   // Weather via Open-Meteo
   async function fetchWeather(){
     try{
@@ -375,13 +462,8 @@
     const next = computeNext(filtered, now);
     if (next){ renderCountdownBanner(banners, next, now); }
 
-    // Morning digest once per day
-    const today = todayKey(now);
-    const shown = localStorage.getItem('medi_digest_shown');
-    if (shown !== today){
-      localStorage.setItem('medi_digest_shown', today);
-      try { const weather = await fetchWeather(); renderMorningDigest(banners, today, weather); } catch(e){ renderMorningDigest(banners, today, null); }
-    }
+    // Morning digest collapsible
+    try { await renderDailyBrief(banners, today); } catch(e){ console.warn('digest error', e); }
 
     // Today
     const tv = $('#today-view'); tv.innerHTML = '';
