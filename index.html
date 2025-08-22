@@ -41,11 +41,12 @@
   .tab{ padding:10px 12px; border-radius:10px 10px 0 0; cursor:pointer; color:var(--muted) }
   .tab.active{ color:var(--text); background:var(--card); border:1px solid var(--border); border-bottom-color:transparent }
 
-  .card{ grid-column:span 12; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:0 6px 20px rgba(0,0,0,.06); }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:0 6px 20px rgba(0,0,0,.06); }
   .grid{ display:grid; grid-template-columns: minmax(0,1fr); gap:10px }
   .date-header{ grid-column:span 12; padding:6px 2px; font-weight:800; font-size:13px; color:var(--muted); border-bottom:1px solid var(--border) }
 
-  .event{ display:grid; grid-template-columns:8px 120px 1fr 0.8fr; gap:10px; align-items:center; padding:10px; background:var(--elev); border:1px solid var(--border); border-radius:10px }
+  .event{ display:grid; grid-template-columns:8px 120px 1fr 0.9fr; gap:10px; align-items:center; padding:10px; background:var(--elev); border:1px solid var(--border); border-radius:10px }
+  .event .where{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center }
   .event.compact{ grid-template-columns:8px 120px 1fr }
   .bar{ width:8px; height:100%; border-radius:6px; background:var(--default) }
   .when{ font-variant-numeric:tabular-nums; font-weight:700 }
@@ -81,7 +82,8 @@
   .pulse{ animation: pulse-scale .35s ease-in-out; }
 
   /* Center Today view */
-  #today, #today-content, #countdown{ max-width: 900px; margin: 0 auto; }
+  #today, #today-content, #countdown{ max-width: 960px; margin-left:auto; margin-right:auto; }
+  #today > *, #today-content > *{ max-width: 960px; margin-left:auto; margin-right:auto; }
 </style>
 
 </head>
@@ -139,7 +141,7 @@
     </div>
 
     <div id="today" class="grid" style="gap:12px; align-content:start">
-      <div class="card banner" id="countdown" style="grid-column:span 12"></div>
+      <div class="card banner" id="countdown"></div>
       <div id="today-content" class="grid"></div>
     </div>
 
@@ -187,6 +189,10 @@
         <div class="sub">Your name (optional)</div>
         <input id="set-name" placeholder="e.g., Noofie">
       </div>
+      <div style="grid-column:span 12">
+        <div class="sub">Time format</div>
+        <select id="set-timefmt"><option value="24h">24h (13:00)</option><option value="12h">12h (1:00 pm)</option></select>
+      </div>
       <div style="grid-column:span 6">
         <div class="sub">Home station / address</div>
         <input id="set-home" placeholder="e.g., Hamilton Station">
@@ -229,7 +235,7 @@
   function setTheme(t){ document.documentElement.setAttribute('data-theme', t==='light'?'light':'dark'); localStorage.setItem('medi_theme', t); }
 
   function loadPrefs(){ try{ const r=localStorage.getItem('medi2101b_prefs'); return r?JSON.parse(r):null;}catch{ return null; } }
-  function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', name:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10 }; }
+  function defaultPrefs(){ return { campus:'Both', group:'ALL', label:'', name:'', home:'', campusStation:'Gosford Station', arriveBuf:15, leaveBuf:10, timeFmt:'24h' }; }
   function savePrefs(p){ localStorage.setItem('medi2101b_prefs', JSON.stringify(p)); }
 
   const COLORS = { anatomy:'#3b82f6', pbl:'#10b981', clinical:'#f59e0b', physiology:'#06b6d4', info:'#a78bfa', lecture:'#eab308' };
@@ -254,6 +260,27 @@
   function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
   function byStart(a,b){ return toDate(a.start)-toDate(b.start); }
+
+  function timeFmt(){ const p=Object.assign(defaultPrefs(), loadPrefs()||{}); return p.timeFmt || '24h'; }
+  function fmt12(d){
+    const h = d.getHours(), m = d.getMinutes();
+    const h12 = ((h + 11) % 12) + 1;
+    const ampm = h < 12 ? 'am' : 'pm';
+    if (m===0) return `${h12} ${ampm}`;
+    return `${h12}:${pad(m)} ${ampm}`;
+  }
+  function fmt24(d){ return `${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+  function fmtT(d){
+    return timeFmt()==='12h' ? fmt12(d) : fmt24(d);
+  }
+  function fmtRange(s, e){
+    const ss = toDate(s), ee = toDate(e);
+    if (timeFmt()==='12h'){
+      return `${fmtT(ss)} to ${fmtT(ee)}`;
+    }
+    return `${fmtT(ss)}-${fmtT(ee)}`;
+  }
+
   function statusFor(ev, now){ const s=toDate(ev.start), e=toDate(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
   function isRemote(ev){ const v=String(ev.venue||''), t=String(ev.title||''), a=String(ev.activity||''); return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t) || /online/i.test(a); }
   function normCampus(x){ x=String(x||'').trim().toLowerCase(); if (!x) return 'both'; if (x.includes('/')) return 'both'; if (x==='cal'||x==='callaghan') return 'callaghan'; if (x==='cc'||x==='ccs') return 'ccs'; if (x==='both') return 'both'; return x; }
@@ -291,7 +318,7 @@
     list.forEach(ev=>{
       const row=document.createElement('div'); row.className='event ' + statusFor(ev, now) + (compact?' compact':'');
       const bar=document.createElement('div'); bar.className='bar'; bar.style.background=colorFor(ev);
-      const when=document.createElement('div'); when.className='when'; const s=toDate(ev.start), e=toDate(ev.end); when.textContent = `${fmtHM(s)}–${fmtHM(e)}`;
+      const when=document.createElement('div'); when.className='when'; const s=toDate(ev.start), e=toDate(ev.end); when.textContent = fmtRange(s, e);
       const main=document.createElement('div'); main.innerHTML = `<div style="font-weight:800">${sanitize(ev.title)}</div><div class="sub">${[ev.domain, ev.activity].filter(Boolean).join(' · ')}${ev.staff? ' · '+sanitize(ev.staff):''}</div>`;
       const where=document.createElement('div'); 
       let whereHtml = '<span class="chip">'+sanitize(ev.campus||'')+'</span>';
@@ -311,7 +338,7 @@
     if (next){
       const st=toDate(next.start), en=toDate(next.end), live= now>=st && now<en, mins = live? Math.max(0,Math.floor((en-now)/60000)) : Math.max(0,Math.floor((st-now)/60000));
       $('#countdown').className = 'card banner ' + (live?'live':'next');
-      $('#countdown').innerHTML = `<strong>${live?'Live now':'Next'}:</strong> ${sanitize(next.title)} · ${fmtHM(st)}–${fmtHM(en)} <span class="sub">(${live?'ends in':'starts in'} ${mins} min)</span>`;
+      $('#countdown').innerHTML = `<strong>${live?'Live now':'Next'}:</strong> ${sanitize(next.title)} · ${fmtRange(st, en)} <span class="sub">(${live?'ends in':'starts in'} ${mins} min)</span>`;
     } else {
       $('#countdown').className = 'card banner'; $('#countdown').innerHTML = `<span class="sub">No upcoming sessions.</span>`;
     }
@@ -349,8 +376,8 @@
       <div class="title">${prefs.name?sanitize(prefs.name)+', ':''}Today</div>
       <div class="sub">${list.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
       <div class="grid" style="margin-top:6px">
-        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">First session</div><div class=\"title\">${fmtHM(toDate(first.start))}–${fmtHM(toDate(first.end))}</div><div class=\"sub\">${sanitize(first.title)}</div></div>
-        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">Last session</div><div class=\"title\">${fmtHM(toDate(last.start))}–${fmtHM(toDate(last.end))}</div><div class=\"sub\">${sanitize(last.title)}</div></div>
+        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">First session</div><div class=\"title\">${fmtRange(first.start, first.end)}</div><div class=\"sub\">${sanitize(first.title)}</div></div>
+        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">Last session</div><div class=\"title\">${fmtRange(last.start, last.end)}</div><div class=\"sub\">${sanitize(last.title)}</div></div>
         <div class="card" style="grid-column:span 12"><div class="sub">Arrive by</div><div class="title">${arriveBy?fmtHM(arriveBy):'—'}</div></div>
         <div class="card" style="grid-column:span 12"><div class="sub">Leave after</div><div class="title">${leaveAfter?fmtHM(leaveAfter):'—'}</div></div>
       </div>
@@ -382,7 +409,7 @@
         dayEvs.forEach(ev => {
           const row=document.createElement('div'); row.className='event'+(compact?' compact':'');
           const bar=document.createElement('div'); bar.className='bar'; bar.style.background=colorFor(ev);
-          const title=document.createElement('div'); title.innerHTML=`<div style="font-weight:800">${fmtHM(toDate(ev.start))}–${fmtHM(toDate(ev.end))}</div><div class="sub">${sanitize(ev.title)}</div>${ev.staff?`<div class="sub">${sanitize(ev.staff)}</div>`:''}`;
+          const title=document.createElement('div'); title.innerHTML=`<div style="font-weight:800">${fmtRange(ev.start, ev.end)}</div><div class="sub">${sanitize(ev.title)}</div>${ev.staff?`<div class="sub">${sanitize(ev.staff)}</div>`:''}`;
           row.append(bar,title); col.append(row);
         });
       }
@@ -546,12 +573,12 @@
 
     $('#btn-settings').addEventListener('click', ()=>{
       const q=Object.assign(defaultPrefs(), loadPrefs()||{});
-      $('#set-campus').value=q.campus; $('#set-group').value=q.group; $('#set-label').value=q.label; $('#set-name').value=q.name||''; $('#set-home').value=q.home||''; $('#set-campus-st').value=q.campusStation||'Gosford Station'; $('#set-arrive').value=q.arriveBuf; $('#set-leave').value=q.leaveBuf;
+      $('#set-campus').value=q.campus; $('#set-group').value=q.group; $('#set-label').value=q.label; $('#set-name').value=q.name||''; $('#set-home').value=q.home||''; $('#set-campus-st').value=q.campusStation||'Gosford Station'; $('#set-arrive').value=q.arriveBuf; $('#set-leave').value=q.leaveBuf; $('#set-timefmt').value=q.timeFmt||'24h';
       $('#modal-backdrop').style.display='flex'; $('#modal-backdrop').setAttribute('aria-hidden','false');
     });
     function closeModal(){ $('#modal-backdrop').style.display='none'; $('#modal-backdrop').setAttribute('aria-hidden','true'); }
     $('#btn-x').addEventListener('click', closeModal); $('#btn-close').addEventListener('click', closeModal);
-    $('#btn-save').addEventListener('click', ()=>{ const q={ campus:$('#set-campus').value, group:$('#set-group').value, label:$('#set-label').value, name:$('#set-name').value, home:$('#set-home').value, campusStation:$('#set-campus-st').value, arriveBuf:parseInt($('#set-arrive').value||'15',10), leaveBuf:parseInt($('#set-leave').value||'10',10)}; savePrefs(q); // mirror to sidebar
+    $('#btn-save').addEventListener('click', ()=>{ const q={ campus:$('#set-campus').value, group:$('#set-group').value, label:$('#set-label').value, name:$('#set-name').value, home:$('#set-home').value, campusStation:$('#set-campus-st').value, arriveBuf:parseInt($('#set-arrive').value||'15',10), leaveBuf:parseInt($('#set-leave').value||'10',10), timeFmt:$('#set-timefmt').value}; savePrefs(q); // mirror to sidebar
       $('#sel-campus').value=q.campus; $('#sel-group').value=q.group; closeModal(); renderAll(); renderWeek(); renderToday(); });
 
     // Filters
