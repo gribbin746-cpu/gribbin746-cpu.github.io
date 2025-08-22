@@ -73,7 +73,17 @@
   .weather.card{ background:var(--elev); display:flex; align-items:center; gap:10px; }
   .weather-emoji{ font-size:24px; line-height:1 }
   .weather-temp{ font-weight:800; font-size:18px }
+
+  /* Toast */
+  .toast{ position:fixed; left:50%; bottom:16px; transform:translateX(-50%); background:var(--card); border:1px solid var(--border); padding:10px 14px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,.15); z-index:1000; opacity:0; transition:opacity .2s, transform .2s; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(-6px); }
+  @keyframes pulse-scale{ 0%{ transform:scale(1) } 50%{ transform:scale(1.08) } 100%{ transform:scale(1) } }
+  .pulse{ animation: pulse-scale .35s ease-in-out; }
+
+  /* Center Today view */
+  #today, #today-content, #countdown{ max-width: 900px; margin: 0 auto; }
 </style>
+
 </head>
 <body>
 <div class="app">
@@ -152,6 +162,7 @@
   <!-- Right Summary (only when sessions today) -->
   <aside class="aside" id="aside"></aside>
 </div>
+<div id="toast" class="toast" role="status" aria-live="polite" style="display:none"></div>
 
 <!-- Settings modal -->
 <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:999;">
@@ -338,14 +349,14 @@
       <div class="title">${prefs.name?sanitize(prefs.name)+', ':''}Today</div>
       <div class="sub">${list.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
       <div class="grid" style="margin-top:6px">
-        <div class="card" style="grid-column:span 12"><div class="sub">First</div><div class="title">${fmtHM(toDate(first.start))}</div><div class="sub">${sanitize(first.title)}</div></div>
-        <div class="card" style="grid-column:span 12"><div class="sub">Last</div><div class="title">${fmtHM(toDate(last.end))}</div><div class="sub">${sanitize(last.title)}</div></div>
+        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">First session</div><div class=\"title\">${fmtHM(toDate(first.start))}–${fmtHM(toDate(first.end))}</div><div class=\"sub\">${sanitize(first.title)}</div></div>
+        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">Last session</div><div class=\"title\">${fmtHM(toDate(last.start))}–${fmtHM(toDate(last.end))}</div><div class=\"sub\">${sanitize(last.title)}</div></div>
         <div class="card" style="grid-column:span 12"><div class="sub">Arrive by</div><div class="title">${arriveBy?fmtHM(arriveBy):'—'}</div></div>
         <div class="card" style="grid-column:span 12"><div class="sub">Leave after</div><div class="title">${leaveAfter?fmtHM(leaveAfter):'—'}</div></div>
       </div>
       <div class="hstack" style="margin-top:8px">
-        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation, {type:'arrive', time:arriveBy})}" target="_blank" rel="noopener">Arrival trains</a>
-        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home, {type:'depart', time:leaveAfter})}" target="_blank" rel="noopener">Return trains</a>
+        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation, {type:'arrive', time:arriveBy})}" target="_blank" rel="noopener" title="${arriveBy?'Arrive by '+fmtHM(arriveBy):'Open maps'}">Arrival trains</a>
+        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home, {type:'depart', time:leaveAfter})}" target="_blank" rel="noopener" title="${leaveAfter?'Depart after '+fmtHM(leaveAfter):'Open maps'}">Return trains</a>
       </div>
     `;
     aside.append(sum);
@@ -452,6 +463,61 @@
     lines.push('END:VCALENDAR'); return lines.join('\\r\\n');
   }
 
+
+  // --- Toast helper ---
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = String(msg);
+    t.style.display = 'block';
+    requestAnimationFrame(()=>{
+      t.classList.add('show');
+      setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>{ t.style.display='none'; }, 200); }, 1600);
+    });
+  }
+
+  // --- Notifications ---
+  let notifiedKeys = new Set();
+  function notifyToggle(){
+    const btn = document.getElementById('btn-bell');
+    btn.classList.add('pulse');
+    setTimeout(()=>btn.classList.remove('pulse'), 400);
+
+    if (!('Notification' in window)){
+      showToast('Notifications not supported');
+      return;
+    }
+    if (Notification.permission === 'default'){
+      Notification.requestPermission().then(p => {
+        if (p === 'granted'){ localStorage.setItem('medi2101b_notify','on'); btn.textContent='🔔'; showToast('Notifications on'); }
+        else { localStorage.setItem('medi2101b_notify','off'); btn.textContent='🔕'; showToast('Notifications blocked'); }
+      });
+      return;
+    }
+    const on = localStorage.getItem('medi2101b_notify') === 'on';
+    if (Notification.permission !== 'granted'){
+      localStorage.setItem('medi2101b_notify','off'); btn.textContent='🔕'; showToast('Notifications blocked');
+      return;
+    }
+    localStorage.setItem('medi2101b_notify', on ? 'off' : 'on');
+    btn.textContent = on ? '🔕' : '🔔';
+    showToast(on ? 'Notifications off' : 'Notifications on');
+  }
+
+  function maybeNotify(){
+    if (localStorage.getItem('medi2101b_notify')!=='on') return;
+    if (!('Notification' in window) || Notification.permission!=='granted') return;
+    const now = new Date();
+    filteredEvents().forEach(e => {
+      const s = toDate(e.start);
+      const key = e.start+'|'+e.title;
+      const mins = Math.floor((s-now)/60000);
+      if (mins === 10 && !notifiedKeys.has(key)){
+        notifiedKeys.add(key);
+        try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + fmtHM(s) }); } catch {}
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', ()=>{
     // Theme
     setTheme(theme());
@@ -469,6 +535,9 @@
     }));
 
     // Buttons
+    const bellOn = localStorage.getItem('medi2101b_notify')==='on';
+    $('#btn-bell').textContent = bellOn ? '🔔' : '🔕';
+    $('#btn-bell').addEventListener('click', notifyToggle);
     $('#btn-theme').addEventListener('click', ()=>{ const t=theme()==='dark'?'light':'dark'; setTheme(t); renderShell(); });
     $('#btn-compact').addEventListener('click', ()=>{ compact=!compact; $('#btn-compact').textContent = compact?'Expanded':'Compact'; renderAll(); renderWeek(); renderToday(); });
     $('#btn-ics').addEventListener('click', ()=>{ const blob=new Blob([toICS(filteredEvents())], {type:'text/calendar'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='medi2101b_filtered.ics'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 400); });
@@ -504,7 +573,7 @@
     renderShell();
     tryAutoLoad();
     renderToday(); // first paint
-    setInterval(renderShell, 60*1000);
+    setInterval(()=>{ renderShell(); maybeNotify(); }, 60*1000);
   });
 </script>
 </body>
