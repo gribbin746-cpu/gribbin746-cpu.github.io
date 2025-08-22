@@ -52,7 +52,8 @@
   .soon { outline: 2px dashed var(--warn); }
   .past { opacity: .55; }
   .hidden { display:none; }
-  .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #c7cbd2; border-bottom: 1px solid var(--border); }
+  .date-header { padding: 6px 2px; font-weight: 800; font-size: 14px; color: #6b7280; border-bottom: 1px solid var(--border); }
+.date-header.highlight { background: rgba(58,160,255,.12); color: var(--text); border-left: 3px solid var(--accent); padding-left: 6px; border-radius: 6px; }
   .dropzone { margin:8px 0; padding:12px; border:1px dashed var(--border); border-radius:12px; color:var(--muted); text-align:center; }
 
   /* Countdown banner */
@@ -270,42 +271,49 @@
   }
   function wmoIcon(code){ const m={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',66:'🌧️',67:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌦️',81:'🌧️',82:'🌧️',95:'⛈️',96:'⛈️',99:'⛈️'}; return m[code]||'🌡️'; }
 
+  
   function renderCountdownBanner(container, ev, now){
     const st = toDate(ev.start), en = toDate(ev.end);
     const live = now>=st && now<en;
     const mins = live ? Math.max(0, Math.floor((en-now)/60000)) : Math.max(0, Math.floor((st-now)/60000));
+    const range = `${fmtHM(st)}–${fmtHM(en)}`;
     const banner = document.createElement('div'); banner.className = 'banner ' + (live?'live':'next');
-    banner.innerHTML = `<strong>${live?'Live now':'Next'}:</strong> ${sanitize(ev.title)} · ${fmtHM(live?en:st)} <span class="sub">(${mins} min)</span>`;
+    banner.innerHTML = `<strong>${live?'Live now':'Next'}:</strong> ${sanitize(ev.title)} · ${range} <span class="sub">(${live?'ends in':'starts in'} ${mins} min)</span>`;
     container.appendChild(banner);
   }
 
+  
   function renderMorningDigest(container, todayKeyStr, weather){
     const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
     const todays = filteredEvents().filter(ev => ev.date === todayKeyStr);
-    if (!todays.length) return;
     const inPerson = todays.filter(ev => !isRemote(ev));
-    const first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]);
-    const last = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]);
-    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
-    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
     const wNow = weather?.current_weather, d0 = weather?.daily;
     const wStr = wNow ? `${wmoIcon(wNow.weathercode)} ${Math.round(wNow.temperature)}°C · H ${Math.round(d0.temperature_2m_max[0])}° / L ${Math.round(d0.temperature_2m_min[0])}° · Rain ${d0.precipitation_probability_max[0]}%` : 'Weather unavailable';
     const heading = prefs.name ? `${sanitize(prefs.name)}, here’s your day` : `Today at a glance`;
 
+    // compute first/last safely
+    let first = null, last = null;
+    if (todays.length){
+      first = todays.reduce((m,e)=> toDate(e.start)<toDate(m.start)?e:m, todays[0]);
+      last  = todays.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, todays[0]);
+    }
+    const arriveBy = inPerson.length ? new Date(toDate(inPerson[0].start).getTime() - prefs.arriveBuf*60000) : null;
+    const leaveAfter = inPerson.length ? new Date(toDate(inPerson[inPerson.length-1].end).getTime() + prefs.leaveBuf*60000) : null;
+
     const card = document.createElement('div'); card.className='card';
     card.innerHTML = `
       <div class="title2">${heading}</div>
-      <div class="sub">${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
+      <div class="sub">${todays.length? `${todays.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}` : 'No sessions scheduled'}</div>
       <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:10px;margin-top:6px">
         <div class="card" style="grid-column:span 6; padding:10px">
           <div class="sub">First</div>
-          <div class="title2">${fmtHM(toDate(first.start))}</div>
-          <div class="sub">${sanitize(first.title)}</div>
+          <div class="title2">${first?fmtHM(toDate(first.start)):'—'}</div>
+          <div class="sub">${first?sanitize(first.title):'—'}</div>
         </div>
         <div class="card" style="grid-column:span 6; padding:10px">
           <div class="sub">Last</div>
-          <div class="title2">${fmtHM(toDate(last.end))}</div>
-          <div class="sub">${sanitize(last.title)}</div>
+          <div class="title2">${last?fmtHM(toDate(last.end)):'—'}</div>
+          <div class="sub">${last?sanitize(last.title):'—'}</div>
         </div>
         <div class="card" style="grid-column:span 6; padding:10px">
           <div class="sub">Arrive by</div>
@@ -437,6 +445,20 @@
     });
   }
 
+
+  function smartScrollAll(){
+    // Find today's header; if not found, go to the next future date with events; otherwise last date
+    const now = new Date();
+    const today = todayKey(now);
+    const todayEl = document.getElementById('date-'+today);
+    if (todayEl){ todayEl.scrollIntoView({behavior:'smooth', block:'start'}); todayEl.classList.add('highlight'); setTimeout(()=>todayEl.classList.remove('highlight'), 1600); return; }
+    // Build sorted unique dates from events
+    const dates = Array.from(new Set(filteredEvents().map(e=>e.date))).sort();
+    const next = dates.find(d => d >= today) || dates[dates.length-1];
+    const el = document.getElementById('date-'+next);
+    if (el){ el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('highlight'); setTimeout(()=>el.classList.remove('highlight'), 1600); }
+  }
+
   // Data load (JSON/CSV)
   async function parseCSV(text){
     // basic CSV (no quoted commas). Use JSON for complex fields.
@@ -531,7 +553,7 @@
       $('#today-banners').classList.toggle('hidden', name!=='today');
       $('#all-view').classList.toggle('hidden', name!=='all');
       $('#week-view').classList.toggle('hidden', name!=='week');
-      if (name==='all'){ setTimeout(()=>{ const id='date-'+todayKey(new Date()); const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); }, 30); }
+      if (name==='all'){ setTimeout(smartScrollAll, 30); }
     }));
 
     // Settings
@@ -564,7 +586,7 @@
     $('#sel-domain').addEventListener('change', (e)=>{ DOMAIN = e.target.value; render(); });
 
     // Jump
-    $('#btn-jump').addEventListener('click', ()=>{ const id='date-'+todayKey(new Date()); const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
+    $('#btn-jump').addEventListener('click', smartScrollAll);
 
     // ICS
     $('#btn-ics').addEventListener('click', ()=>{
