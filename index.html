@@ -24,13 +24,13 @@
 
   .sidebar{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:12px; position:sticky; top:14px; height:max-content; }
   .aside{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:12px; position:sticky; top:14px; height:max-content; }
-  .main{ min-height:60vh; }
+  main.main{ min-height:60vh; }
 
-  .hstack{ display:flex; align-items:center; gap:8px; }
+  .hstack{ display:flex; align-items:start; gap:8px; }
   .space{ flex:1 }
   .title{ font-weight:800; font-size:18px }
   .muted{ color:var(--muted); font-size:12px }
-  .chip{ display:inline-flex; align-items:center; gap:6px; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; font-size:12px; color:var(--muted) }
+  .chip{ display:inline-flex; align-items:start; gap:6px; background:var(--chip); border:1px solid var(--border); border-radius:999px; padding:6px 10px; font-size:12px; color:var(--muted) }
   .btn{ background:var(--elev); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; }
   .btn:hover{ filter:brightness(1.07) }
   .btn.ghost{ background:transparent }
@@ -43,18 +43,18 @@
 
   .card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:0 6px 20px rgba(0,0,0,.06); }
   .grid{ display:grid; grid-template-columns: minmax(0,1fr); gap:10px }
-  .date-header{ grid-column:span 12; padding:6px 2px; font-weight:800; font-size:13px; color:var(--muted); border-bottom:1px solid var(--border) }
+  .date-header{ padding:6px 2px; font-weight:800; font-size:13px; color:var(--muted); border-bottom:1px solid var(--border) }
 
-  .event{ display:grid; grid-template-columns:8px 120px 1fr 0.9fr; gap:10px; align-items:center; padding:10px; background:var(--elev); border:1px solid var(--border); border-radius:10px }
+  .event{ display:grid; grid-template-columns:8px 120px 1fr 0.9fr; gap:10px; align-items:start; padding:10px; background:var(--elev); border:1px solid var(--border); border-radius:10px }
   .event .where{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center }
   .event.compact{ grid-template-columns:8px 120px 1fr }
   .bar{ width:8px; height:100%; border-radius:6px; background:var(--default) }
   .when{ font-variant-numeric:tabular-nums; font-weight:700 }
   .sub{ color:var(--muted); font-size:12px }
   .live{ outline:2px solid var(--good) }
-  .soon{ outline:none; box-shadow:none } /* no amber cue */
+  .soon{ outline:none; box-shadow:none }
 
-  .banner{ display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; }
+  .banner{ display:flex; align-items:start; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; }
   .banner.live{ background:rgba(34,197,94,.12) }
   .banner.next{ background:rgba(58,160,255,.12) }
 
@@ -71,7 +71,7 @@
   .sidebar .hstack + .hstack{ margin-top:8px }
 
   /* Weather card */
-  .weather.card{ background:var(--elev); display:flex; align-items:center; gap:10px; }
+  .weather.card{ background:var(--elev); display:flex; align-items:start; gap:10px; }
   .weather-emoji{ font-size:24px; line-height:1 }
   .weather-temp{ font-weight:800; font-size:18px }
 
@@ -81,11 +81,56 @@
   @keyframes pulse-scale{ 0%{ transform:scale(1) } 50%{ transform:scale(1.08) } 100%{ transform:scale(1) } }
   .pulse{ animation: pulse-scale .35s ease-in-out; }
 
-  /* Center Today view */
-  #today, #today-content, #countdown{ max-width: 960px; margin-left:auto; margin-right:auto; }
-  #today > *, #today-content > *{ max-width: 960px; margin-left:auto; margin-right:auto; }
-</style>
+  /* Center Today/Week/All */
+  #today, #today-content, #countdown, #week, #all{ max-width: 960px; margin-left:auto; margin-right:auto; }
+  #today > *, #today-content > *, #week > *, #all > *{ max-width: 960px; margin-left:auto; margin-right:auto; }
+  /* Week/All spacing & alignment */
+  #week-grid{ gap:16px }
+  #week-grid > .card, #all > .card{ margin-left:0; margin-right:0 }
+  #week-grid .card > .event:first-of-type{ margin-top:8px }
+  .date-header{ margin-top:24px }
+  .date-header + .card{ margin-top:12px }
 
+  /* Back-to-top button */
+  #backTop{ position:fixed; right:18px; bottom:18px; z-index:900; display:none; align-items:start; justify-content:center; width:40px; height:40px; border-radius:10px }
+  #backTop.show{ display:inline-flex }
+  /* --- Mobile layout fixes --- */
+  /* Mobile layout (safe media query only) */
+@media (max-width: 760px){
+  .app{ grid-template-columns: 1fr; }
+  .aside{ display:none }
+  #today, #today-content, #countdown, #week, #all{ max-width:100%; }
+  #week-grid{ gap:12px }
+
+  .event{ grid-template-columns:6px 1fr; grid-auto-rows:auto; gap:8px; padding:10px; grid-template-areas:'bar evtmain' 'bar when' 'bar where'; }
+  .event .bar{ grid-area:bar; grid-row:auto; height:auto }
+  .event .evt-main{ grid-area:main }
+  .event .when{ grid-area:when; font-size:13px; color:var(--muted) }
+  .event .where{ grid-area:where; justify-content:flex-start }
+
+  .date-header{ margin-top:20px }
+  .tabs{ position: sticky; top:0; background:var(--bg); z-index:50 }
+}
+    .aside{ display:none }
+    #today, #today-content, #countdown, #week, #all{ max-width: 100%; }
+    #week-grid{ gap:12px }
+
+    .event{ grid-template-columns:6px 1fr; grid-auto-rows:auto; gap:8px; padding:10px }
+    .event .bar{ grid-row:1 / span 3 }
+    .event .when{ font-size:13px; color:var(--muted) }
+    .event .where{ justify-content:flex-start }
+
+    /* Stack content using class hooks */
+    .event{ grid-template-areas: 'bar main' 'bar when' 'bar where'; }
+    .event .bar{ grid-area: bar }
+    .event .evt-main{ grid-area: main }
+    .event .when{ grid-area: when }
+    .event .where{ grid-area: where }
+
+    .date-header{ margin-top:20px }
+    .tabs{ position: sticky; top:0; background:var(--bg); z-index:50 }
+  }
+</style>
 </head>
 <body>
 <div class="app">
@@ -154,6 +199,7 @@
           <div class="space"></div>
           <button class="btn" id="btn-next-week">▶</button>
         </div>
+        <!-- Vertical list of days -->
         <div class="grid" id="week-grid" style="margin-top:8px"></div>
       </div>
     </div>
@@ -164,10 +210,13 @@
   <!-- Right Summary (only when sessions today) -->
   <aside class="aside" id="aside"></aside>
 </div>
+
+<button id="backTop" class="btn" title="Back to top">↑</button>
+
 <div id="toast" class="toast" role="status" aria-live="polite" style="display:none"></div>
 
 <!-- Settings modal -->
-<div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:999;">
+<div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:start;justify-content:center;background:rgba(0,0,0,.6);z-index:999;">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="width:min(680px,94vw);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;position:relative;">
     <button class="x" id="btn-x" title="Close" style="position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;">✕</button>
     <div style="font-size:18px;font-weight:800;margin-bottom:6px" id="modal-title">Setup</div>
@@ -253,15 +302,10 @@
 
   function toDate(s){
     if (s instanceof Date) return s;
-    const m = String(s||'').match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2})(?::(\\d{2}))?$/);
+    const m = String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
     if (m) return new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], m[6]?+m[6]:0);
     return new Date(s);
   }
-  function fmtHM(d){ return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
-  function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
-  function byStart(a,b){ return toDate(a.start)-toDate(b.start); }
-
-  function timeFmt(){ const p=Object.assign(defaultPrefs(), loadPrefs()||{}); return p.timeFmt || '24h'; }
   function fmt12(d){
     const h = d.getHours(), m = d.getMinutes();
     const h12 = ((h + 11) % 12) + 1;
@@ -270,17 +314,16 @@
     return `${h12}:${pad(m)} ${ampm}`;
   }
   function fmt24(d){ return `${pad(d.getHours())}:${pad(d.getMinutes())}`; }
-  function fmtT(d){
-    return timeFmt()==='12h' ? fmt12(d) : fmt24(d);
-  }
+  function timeFmt(){ const p=Object.assign(defaultPrefs(), loadPrefs()||{}); return p.timeFmt || '24h'; }
+  function fmtT(d){ return timeFmt()==='12h' ? fmt12(d) : fmt24(d); }
   function fmtRange(s, e){
     const ss = toDate(s), ee = toDate(e);
-    if (timeFmt()==='12h'){
-      return `${fmtT(ss)} to ${fmtT(ee)}`;
-    }
+    if (timeFmt()==='12h'){ return `${fmtT(ss)} to ${fmtT(ee)}`; }
     return `${fmtT(ss)}-${fmtT(ee)}`;
   }
 
+  function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+  function byStart(a,b){ return toDate(a.start)-toDate(b.start); }
   function statusFor(ev, now){ const s=toDate(ev.start), e=toDate(ev.end); if(now>=s && now<e) return 'live'; if(now<s){ const mins=Math.floor((s-now)/60000); return mins<=60?'soon':'upcoming'; } return 'past'; }
   function isRemote(ev){ const v=String(ev.venue||''), t=String(ev.title||''), a=String(ev.activity||''); return /zoom|panopto|online|record/i.test(v) || /zoom|online|record/i.test(t) || /online/i.test(a); }
   function normCampus(x){ x=String(x||'').trim().toLowerCase(); if (!x) return 'both'; if (x.includes('/')) return 'both'; if (x==='cal'||x==='callaghan') return 'callaghan'; if (x==='cc'||x==='ccs') return 'ccs'; if (x==='both') return 'both'; return x; }
@@ -319,8 +362,8 @@
       const row=document.createElement('div'); row.className='event ' + statusFor(ev, now) + (compact?' compact':'');
       const bar=document.createElement('div'); bar.className='bar'; bar.style.background=colorFor(ev);
       const when=document.createElement('div'); when.className='when'; const s=toDate(ev.start), e=toDate(ev.end); when.textContent = fmtRange(s, e);
-      const main=document.createElement('div'); main.innerHTML = `<div style="font-weight:800">${sanitize(ev.title)}</div><div class="sub">${[ev.domain, ev.activity].filter(Boolean).join(' · ')}${ev.staff? ' · '+sanitize(ev.staff):''}</div>`;
-      const where=document.createElement('div'); 
+      const main=document.createElement('div'); main.className='evt-main'; main.innerHTML = `<div style="font-weight:800">${sanitize(ev.title)}</div><div class="sub">${[ev.domain, ev.activity].filter(Boolean).join(' · ')}${ev.staff? ' · '+sanitize(ev.staff):''}</div>`;
+      const where=document.createElement('div'); where.className='where';
       let whereHtml = '<span class="chip">'+sanitize(ev.campus||'')+'</span>';
       if (ev.venue) whereHtml += ' <span class="chip">'+sanitize(ev.venue)+'</span>';
       if (ev.staff) whereHtml += ' <span class="chip">'+sanitize(ev.staff)+'</span>';
@@ -329,6 +372,12 @@
     });
     wrapper.append(inner); container.append(wrapper);
   }
+
+  // Toast + Notifications
+  function showToast(msg){ const t = document.getElementById('toast'); t.textContent = String(msg); t.style.display = 'block'; requestAnimationFrame(()=>{ t.classList.add('show'); setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>{ t.style.display='none'; }, 200); }, 1600); }); }
+  let notifiedKeys = new Set();
+  function notifyToggle(){ const btn = document.getElementById('btn-bell'); btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'), 400); if (!('Notification' in window)){ showToast('Notifications not supported'); return; } if (Notification.permission === 'default'){ Notification.requestPermission().then(p => { if (p === 'granted'){ localStorage.setItem('medi2101b_notify','on'); btn.textContent='🔔'; showToast('Notifications on'); } else { localStorage.setItem('medi2101b_notify','off'); btn.textContent='🔕'; showToast('Notifications blocked'); } }); return; } const on = localStorage.getItem('medi2101b_notify') === 'on'; if (Notification.permission !== 'granted'){ localStorage.setItem('medi2101b_notify','off'); btn.textContent='🔕'; showToast('Notifications blocked'); return; } localStorage.setItem('medi2101b_notify', on ? 'off' : 'on'); btn.textContent = on ? '🔕' : '🔔'; showToast(on ? 'Notifications off' : 'Notifications on'); }
+  function maybeNotify(){ if (localStorage.getItem('medi2101b_notify')!=='on') return; if (!('Notification' in window) || Notification.permission!=='granted') return; const now = new Date(); filteredEvents().forEach(e => { const s = toDate(e.start); const key = e.start+'|'+e.title; const mins = Math.floor((s-now)/60000); if (mins === 10 && !notifiedKeys.has(key)){ notifiedKeys.add(key); try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + fmtT(s) }); } catch {} } }); }
 
   function renderToday(){
     const now = new Date();
@@ -345,15 +394,9 @@
 
     const content = $('#today-content'); content.innerHTML='';
     if (!list.length){
-      // No sessions: smiley + quip; no Day Summary in aside
       const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
-      const card = document.createElement('div'); card.className='card'; card.style.gridColumn='span 12';
-      const quips=[
-        `No sessions today, ${prefs.name||'mate'}. Take a breather.`,
-        `Calendar’s clear, ${prefs.name||'mate'}. Touch grass.`,
-        `Zero on the docket. Get sunlight, ${prefs.name||'mate'}.`,
-        `Free day. Read one page, lift something heavy.`
-      ];
+      const card = document.createElement('div'); card.className='card';
+      const quips=[`No sessions today, ${prefs.name||'mate'}. Take a breather.`,`Calendar’s clear, ${prefs.name||'mate'}. Touch grass.`,`Zero on the docket. Get sunlight, ${prefs.name||'mate'}.`,`Free day. Read one page, lift something heavy.`];
       const msg = quips[Math.floor(Math.random()*quips.length)];
       card.innerHTML = `<div class="hstack"><div class="smiley">😊</div><div><div class="title">No sessions today</div><div class="sub">${sanitize(msg)}</div></div></div>`;
       content.append(card);
@@ -363,7 +406,7 @@
 
     renderEventList(content, list, now);
 
-    // Right summary (only if list.length>0)
+    // Right summary
     const prefs = Object.assign(defaultPrefs(), loadPrefs()||{});
     const inPerson = list.filter(ev => !isRemote(ev));
     const first = list[0], last = list.reduce((m,e)=> toDate(e.end)>toDate(m.end)?e:m, list[0]);
@@ -373,17 +416,18 @@
     const aside = $('#aside'); aside.style.display=''; aside.innerHTML='';
     const sum = document.createElement('div'); sum.className='card';
     sum.innerHTML = `
-      <div class="title">${prefs.name?sanitize(prefs.name)+', ':''}Today</div>
+      <div class="title">${prefs.name?('Welcome '+sanitize(prefs.name)):'Today'}</div>
+      ${prefs.name?'<div class="sub">Today</div>':''}
       <div class="sub">${list.length} sessions${inPerson.length?` · ${inPerson.length} in‑person`:''}</div>
       <div class="grid" style="margin-top:6px">
-        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">First session</div><div class=\"title\">${fmtRange(first.start, first.end)}</div><div class=\"sub\">${sanitize(first.title)}</div></div>
-        <div class=\"card\" style=\"grid-column:span 12\"><div class=\"sub\">Last session</div><div class=\"title\">${fmtRange(last.start, last.end)}</div><div class=\"sub\">${sanitize(last.title)}</div></div>
-        <div class="card" style="grid-column:span 12"><div class="sub">Arrive by</div><div class="title">${arriveBy?fmtHM(arriveBy):'—'}</div></div>
-        <div class="card" style="grid-column:span 12"><div class="sub">Leave after</div><div class="title">${leaveAfter?fmtHM(leaveAfter):'—'}</div></div>
+        <div class="card"><div class="sub">First session</div><div class="title">${fmtRange(first.start, first.end)}</div><div class="sub">${sanitize(first.title)}</div></div>
+        <div class="card"><div class="sub">Last session</div><div class="title">${fmtRange(last.start, last.end)}</div><div class="sub">${sanitize(last.title)}</div></div>
+        <div class="card"><div class="sub">Arrive by</div><div class="title">${arriveBy?fmtT(arriveBy):'—'}</div></div>
+        <div class="card"><div class="sub">Leave after</div><div class="title">${leaveAfter?fmtT(leaveAfter):'—'}</div></div>
       </div>
       <div class="hstack" style="margin-top:8px">
-        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation, {type:'arrive', time:arriveBy})}" target="_blank" rel="noopener" title="${arriveBy?'Arrive by '+fmtHM(arriveBy):'Open maps'}">Arrival trains</a>
-        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home, {type:'depart', time:leaveAfter})}" target="_blank" rel="noopener" title="${leaveAfter?'Depart after '+fmtHM(leaveAfter):'Open maps'}">Return trains</a>
+        <a class="btn" href="${mapsTransitLink(prefs.home, prefs.campusStation, {type:'arrive', time:arriveBy})}" target="_blank" rel="noopener" title="${arriveBy?'Arrive by '+fmtT(arriveBy):'Open maps'}">Arrival trains</a>
+        <a class="btn" href="${mapsTransitLink(prefs.campusStation, prefs.home, {type:'depart', time:leaveAfter})}" target="_blank" rel="noopener" title="${leaveAfter?'Depart after '+fmtT(leaveAfter):'Open maps'}">Return trains</a>
       </div>
     `;
     aside.append(sum);
@@ -391,17 +435,18 @@
 
   function renderWeek(){
     const base = new Date();
-    // compute Monday start of week + offset
     const d=new Date(base.getFullYear(), base.getMonth(), base.getDate());
     d.setDate(d.getDate() + weekOffset*7);
     const dow=d.getDay(); const mon=new Date(d); mon.setDate(d.getDate() + (dow===0?-6:1-dow));
     const days=[]; for(let i=0;i<7;i++){ const x=new Date(mon); x.setDate(mon.getDate()+i); days.push(x); }
 
     $('#week-label').textContent = `Week of ${days[0].toLocaleDateString([], {month:'short', day:'numeric'})}`;
-    const grid = $('#week-grid'); grid.innerHTML = ''; grid.style.gridTemplateColumns='repeat(7, minmax(0,1fr))';
+
+    // Vertical list of day cards
+    const grid = $('#week-grid'); grid.innerHTML = ''; grid.style.gridTemplateColumns='minmax(0,1fr)';
     const evs = filteredEvents();
     days.forEach(day => {
-      const col=document.createElement('div'); col.className='card';
+      const col=document.createElement('div'); col.className='card'; col.id='weekday-'+todayKey(day);
       col.innerHTML = `<div class="sub" style="font-weight:800">${day.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'})}</div>`;
       const dayEvs = evs.filter(e => e.date === todayKey(day)).sort(byStart);
       if (!dayEvs.length){ const em=document.createElement('div'); em.className='sub'; em.textContent='—'; col.append(em); }
@@ -409,12 +454,23 @@
         dayEvs.forEach(ev => {
           const row=document.createElement('div'); row.className='event'+(compact?' compact':'');
           const bar=document.createElement('div'); bar.className='bar'; bar.style.background=colorFor(ev);
-          const title=document.createElement('div'); title.innerHTML=`<div style="font-weight:800">${fmtRange(ev.start, ev.end)}</div><div class="sub">${sanitize(ev.title)}</div>${ev.staff?`<div class="sub">${sanitize(ev.staff)}</div>`:''}`;
-          row.append(bar,title); col.append(row);
+          const when=document.createElement('div'); when.className='when'; when.textContent = fmtRange(ev.start, ev.end);
+          const title=document.createElement('div'); title.className='evt-main'; title.innerHTML=`<div style="font-weight:800">${sanitize(ev.title)}</div><div class="sub">${sanitize([ev.domain, ev.activity].filter(Boolean).join(' · '))}${ev.staff? ' · '+sanitize(ev.staff):''}</div>`;
+          const where=document.createElement('div'); where.className='where';
+          let whereHtml = '<span class="chip">'+sanitize(ev.campus||'')+'</span>';
+          if (ev.venue) whereHtml += ' <span class="chip">'+sanitize(ev.venue)+'</span>';
+          if (ev.staff) whereHtml += ' <span class="chip">'+sanitize(ev.staff)+'</span>';
+          where.innerHTML = whereHtml;
+          row.append(bar, when, title, where); col.append(row);
         });
       }
       grid.append(col);
     });
+
+    // Scroll to today's card
+    const tk = todayKey(new Date());
+    const el = document.getElementById('weekday-'+tk);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
   function renderAll(){
@@ -428,7 +484,6 @@
       av.append(head);
       renderEventList(av, grouped.get(k).sort(byStart), now);
     });
-    // Smart scroll to today or next
     const today = todayKey(new Date());
     const el = document.getElementById('date-'+today) || document.getElementById('date-'+(dates.find(d=>d>=today)||dates[dates.length-1]));
     if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
@@ -453,7 +508,7 @@
   }
 
   async function parseCSV(text){
-    const lines = text.split(/\\r?\\n/).filter(Boolean);
+    const lines = text.split(/\r?\n/).filter(Boolean);
     if (!lines.length) return [];
     const headers = lines[0].split(',').map(s=>s.trim());
     const idx = Object.fromEntries(headers.map((h,i)=>[h,i]));
@@ -483,66 +538,11 @@
   }
 
   function toICS(list){
-    function esc(s){ return String(s||'').replace(/([,;])/g,'\\\\$1').replace(/\\n/g,'\\\\n'); }
+    function esc(s){ return String(s||'').replace(/([,;])/g,'\\$1').replace(/\n/g,'\\n'); }
     function dt(v){ const d=toDate(v); return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`; }
     const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MEDI2101B//Timetable//EN'];
     list.forEach((e,i)=>{ lines.push('BEGIN:VEVENT','UID:'+(e.start+'_'+i+'@medi2101b'),'DTSTART:'+dt(e.start),'DTEND:'+dt(e.end),'SUMMARY:'+esc(e.title)); const desc=[e.domain,e.activity,e.campus,e.venue,e.staff].filter(Boolean).join(' · '); if(desc) lines.push('DESCRIPTION:'+esc(desc)); lines.push('END:VEVENT'); });
-    lines.push('END:VCALENDAR'); return lines.join('\\r\\n');
-  }
-
-
-  // --- Toast helper ---
-  function showToast(msg){
-    const t = document.getElementById('toast');
-    t.textContent = String(msg);
-    t.style.display = 'block';
-    requestAnimationFrame(()=>{
-      t.classList.add('show');
-      setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>{ t.style.display='none'; }, 200); }, 1600);
-    });
-  }
-
-  // --- Notifications ---
-  let notifiedKeys = new Set();
-  function notifyToggle(){
-    const btn = document.getElementById('btn-bell');
-    btn.classList.add('pulse');
-    setTimeout(()=>btn.classList.remove('pulse'), 400);
-
-    if (!('Notification' in window)){
-      showToast('Notifications not supported');
-      return;
-    }
-    if (Notification.permission === 'default'){
-      Notification.requestPermission().then(p => {
-        if (p === 'granted'){ localStorage.setItem('medi2101b_notify','on'); btn.textContent='🔔'; showToast('Notifications on'); }
-        else { localStorage.setItem('medi2101b_notify','off'); btn.textContent='🔕'; showToast('Notifications blocked'); }
-      });
-      return;
-    }
-    const on = localStorage.getItem('medi2101b_notify') === 'on';
-    if (Notification.permission !== 'granted'){
-      localStorage.setItem('medi2101b_notify','off'); btn.textContent='🔕'; showToast('Notifications blocked');
-      return;
-    }
-    localStorage.setItem('medi2101b_notify', on ? 'off' : 'on');
-    btn.textContent = on ? '🔕' : '🔔';
-    showToast(on ? 'Notifications off' : 'Notifications on');
-  }
-
-  function maybeNotify(){
-    if (localStorage.getItem('medi2101b_notify')!=='on') return;
-    if (!('Notification' in window) || Notification.permission!=='granted') return;
-    const now = new Date();
-    filteredEvents().forEach(e => {
-      const s = toDate(e.start);
-      const key = e.start+'|'+e.title;
-      const mins = Math.floor((s-now)/60000);
-      if (mins === 10 && !notifiedKeys.has(key)){
-        notifiedKeys.add(key);
-        try { new Notification('Starts in 10 minutes', { body: e.title + ' · ' + fmtHM(s) }); } catch {}
-      }
-    });
+    lines.push('END:VCALENDAR'); return lines.join('\r\n');
   }
 
   document.addEventListener('DOMContentLoaded', ()=>{
@@ -559,6 +559,7 @@
       $$('.tab').forEach(x=>x.classList.remove('active')); t.classList.add('active');
       const tab=t.dataset.tab; $('#today').style.display = tab==='today'?'grid':'none'; $('#week').style.display = tab==='week'?'grid':'none'; $('#all').style.display = tab==='all'?'grid':'none';
       if (tab==='all') renderAll(); if (tab==='week') renderWeek(); if (tab==='today') renderToday();
+      updateBackTop();
     }));
 
     // Buttons
@@ -573,7 +574,7 @@
 
     $('#btn-settings').addEventListener('click', ()=>{
       const q=Object.assign(defaultPrefs(), loadPrefs()||{});
-      $('#set-campus').value=q.campus; $('#set-group').value=q.group; $('#set-label').value=q.label; $('#set-name').value=q.name||''; $('#set-home').value=q.home||''; $('#set-campus-st').value=q.campusStation||'Gosford Station'; $('#set-arrive').value=q.arriveBuf; $('#set-leave').value=q.leaveBuf; $('#set-timefmt').value=q.timeFmt||'24h';
+      $('#set-campus').value=q.campus; $('#set-group').value=q.group; $('#set-label').value=q.label; $('#set-name').value=q.name||''; $('#set-timefmt').value=q.timeFmt||'24h'; $('#set-home').value=q.home||''; $('#set-campus-st').value=q.campusStation||'Gosford Station'; $('#set-arrive').value=q.arriveBuf; $('#set-leave').value=q.leaveBuf;
       $('#modal-backdrop').style.display='flex'; $('#modal-backdrop').setAttribute('aria-hidden','false');
     });
     function closeModal(){ $('#modal-backdrop').style.display='none'; $('#modal-backdrop').setAttribute('aria-hidden','true'); }
@@ -586,7 +587,7 @@
     $('#sel-group').addEventListener('change', ()=>{ const q=Object.assign(defaultPrefs(), loadPrefs()||{}); q.group=$('#sel-group').value; savePrefs(q); renderAll(); renderWeek(); renderToday(); });
     $('#sel-domain').addEventListener('change', (e)=>{ DOMAIN=e.target.value; renderAll(); renderWeek(); renderToday(); });
 
-    // Week nav (robust)
+    // Week nav
     document.addEventListener('click', (e)=>{
       const id = e.target && e.target.id;
       if (id === 'btn-prev-week'){ weekOffset--; renderWeek(); }
@@ -599,8 +600,16 @@
 
     renderShell();
     tryAutoLoad();
-    renderToday(); // first paint
+    renderToday();
     setInterval(()=>{ renderShell(); maybeNotify(); }, 60*1000);
+
+    // Back-to-top wiring
+    const backTop = document.getElementById('backTop');
+    function activeTab(){ const a=document.querySelector('.tab.active'); return a ? a.dataset.tab : 'today'; }
+    function updateBackTop(){ const t=activeTab(); const show=(t==='week'||t==='all') && window.scrollY>200; backTop.classList.toggle('show', show); }
+    window.addEventListener('scroll', updateBackTop);
+    backTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+    updateBackTop();
   });
 </script>
 </body>
